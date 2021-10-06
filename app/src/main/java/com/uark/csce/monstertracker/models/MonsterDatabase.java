@@ -1,10 +1,10 @@
-package com.uark.csce.monstertracker.Models;
+package com.uark.csce.monstertracker.models;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-import com.uark.csce.monstertracker.Models.Daos.ConditionDao;
-import com.uark.csce.monstertracker.Models.Entites.Condition;
+import com.uark.csce.monstertracker.models.daos.ConditionDao;
+import com.uark.csce.monstertracker.models.entities.Condition;
 
 @Database(entities = {Condition.class},version = 1)
 public abstract class MonsterDatabase extends RoomDatabase {

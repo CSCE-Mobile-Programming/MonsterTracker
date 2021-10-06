@@ -1,9 +1,9 @@
-package com.uark.csce.monstertracker.Models.Daos;
+package com.uark.csce.monstertracker.models.daos;
 
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.uark.csce.monstertracker.Models.Entites.Condition;
+import com.uark.csce.monstertracker.models.entities.Condition;
 
 import java.util.List;
 

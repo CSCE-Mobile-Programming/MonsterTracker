@@ -1,4 +1,4 @@
-package com.uark.csce.monstertracker.Models.Entites;
+package com.uark.csce.monstertracker.models.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
