@@ -9,24 +9,32 @@ import android.util.Log;
 import com.uark.csce.monstertracker.models.daos.ConditionDao;
 import com.uark.csce.monstertracker.models.entities.Condition;
 import com.uark.csce.monstertracker.models.MonsterDatabase;
+import com.uark.csce.monstertracker.util.AppExecutors;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private AppExecutors mAppExecutors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAppExecutors = new AppExecutors();
+
         MonsterDatabase db = Room.databaseBuilder(getApplicationContext(),
-                MonsterDatabase.class, "monster-database")
-                .createFromAsset("monsterdata.db")
-                .build();
+                MonsterDatabase.class, "monsterdata").build();
 
         ConditionDao conditionDao = db.conditionDao();
-        List<Condition> conditions = conditionDao.getAll();
 
-        Log.i("First Item", conditions.get(0).name);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                List<Condition> conditions = conditionDao.getAll();
+            }
+        };
+        mAppExecutors.diskIO().execute(runnable);
     }
 }
