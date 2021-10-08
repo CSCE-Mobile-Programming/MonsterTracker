@@ -1,5 +1,7 @@
-{
-  "Ancient Artillery": [
+[
+  {
+    "name": "Ancient Artillery",
+    "cards": [
     {
       "initiative": "46",
       "shuffle": false,
@@ -74,8 +76,11 @@
         "** %immobilize%"
       ]
     }
-  ],
-  "Archer": [
+  ]
+  },
+  {
+    "name": "Archer",
+    "cards": [
     {
       "initiative": "16",
       "shuffle": false,
@@ -150,8 +155,11 @@
         "** %immobilize%"
       ]
     }
-  ],
-  "Boss": [
+  ]
+  },
+  {
+    "name": "Boss",
+    "cards": [
     {
       "initiative": "11",
       "shuffle": false,
@@ -212,8 +220,11 @@
         "** %target% 2"
       ]
     }
-  ],
-  "Cave Bear": [
+  ]
+  },
+  {
+    "name": "Cave Bear",
+    "cards": [
     {
       "initiative": "13",
       "shuffle": false,
@@ -284,8 +295,11 @@
         "** Self"
       ]
     }
-  ],
-  "Cultist": [
+  ]
+  },
+  {
+    "name": "Cultist",
+    "cards": [
     {
       "initiative": "10",
       "shuffle": false,
@@ -357,8 +371,11 @@
         "** %range% 3"
       ]
     }
-  ],
-  "Deep Terror": [
+  ]
+  },
+  {
+    "name": "Deep Terror",
+    "cards": [
     {
       "initiative": "65",
       "shuffle": false,
@@ -438,8 +455,11 @@
         "** %range% 4"
       ]
     }
-  ],
-  "Earth Demon": [
+  ]
+  },
+  {
+    "name": "Earth Demon",
+    "cards": [
     {
       "initiative": "40",
       "shuffle": true,
@@ -512,8 +532,11 @@
         "* %any%%use_element%: %earth%"
       ]
     }
-  ],
-  "Flame Demon": [
+  ]
+  },
+  {
+    "name": "Flame Demon",
+    "cards": [
     {
       "initiative": "03",
       "shuffle": false,
@@ -591,8 +614,11 @@
         "* %any%%use_element%: %fire%"
       ]
     }
-  ],
-  "Frost Demon": [
+  ]
+  },
+  {
+    "name": "Frost Demon",
+    "cards": [
     {
       "initiative": "18",
       "shuffle": false,
@@ -665,8 +691,11 @@
         "* %fire%%use_element%: <span class='small'>Frost Demon suffers 1 damage</span>"
       ]
     }
-  ],
-  "Giant Viper": [
+  ]
+  },
+  {
+    "name": "Giant Viper",
+    "cards": [
     {
       "initiative": "32",
       "shuffle": true,
@@ -741,8 +770,11 @@
         "* %attack% -1"
       ]
     }
-  ],
-  "Guard": [
+  ]
+  },
+  {
+    "name": "Guard",
+    "cards": [
     {
       "initiative": "15",
       "shuffle": true,
@@ -811,8 +843,11 @@
         "** %poison%"
       ]
     }
-  ],
-  "Harrower Infester": [
+  ]
+  },
+  {
+    "name": "Harrower Infester",
+    "cards": [
     {
       "initiative": "38",
       "shuffle": false,
@@ -890,8 +925,11 @@
         "** Self"
       ]
     }
-  ],
-  "Hound": [
+  ]
+  },
+  {
+    "name": "Hound",
+    "cards": [
     {
       "initiative": "06",
       "shuffle": false,
@@ -963,8 +1001,11 @@
         "** %pierce% 2"
       ]
     }
-  ],
-  "Imp": [
+  ]
+  },
+  {
+    "name": "Imp",
+    "cards": [
     {
       "initiative": "05",
       "shuffle": false,
@@ -1038,8 +1079,11 @@
         "** Target all enemies within %range% 2"
       ]
     }
-  ],
-  "Living Bones": [
+  ]
+  },
+  {
+    "name": "Living Bones",
+    "cards": [
     {
       "initiative": "64",
       "shuffle": false,
@@ -1107,8 +1151,11 @@
         "** Self"
       ]
     }
-  ],
-  "Living Corpse": [
+  ]
+  },
+  {
+    "name": "Living Corpse",
+    "cards": [
     {
       "initiative": "21",
       "shuffle": false,
@@ -1177,8 +1224,11 @@
         "* Living Corpse suffers 1 damage."
       ]
     }
-  ],
-  "Living Spirit": [
+  ]
+  },
+  {"name": "Living Spirit",
+
+    "cards": [
     {
       "initiative": "22",
       "shuffle": true,
@@ -1258,8 +1308,11 @@
         "** %ice%%use_element%: %stun%"
       ]
     }
-  ],
-  "Lurker": [
+  ]
+  },
+  {
+    "name": "Lurker",
+    "cards": [
     {
       "initiative": "11",
       "shuffle": true,
@@ -1332,8 +1385,11 @@
         "* %ice%"
       ]
     }
-  ],
-  "Night Demon": [
+  ]
+  },
+  {
+    "name": "Night Demon",
+    "cards": [
     {
       "initiative": "04",
       "shuffle": false,
@@ -1411,8 +1467,11 @@
         "* <span class='small'>%any%%use_element%: %dark%</span>"
       ]
     }
-  ],
-  "Ooze": [
+  ]
+  },
+  {
+    "name": "Ooze",
+    "cards": [
     {
       "initiative": "36",
       "shuffle": false,
@@ -1487,8 +1546,11 @@
         "** Self"
       ]
     }
-  ],
-  "Rending Drake": [
+  ]
+  },
+  {
+    "name": "Rending Drake",
+    "cards": [
     {
       "initiative": "12",
       "shuffle": false,
@@ -1562,8 +1624,11 @@
         "* %attack% -2"
       ]
     }
-  ],
-  "Savvas Icestorm": [
+  ]
+  },
+  {
+    "name": "Savvas Icestorm",
+    "cards": [
     {
       "initiative": "70",
       "shuffle": false,
@@ -1646,8 +1711,11 @@
         "* %ice%"
       ]
     }
-  ],
-  "Savvas Lavaflow": [
+  ]
+  },
+  {
+    "name": "Savvas Lavaflow",
+    "cards": [
     {
       "initiative": "97",
       "shuffle": false,
@@ -1723,8 +1791,10 @@
         "* %fire%"
       ]
     }
-  ],
-  "Scout": [
+  ]},
+  {
+    "name": "Scout",
+    "cards": [
     {
       "initiative": "29",
       "shuffle": false,
@@ -1794,8 +1864,11 @@
         "** %target% 2"
       ]
     }
-  ],
-  "Shaman": [
+  ]
+  },
+  {
+    "name": "Shaman",
+    "cards": [
     {
       "initiative": "08",
       "shuffle": false,
@@ -1872,8 +1945,11 @@
         "** %range% +0, %curse%, %target% 2"
       ]
     }
-  ],
-  "Spitting Drake": [
+  ]
+  },
+  {
+    "name": "Spitting Drake",
+    "cards": [
     {
       "initiative": "32",
       "shuffle": false,
@@ -1948,8 +2024,11 @@
         "** %poison%"
       ]
     }
-  ],
-  "Stone Golem": [
+  ]
+  },
+  {
+    "name": "Stone Golem",
+    "cards": [
     {
       "initiative": "11",
       "shuffle": false,
@@ -2020,8 +2099,11 @@
         "** Target all adjacent enemies"
       ]
     }
-  ],
-  "Sun Demon": [
+  ]
+  },
+  {
+    "name": "Sun Demon",
+    "cards": [
     {
       "initiative": "17",
       "shuffle": true,
@@ -2101,8 +2183,11 @@
         "* %any%%use_element%: %light%"
       ]
     }
-  ],
-  "Wind Demon": [
+  ]
+  },
+  {
+    "name": "Wind Demon",
+    "cards": [
     {
       "initiative": "09",
       "shuffle": false,
@@ -2186,4 +2271,5 @@
       ]
     }
   ]
-}
+  }
+]

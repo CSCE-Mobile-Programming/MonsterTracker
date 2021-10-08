@@ -1,7 +1,7 @@
 [
   {
     "name": "#1 Black Barrow",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Guard"
       },
@@ -15,7 +15,7 @@
   },
   {
     "name": "#2 Barrow Lair",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Archer"
       },
@@ -32,7 +32,7 @@
   },
   {
     "name": "#3 Inox Encampment",
-    "decks": [
+    "monsters": [
       {
         "name": "Inox Guard"
       },
@@ -46,7 +46,7 @@
   },
   {
     "name": "#4 Crypt of the Damned",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -66,7 +66,7 @@
   },
   {
     "name": "#5 Ruinous Crypt",
-    "decks": [
+    "monsters": [
       {
         "name": "Cultist"
       },
@@ -89,7 +89,7 @@
   },
   {
     "name": "#6 Decaying Crypt",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -103,7 +103,7 @@
   },
   {
     "name": "#7 Vibrant Grotto",
-    "decks": [
+    "monsters": [
       {
         "name": "Forest Imp"
       },
@@ -120,7 +120,7 @@
   },
   {
     "name": "#8 Gloomhaven Warehouse",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -134,7 +134,7 @@
   },
   {
     "name": "#9 Diamond Mine",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -148,7 +148,7 @@
   },
   {
     "name": "#10 Plane of Elemental Power",
-    "decks": [
+    "monsters": [
       {
         "name": "Flame Demon"
       },
@@ -162,7 +162,7 @@
   },
   {
     "name": "#11 Gloomhaven Square A",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -182,7 +182,7 @@
   },
   {
     "name": "#12 Gloomhaven Square B",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -205,7 +205,7 @@
   },
   {
     "name": "#13 Temple of the Seer",
-    "decks": [
+    "monsters": [
       {
         "name": "Stone Golem"
       },
@@ -222,7 +222,7 @@
   },
   {
     "name": "#14 Frozen Hollow",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -236,7 +236,7 @@
   },
   {
     "name": "#15 Shrine of Strength",
-    "decks": [
+    "monsters": [
       {
         "name": "Stone Golem"
       },
@@ -256,7 +256,7 @@
   },
   {
     "name": "#16 Mountain Pass",
-    "decks": [
+    "monsters": [
       {
         "name": "Earth Demon"
       },
@@ -273,7 +273,7 @@
   },
   {
     "name": "#17 Lost Island",
-    "decks": [
+    "monsters": [
       {
         "name": "Vermling Scout"
       },
@@ -287,7 +287,7 @@
   },
   {
     "name": "#18 Abandoned Sewers",
-    "decks": [
+    "monsters": [
       {
         "name": "Giant Viper"
       },
@@ -301,7 +301,7 @@
   },
   {
     "name": "#19 Forgotten Crypt",
-    "decks": [
+    "monsters": [
       {
         "name": "Cultist"
       },
@@ -318,7 +318,7 @@
   },
   {
     "name": "#20 Necromancer's Sanctum",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -338,7 +338,7 @@
   },
   {
     "name": "#21 Infernal Throne",
-    "decks": [
+    "monsters": [
       {
         "name": "Sun Demon"
       },
@@ -364,7 +364,7 @@
   },
   {
     "name": "#22 Temple of the Elements",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -387,7 +387,7 @@
   },
   {
     "name": "#23 Deep Ruins",
-    "decks": [
+    "monsters": [
       {
         "name": "Stone Golem"
       },
@@ -404,7 +404,7 @@
   },
   {
     "name": "#24 Echo Chamber",
-    "decks": [
+    "monsters": [
       {
         "name": "Rending Drake"
       },
@@ -418,7 +418,7 @@
   },
   {
     "name": "#25 Icecrag Ascent",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -432,7 +432,7 @@
   },
   {
     "name": "#26 Ancient Cistern",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Corpse"
       },
@@ -449,7 +449,7 @@
   },
   {
     "name": "#27 Ruinous Rift",
-    "decks": [
+    "monsters": [
       {
         "name": "Night Demon"
       },
@@ -472,7 +472,7 @@
   },
   {
     "name": "#28 Outer Ritual Chamber",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Corpse"
       },
@@ -492,7 +492,7 @@
   },
   {
     "name": "#29 Sanctuary of Gloom",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -509,7 +509,7 @@
   },
   {
     "name": "#30 Shrine of the Depths",
-    "decks": [
+    "monsters": [
       {
         "name": "Ooze"
       },
@@ -523,7 +523,7 @@
   },
   {
     "name": "#31 Plane of the Night",
-    "decks": [
+    "monsters": [
       {
         "name": "Deep Terror"
       },
@@ -537,7 +537,7 @@
   },
   {
     "name": "#32 Decrepit Wood",
-    "decks": [
+    "monsters": [
       {
         "name": "Harrower Infester"
       },
@@ -554,7 +554,7 @@
   },
   {
     "name": "#33 Savvas Armory",
-    "decks": [
+    "monsters": [
       {
         "name": "Savvas Icestorm"
       },
@@ -577,7 +577,7 @@
   },
   {
     "name": "#34 Scorched Summit",
-    "decks": [
+    "monsters": [
       {
         "name": "Rending Drake"
       },
@@ -591,7 +591,7 @@
   },
   {
     "name": "#35 Gloomhaven Battlements A",
-    "decks": [
+    "monsters": [
       {
         "name": "Flame Demon"
       },
@@ -608,7 +608,7 @@
   },
   {
     "name": "#36 Gloomhaven Battlements B",
-    "decks": [
+    "monsters": [
       {
         "name": "Flame Demon"
       },
@@ -631,7 +631,7 @@
   },
   {
     "name": "#37 Doom Trench",
-    "decks": [
+    "monsters": [
       {
         "name": "Lurker"
       },
@@ -645,7 +645,7 @@
   },
   {
     "name": "#38 Slave Pens",
-    "decks": [
+    "monsters": [
       {
         "name": "Inox Guard"
       },
@@ -662,7 +662,7 @@
   },
   {
     "name": "#39 Treacherous Divide",
-    "decks": [
+    "monsters": [
       {
         "name": "Cave Bear"
       },
@@ -682,7 +682,7 @@
   },
   {
     "name": "#40 Ancient Defense Network",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Corpse"
       },
@@ -702,7 +702,7 @@
   },
   {
     "name": "#41 Timeworn Tomb",
-    "decks": [
+    "monsters": [
       {
         "name": "Ancient Artillery"
       },
@@ -719,7 +719,7 @@
   },
   {
     "name": "#42 Realm of the Voice",
-    "decks": [
+    "monsters": [
       {
         "name": "Night Demon"
       },
@@ -733,7 +733,7 @@
   },
   {
     "name": "#43 - Drake Nest",
-    "decks": [
+    "monsters": [
       {
         "name": "Flame Demon"
       },
@@ -747,7 +747,7 @@
   },
   {
     "name": "#44 Tribal Assault",
-    "decks": [
+    "monsters": [
       {
         "name": "Inox Guard"
       },
@@ -764,7 +764,7 @@
   },
   {
     "name": "#45 Rebel Swamp",
-    "decks": [
+    "monsters": [
       {
         "name": "City Guard"
       },
@@ -778,7 +778,7 @@
   },
   {
     "name": "#46 Nightmare Peak",
-    "decks": [
+    "monsters": [
       {
         "name": "Night Demon"
       },
@@ -798,7 +798,7 @@
   },
   {
     "name": "#47 Lair of the Unseeing Eye",
-    "decks": [
+    "monsters": [
       {
         "name": "Lurker"
       },
@@ -815,7 +815,7 @@
   },
   {
     "name": "#48 - Shadow Weald",
-    "decks": [
+    "monsters": [
       {
         "name": "Forest Imp"
       },
@@ -832,7 +832,7 @@
   },
   {
     "name": "#49 Rebel's Stand",
-    "decks": [
+    "monsters": [
       {
         "name": "Giant Viper"
       },
@@ -849,7 +849,7 @@
   },
   {
     "name": "#50 Ghost Fortress",
-    "decks": [
+    "monsters": [
       {
         "name": "Night Demon"
       },
@@ -863,7 +863,7 @@
   },
   {
     "name": "#51 The Void",
-    "decks": [
+    "monsters": [
       {
         "name": "The Gloom"
       }
@@ -871,7 +871,7 @@
   },
   {
     "name": "#52 Noxious Cellar",
-    "decks": [
+    "monsters": [
       {
         "name": "Spitting Drake"
       },
@@ -891,7 +891,7 @@
   },
   {
     "name": "#53 Crypt Basement",
-    "decks": [
+    "monsters": [
       {
         "name": "Ooze"
       },
@@ -911,7 +911,7 @@
   },
   {
     "name": "#54 Palace of Ice",
-    "decks": [
+    "monsters": [
       {
         "name": "Cave Bear"
       },
@@ -928,11 +928,11 @@
   },
   {
     "name": "#55 Foggy Thicket",
-    "decks": []
+    "monsters": []
   },
   {
     "name": "#56 Bandit's Wood",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -949,7 +949,7 @@
   },
   {
     "name": "#57 Investigation",
-    "decks": [
+    "monsters": [
       {
         "name": "City Guard"
       },
@@ -963,7 +963,7 @@
   },
   {
     "name": "#58 Bloody Shack",
-    "decks": [
+    "monsters": [
       {
         "name": "Earth Demon"
       },
@@ -980,7 +980,7 @@
   },
   {
     "name": "#59 Forgotten Grove",
-    "decks": [
+    "monsters": [
       {
         "name": "Cave Bear"
       },
@@ -994,7 +994,7 @@
   },
   {
     "name": "#60 Alchemy Lab",
-    "decks": [
+    "monsters": [
       {
         "name": "Ooze"
       },
@@ -1014,7 +1014,7 @@
   },
   {
     "name": "#61 Fading Lighthouse",
-    "decks": [
+    "monsters": [
       {
         "name": "Ooze"
       },
@@ -1031,7 +1031,7 @@
   },
   {
     "name": "#62 Pit of Souls",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -1042,7 +1042,7 @@
   },
   {
     "name": "#63 Magma Pit",
-    "decks": [
+    "monsters": [
       {
         "name": "Vermling Scout"
       },
@@ -1059,7 +1059,7 @@
   },
   {
     "name": "#64 Underwater Lagoon",
-    "decks": [
+    "monsters": [
       {
         "name": "Ooze"
       },
@@ -1073,7 +1073,7 @@
   },
   {
     "name": "#65 Sulfur Mine",
-    "decks": [
+    "monsters": [
       {
         "name": "Vermling Scout"
       },
@@ -1087,7 +1087,7 @@
   },
   {
     "name": "#66 Clockwork Cove",
-    "decks": [
+    "monsters": [
       {
         "name": "Ooze"
       },
@@ -1104,7 +1104,7 @@
   },
   {
     "name": "#67 Arcane Library",
-    "decks": [
+    "monsters": [
       {
         "name": "Forest Imp"
       },
@@ -1118,7 +1118,7 @@
   },
   {
     "name": "#68 Toxic Moor",
-    "decks": [
+    "monsters": [
       {
         "name": "Rending Drake"
       },
@@ -1135,7 +1135,7 @@
   },
   {
     "name": "#69 Well of the Unfortunate",
-    "decks": [
+    "monsters": [
       {
         "name": "Vermling Scout"
       },
@@ -1155,7 +1155,7 @@
   },
   {
     "name": "#70 Chained Isle",
-    "decks": [
+    "monsters": [
       {
         "name": "Night Demon"
       },
@@ -1169,7 +1169,7 @@
   },
   {
     "name": "#71 Windswept Highlands",
-    "decks": [
+    "monsters": [
       {
         "name": "Spitting Drake"
       },
@@ -1183,7 +1183,7 @@
   },
   {
     "name": "#72 Oozing Grove",
-    "decks": [
+    "monsters": [
       {
         "name": "Ooze"
       },
@@ -1197,7 +1197,7 @@
   },
   {
     "name": "#73 Rockslide Ridge",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -1217,7 +1217,7 @@
   },
   {
     "name": "#74 Merchant Ship",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Guard"
       },
@@ -1234,7 +1234,7 @@
   },
   {
     "name": "#75 Overgrown Graveyard",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -1248,7 +1248,7 @@
   },
   {
     "name": "#76 Harrower Hive",
-    "decks": [
+    "monsters": [
       {
         "name": "Giant Viper"
       },
@@ -1265,7 +1265,7 @@
   },
   {
     "name": "#77 Vault of Secrets",
-    "decks": [
+    "monsters": [
       {
         "name": "City Guard"
       },
@@ -1282,7 +1282,7 @@
   },
   {
     "name": "#78 Sacrifice Pit",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Guard"
       },
@@ -1302,7 +1302,7 @@
   },
   {
     "name": "#79 Lost Temple",
-    "decks": [
+    "monsters": [
       {
         "name": "Stone Golem"
       },
@@ -1316,7 +1316,7 @@
   },
   {
     "name": "#80 Vigil Keep",
-    "decks": [
+    "monsters": [
       {
         "name": "City Guard"
       },
@@ -1333,7 +1333,7 @@
   },
   {
     "name": "#81 Temple of the Eclipse",
-    "decks": [
+    "monsters": [
       {
         "name": "Night Demon"
       },
@@ -1353,7 +1353,7 @@
   },
   {
     "name": "#82 Burning Mountain",
-    "decks": [
+    "monsters": [
       {
         "name": "Earth Demon"
       },
@@ -1367,7 +1367,7 @@
   },
   {
     "name": "#83 Shadows Within",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -1387,7 +1387,7 @@
   },
   {
     "name": "#84 Crystalline Cave",
-    "decks": [
+    "monsters": [
       {
         "name": "Flame Demon"
       },
@@ -1401,7 +1401,7 @@
   },
   {
     "name": "#85 Sun Temple",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -1418,7 +1418,7 @@
   },
   {
     "name": "#86 Harried Village",
-    "decks": [
+    "monsters": [
       {
         "name": "Cave Bear"
       },
@@ -1435,7 +1435,7 @@
   },
   {
     "name": "#87 Corrupted Cove",
-    "decks": [
+    "monsters": [
       {
         "name": "Lurker"
       },
@@ -1452,7 +1452,7 @@
   },
   {
     "name": "#88 Plane of Water",
-    "decks": [
+    "monsters": [
       {
         "name": "Frost Demon"
       },
@@ -1466,7 +1466,7 @@
   },
   {
     "name": "#89 Syndicate Hideout",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Archer"
       },
@@ -1486,7 +1486,7 @@
   },
   {
     "name": "#90 Demonic Rift",
-    "decks": [
+    "monsters": [
       {
         "name": "Earth Demon"
       },
@@ -1503,7 +1503,7 @@
   },
   {
     "name": "#91 Wild Melee",
-    "decks": [
+    "monsters": [
       {
         "name": "Cave Bear"
       },
@@ -1523,7 +1523,7 @@
   },
   {
     "name": "#92 Back Alley Brawl",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Guard"
       },
@@ -1552,7 +1552,7 @@
   },
   {
     "name": "#93 Sunken Vessel",
-    "decks": [
+    "monsters": [
       {
         "name": "Lurker"
       },
@@ -1566,7 +1566,7 @@
   },
   {
     "name": "#94 Vermling Nest",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -1583,7 +1583,7 @@
   },
   {
     "name": "#95 Payment Due",
-    "decks": [
+    "monsters": [
       {
         "name": "Deep Terror"
       },
@@ -1600,7 +1600,7 @@
   },
   {
     "name": "#K1 Just Another Night",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Archer"
       },
@@ -1620,7 +1620,7 @@
   },
   {
     "name": "#K2 A Quatryl Scorned",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Archer"
       },
@@ -1634,7 +1634,7 @@
   },
   {
     "name": "#K3 Unreliable Medicine",
-    "decks": [
+    "monsters": [
       {
         "name": "Giant Viper"
       },
@@ -1651,7 +1651,7 @@
   },
   {
     "name": "#K4 Unlikely Allies",
-    "decks": [
+    "monsters": [
       {
         "name": "Vermling Scout"
       },
@@ -1662,7 +1662,7 @@
   },
   {
     "name": "#K5 The Sun Spire",
-    "decks": [
+    "monsters": [
       {
         "name": "Vermling Scout"
       },
@@ -1679,7 +1679,7 @@
   },
   {
     "name": "#K6 A Ship in a Storm",
-    "decks": [
+    "monsters": [
       {
         "name": "Wind Demon"
       },
@@ -1693,7 +1693,7 @@
   },
   {
     "name": "#K7 Arrival in Chains",
-    "decks": [
+    "monsters": [
       {
         "name": "Cave Bear"
       },
@@ -1710,7 +1710,7 @@
   },
   {
     "name": "#K8 The Doctor's Lab",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Bones"
       },
@@ -1727,7 +1727,7 @@
   },
   {
     "name": "#K9 Skewed Perspective",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -1744,7 +1744,7 @@
   },
   {
     "name": "#K10 Panic Room",
-    "decks": [
+    "monsters": [
       {
         "name": "Night Demon"
       },
@@ -1755,7 +1755,7 @@
   },
   {
     "name": "#S1 - Brute - Return to the Black Barrow",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit Guard"
       },
@@ -1769,7 +1769,7 @@
   },
   {
     "name": "#S2 - Tinkerer - An Unfortunate Intrusion",
-    "decks": [
+    "monsters": [
       {
         "name": "City Guard"
       },
@@ -1783,7 +1783,7 @@
   },
   {
     "name": "#S3 - Spellweaver - Corrupted Library",
-    "decks": [
+    "monsters": [
       {
         "name": "Black Imp"
       },
@@ -1797,7 +1797,7 @@
   },
   {
     "name": "#S4 - Scoundrel - Armory Heist",
-    "decks": [
+    "monsters": [
       {
         "name": "City Guard"
       },
@@ -1811,7 +1811,7 @@
   },
   {
     "name": "#S5 - Cragheart - Stone Defense",
-    "decks": [
+    "monsters": [
       {
         "name": "Cave Bear"
       },
@@ -1825,7 +1825,7 @@
   },
   {
     "name": "#S6 - Mindthief - Rodent Liberation",
-    "decks": [
+    "monsters": [
       {
         "name": "Vermling Scout"
       },
@@ -1839,7 +1839,7 @@
   },
   {
     "name": "#S7 - Sunkeeper - Caravan Escort",
-    "decks": [
+    "monsters": [
       {
         "name": "City Guard"
       },
@@ -1871,7 +1871,7 @@
   },
   {
     "name": "#S8 - Berserker - Unnatural Insults",
-    "decks": [
+    "monsters": [
       {
         "name": "Living Corpse"
       },
@@ -1888,7 +1888,7 @@
   },
   {
     "name": "#S9 - Quartermaster - Storage Fees",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -1902,7 +1902,7 @@
   },
   {
     "name": "#S10 - Summoner - Plane of the Wild Beasts",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -1916,7 +1916,7 @@
   },
   {
     "name": "#S11 - Nightshroud - Harvesting the Night",
-    "decks": [
+    "monsters": [
       {
         "name": "Night Demon"
       },
@@ -1927,7 +1927,7 @@
   },
   {
     "name": "#S12 - Plagueherald - Plagued Crypt",
-    "decks": [
+    "monsters": [
       {
         "name": "Giant Viper"
       },
@@ -1938,7 +1938,7 @@
   },
   {
     "name": "#S13 - Soothsinger - Battle of the Bards",
-    "decks": [
+    "monsters": [
       {
         "name": "Bandit  Guard"
       },
@@ -1961,7 +1961,7 @@
   },
   {
     "name": "#S14 - Doomstalker - Corrupted Hunt",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
@@ -1981,7 +1981,7 @@
   },
   {
     "name": "#S15 - Sawbones - Aftermath",
-    "decks": [
+    "monsters": [
       {
         "name": "City Guard"
       }
@@ -1989,7 +1989,7 @@
   },
   {
     "name": "#S16 - Elementalist - Elemental Secrets",
-    "decks": [
+    "monsters": [
       {
         "name": "Flame Demon"
       },
@@ -2006,7 +2006,7 @@
   },
   {
     "name": "#S17 - Beast Tyrant - The Caged Bear",
-    "decks": [
+    "monsters": [
       {
         "name": "Hound"
       },
