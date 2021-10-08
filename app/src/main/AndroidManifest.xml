@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MonsterTracker">
         <activity
+            android:name=".ScenarioActivity.ScenarioActivity"
+            android:exported="true" />
+        <activity
             android:name=".MonsterDetailsActivity.MonsterDetailsActivity"
             android:exported="true" />
         <activity
