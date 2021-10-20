@@ -20,10 +20,6 @@ public class MonsterRepository {
     private static volatile MonsterRepository INSTANCE;
     Gson gson;
 
-    private List<CardClasses> cardClasses;
-    private List<Scenario> scenarios;
-    private List<CardContent> cardContents;
-
     public static MonsterRepository getInstance(@NonNull Context context){
         if(INSTANCE == null){
             synchronized (MonsterRepository.class){
@@ -41,36 +37,11 @@ public class MonsterRepository {
 
         AssetManager assetManager = context.getAssets();
 
-        try {
-            //Get a map between monster and card deck
-            InputStream in = assetManager.open("monster/card_classes.json");
-            Reader reader = new InputStreamReader(in);
-
-            cardClasses = gson.fromJson(reader, new TypeToken<List<CardClasses>>(){}.getType());
-
-            reader.close();
-
-            //Load the map between scenarios and monsters
-            in = assetManager.open("monster/scenarios.json");
-            reader = new InputStreamReader(in);
-
-            scenarios = gson.fromJson(reader, new TypeToken<List<Scenario>>(){}.getType());
-
-            reader.close();
-
-            //Load the cardContents for each deck
-            in = assetManager.open("monster/card_content.json");
-            reader = new InputStreamReader(in);
-
-            cardContents = gson.fromJson(reader, new TypeToken<List<CardContent>>(){}.getType());
-
-            reader.close();
-
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        //Get a map between monster and card deck
+        //InputStream in = assetManager.open("monster/card_classes.json");
+        //Reader reader = new InputStreamReader(in);
+        //cardClasses = gson.fromJson(reader, new TypeToken<List<CardClasses>>(){}.getType());
+        //reader.close();
 
     }
 }
