@@ -17,6 +17,8 @@ import java.util.List;
 
 public class MonsterRepository {
 
+    private List<Scenario> scenarios;
+
     private static volatile MonsterRepository INSTANCE;
     Gson gson;
 
@@ -37,11 +39,16 @@ public class MonsterRepository {
 
         AssetManager assetManager = context.getAssets();
 
-        //Get a map between monster and card deck
-        //InputStream in = assetManager.open("monster/card_classes.json");
-        //Reader reader = new InputStreamReader(in);
-        //cardClasses = gson.fromJson(reader, new TypeToken<List<CardClasses>>(){}.getType());
-        //reader.close();
+        try {//Get a map between monster and card deck
+            InputStream in = assetManager.open("monster/scenarios.json");
+            Reader reader = new InputStreamReader(in);
+
+            scenarios = gson.fromJson(reader, new TypeToken<List<Scenario>>(){}.getType());
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
