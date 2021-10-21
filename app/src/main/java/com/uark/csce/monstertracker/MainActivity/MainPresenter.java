@@ -12,4 +12,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void start() {
         view.setPresenter(this);
     }
+
+    @Override
+    public void detailsActivityButtonClicked() { view.startDetailsActivity(); }
 }
