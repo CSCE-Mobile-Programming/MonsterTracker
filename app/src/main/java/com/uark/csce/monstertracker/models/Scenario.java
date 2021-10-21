@@ -3,23 +3,22 @@ package com.uark.csce.monstertracker.models;
 import java.util.List;
 
 public class Scenario {
-
-    private String name;
-    private List<Monster> monsters;
+    private String Name;
+    private List<String> Monsters;
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
-    public List<Monster> getMonsters() {
-        return monsters;
+    public List<String> getMonsters() {
+        return Monsters;
     }
 
-    public void setMonsters(List<Monster> monsters) {
-        this.monsters = monsters;
+    public void setMonsters(List<String> monsters) {
+        this.Monsters = monsters;
     }
 }
