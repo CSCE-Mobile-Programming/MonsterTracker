@@ -3,36 +3,36 @@ package com.uark.csce.monstertracker.models.info;
 import java.util.List;
 
 public class ActionInfo {
-    private int type;
-    private String actionText;
-    private int modifier;
-    private List<String> rules;
+    private int Type;
+    private String ActionText;
+    private int Modifier;
+    private List<String> Rules;
 
     public int getType() {
-        return type;
+        return Type;
     }
     public void setType(int type) {
-        this.type = type;
+        this.Type = type;
     }
 
     public String getActionText() {
-        return actionText;
+        return ActionText;
     }
     public void setActionText(String actionText) {
-        this.actionText = actionText;
+        this.ActionText = actionText;
     }
 
     public int getModifier() {
-        return modifier;
+        return Modifier;
     }
     public void setModifier(int modifier) {
-        this.modifier = modifier;
+        this.Modifier = modifier;
     }
 
     public List<String> getRules() {
-        return rules;
+        return Rules;
     }
     public void setRules(List<String> rules) {
-        this.rules = rules;
+        this.Rules = rules;
     }
 }

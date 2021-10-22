@@ -3,28 +3,28 @@ package com.uark.csce.monstertracker.models.info;
 import java.util.List;
 
 public class CardInfo {
-    private int initiative;
-    private boolean shuffle;
-    private List<ActionInfo> action;
+    private int Initiative;
+    private boolean Shuffle;
+    private List<ActionInfo> Action;
 
     public int getInitiative() {
-        return initiative;
+        return Initiative;
     }
     public void setInitiative(int initiative) {
-        this.initiative = initiative;
+        this.Initiative = initiative;
     }
 
     public boolean isShuffle() {
-        return shuffle;
+        return Shuffle;
     }
     public void setShuffle(boolean shuffle) {
-        this.shuffle = shuffle;
+        this.Shuffle = shuffle;
     }
 
     public List<ActionInfo> getAction() {
-        return action;
+        return Action;
     }
     public void setAction(List<ActionInfo> action) {
-        this.action = action;
+        this.Action = action;
     }
 }

@@ -12,11 +12,12 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 import com.uark.csce.monstertracker.models.MonsterRepository;
+import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
 @RunWith(AndroidJUnit4.class)
 public class MonsterRepositoryTest {
     private MonsterRepository repository;
-    private Context testContext = ApplicationProvider.getApplicationContext();
+    private Context testContext;
 
     public MonsterRepositoryTest() {
         testContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
@@ -38,5 +39,28 @@ public class MonsterRepositoryTest {
     @Test
     public void countMonsters() {
         assertEquals(34, repository.getMonsterInfos().size());
+    }
+
+    @Test
+    public void BlackImpLoadsBaseInfo() {
+        MonsterInfo blackImp = repository.getMonsterInfos().get(3);
+        assertEquals("Black Imp", blackImp.getName());
+        assertEquals(8, blackImp.getDeck().getCards().size());
+        assertEquals(8, blackImp.getStats().size());
+    }
+
+    @Test
+    public void BlackImpStatsLoad() {
+        MonsterInfo blackImp = repository.getMonsterInfos().get(3);
+
+        int[] levels = new int[] {0, 1, 2, 3, 4, 5, 6, 7 };
+        int[] normalHealths = new int[] {3, 4, 5, 5, 7, 9, 10, 12};
+        int[] eliteHealths = new int[] {4, 6, 8, 8, 11, 12, 14, 17};
+
+        for(int i = 0; i < 8; i++) {
+            assertEquals(levels[i], blackImp.getStats().get(i).getLevel());
+            assertEquals(normalHealths[i], blackImp.getStats().get(i).getNormal().getHealth());
+            assertEquals(eliteHealths[i], blackImp.getStats().get(i).getElite().getHealth());
+        }
     }
 }
