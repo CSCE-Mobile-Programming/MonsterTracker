@@ -9,5 +9,6 @@ public interface MainContract {
     interface Presenter {
         public void setView(View view);
         public void start();
+        public void detailsActivityButtonClicked();
     }
 }

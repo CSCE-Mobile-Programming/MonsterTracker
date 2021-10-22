@@ -10,6 +10,7 @@ import com.uark.csce.monstertracker.models.MonsterRepository;
 public class MainActivity extends AppCompatActivity {
     MainContract.View view;
     MainContract.Presenter presenter;
+    MonsterRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         presenter = new MainPresenter();
         view = (MainContract.View) getSupportFragmentManager().findFragmentById(R.id.mainFragmentContainerView);
         presenter.setView(view);
-        MonsterRepository.getInstance(getApplicationContext());
+        repository = MonsterRepository.getInstance(getApplicationContext());
     }
 
     @Override
