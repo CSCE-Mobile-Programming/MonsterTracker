@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.uark.csce.monstertracker.MonsterDetailsActivity.MonsterDetailsActivity;
 import com.uark.csce.monstertracker.R;
+import com.uark.csce.monstertracker.ScenarioActivity.ScenarioActivity;
 
 public class MainFragment extends Fragment implements MainContract.View {
     MainContract.Presenter presenter;
@@ -52,7 +53,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void startDetailsActivity() {
         Intent detailsIntent = new Intent();
-        detailsIntent.setClass(getActivity(), MonsterDetailsActivity.class);
+        detailsIntent.setClass(getActivity(), ScenarioActivity.class);
         startActivity(detailsIntent);
     }
 }
