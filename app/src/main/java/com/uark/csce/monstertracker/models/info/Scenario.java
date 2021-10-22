@@ -1,4 +1,4 @@
-package com.uark.csce.monstertracker.models;
+package com.uark.csce.monstertracker.models.info;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ public class Scenario {
     public String getName() {
         return Name;
     }
-
     public void setName(String name) {
         this.Name = name;
     }
@@ -17,7 +16,6 @@ public class Scenario {
     public List<String> getMonsters() {
         return Monsters;
     }
-
     public void setMonsters(List<String> monsters) {
         this.Monsters = monsters;
     }
