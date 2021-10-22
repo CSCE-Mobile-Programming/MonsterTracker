@@ -7,17 +7,32 @@ import android.os.Bundle;
 import com.uark.csce.monstertracker.MainActivity.MainContract;
 import com.uark.csce.monstertracker.MainActivity.MainPresenter;
 import com.uark.csce.monstertracker.R;
+import com.uark.csce.monstertracker.models.MonsterRepository;
 
 public class ScenarioActivity extends AppCompatActivity {
-    MainContract.View view;
-    MainContract.Presenter presenter;
+    ScenarioContract.View view;
+    ScenarioContract.Presenter presenter;
+    MonsterRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenario);
-        presenter = new MainPresenter();
-        view = (MainContract.View) getSupportFragmentManager().findFragmentById(R.id.scenarioFragmentContainerView);
+
+        repository = MonsterRepository.getInstance(getApplicationContext());
+
+        presenter = new ScenarioPresenter();
+        presenter.setRepository(repository);
+
+        view = (ScenarioContract.View) getSupportFragmentManager().findFragmentById(R.id.scenarioFragmentContainerView);
+
         presenter.setView(view);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.start();
     }
 }
