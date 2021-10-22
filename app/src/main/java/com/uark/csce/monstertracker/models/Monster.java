@@ -1,92 +1,125 @@
 package com.uark.csce.monstertracker.models;
 
+import com.uark.csce.monstertracker.models.info.MonsterInfo;
+import com.uark.csce.monstertracker.models.info.MonsterStatsInfo;
+import com.uark.csce.monstertracker.models.info.StatsInfo;
+
 // A monster is a single instance of a Class of Monsters ("Class" in the game sense and not in the
 // OOP sense). I.e. one monster object maps to one monster on the board in GH
 public class Monster {
-    private String Name; // Name acts as our unique identifier for a monster type
-    private int Level;
-    private MonsterType Type;
+    private String name; // Name acts as our unique identifier for a monster type
+    private int level;
+    private MonsterType type;
 
     // Stats. "Base" stats are given by level without modifiers from attack cards.
-    private int BaseHealth;
-    private int BaseMove;
-    private int BaseAttack;
-    private int BaseRange;
+    private int baseHealth;
+    private int baseMove;
+    private int baseAttack;
+    private int baseRange;
 
     // Non-base stats are fluid and change-turn-to-turn. A monster is defeated if its Health is 0
-    private int Health;
-    private int Move;
-    private int Attack;
-    private int Range;
+    private int health;
+    private int move;
+    private int attack;
+    private int range;
+
+    private Attributes attributes;
+
+    public Monster(MonsterInfo info, int level, MonsterType type) {
+        name = info.getName();
+        this.level = level;
+        this.type = type;
+
+        MonsterStatsInfo stats = info.getStats().get(level);
+        if (type == MonsterType.Normal) {
+            baseHealth = stats.getNormal().getHealth();
+            baseMove = stats.getNormal().getMove();
+            baseAttack = stats.getNormal().getAttack();
+            baseRange = stats.getNormal().getRange();
+        }
+        else if (type == MonsterType.Elite) {
+            baseHealth = stats.getElite().getHealth();
+            baseMove = stats.getElite().getMove();
+            baseAttack = stats.getElite().getAttack();
+            baseRange = stats.getElite().getRange();
+        }
+
+        health = baseHealth;
+        move = baseMove;
+        attack = baseAttack;
+        range = baseRange;
+
+        //attributes = info.getStats().getAttributes();
+    }
 
     // Getters and setters
     public int getLevel() {
-        return Level;
+        return level;
     }
     public void setLevel(int level) {
-        Level = level;
+        this.level = level;
     }
 
     public MonsterType getType() {
-        return Type;
+        return type;
     }
     public void setType(MonsterType type) {
-        Type = type;
+        this.type = type;
     }
 
     public int getBaseHealth() {
-        return BaseHealth;
+        return baseHealth;
     }
     public void setBaseHealth(int baseHealth) {
-        BaseHealth = baseHealth;
+        this.baseHealth = baseHealth;
     }
 
     public int getBaseMove() {
-        return BaseMove;
+        return baseMove;
     }
     public void setBaseMove(int baseMove) {
-        BaseMove = baseMove;
+        this.baseMove = baseMove;
     }
 
     public int getBaseAttack() {
-        return BaseAttack;
+        return baseAttack;
     }
     public void setBaseAttack(int baseAttack) {
-        BaseAttack = baseAttack;
+        this.baseAttack = baseAttack;
     }
 
     public int getBaseRange() {
-        return BaseRange;
+        return baseRange;
     }
     public void setBaseRange(int baseRange) {
-        BaseRange = baseRange;
+        this.baseRange = baseRange;
     }
 
     public int getHealth() {
-        return Health;
+        return health;
     }
     public void setHealth(int health) {
-        Health = health;
+        this.health = health;
     }
 
     public int getMove() {
-        return Move;
+        return move;
     }
     public void setMove(int move) {
-        Move = move;
+        this.move = move;
     }
 
     public int getAttack() {
-        return Attack;
+        return attack;
     }
     public void setAttack(int attack) {
-        Attack = attack;
+        this.attack = attack;
     }
 
     public int getRange() {
-        return Range;
+        return range;
     }
     public void setRange(int range) {
-        Range = range;
+        this.range = range;
     }
 }

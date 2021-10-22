@@ -4,122 +4,122 @@ import java.util.List;
 
 public class AttributesInfo {
     // Pseudo-stats
-    private int shield;
-    private int target;
-    private int retaliate;
-    private int pierce;
+    private int Shield;
+    private int Target;
+    private int Retaliate;
+    private int Pierce;
 
     // Other flags
-    private boolean isFlying;
-    private boolean attackersGainDisadvantage;
+    private boolean IsFlying;
+    private boolean AttackersGainDisadvantage;
 
     // Immunities
-    private boolean isImmuneToCurse;
-    private boolean isImmuneToDisarm;
-    private boolean isImmuneToImmobilize;
-    private boolean isImmuneToStun;
-    private boolean isImmuneToMuddle;
-    private boolean isImmuneToPoison;
-    private boolean isImmuneToWound;
+    private boolean IsImmuneToCurse;
+    private boolean IsImmuneToDisarm;
+    private boolean IsImmuneToImmobilize;
+    private boolean IsImmuneToStun;
+    private boolean IsImmuneToMuddle;
+    private boolean IsImmuneToPoison;
+    private boolean IsImmuneToWound;
 
     // Raw json data
-    private List<String> attributesList;
+    private List<String> AttributesList;
 
     public int getShield() {
-        return shield;
+        return Shield;
     }
     public void setShield(int shield) {
-        this.shield = shield;
+        this.Shield = shield;
     }
 
     public int getTarget() {
-        return target;
+        return Target;
     }
     public void setTarget(int target) {
-        this.target = target;
+        this.Target = target;
     }
 
     public int getRetaliate() {
-        return retaliate;
+        return Retaliate;
     }
     public void setRetaliate(int retaliate) {
-        this.retaliate = retaliate;
+        this.Retaliate = retaliate;
     }
 
     public int getPierce() {
-        return pierce;
+        return Pierce;
     }
     public void setPierce(int pierce) {
-        this.pierce = pierce;
+        this.Pierce = pierce;
     }
 
     public boolean isFlying() {
-        return isFlying;
+        return IsFlying;
     }
     public void setFlying(boolean flying) {
-        isFlying = flying;
+        IsFlying = flying;
     }
 
     public boolean isAttackersGainDisadvantage() {
-        return attackersGainDisadvantage;
+        return AttackersGainDisadvantage;
     }
     public void setAttackersGainDisadvantage(boolean attackersGainDisadvantage) {
-        this.attackersGainDisadvantage = attackersGainDisadvantage;
+        this.AttackersGainDisadvantage = attackersGainDisadvantage;
     }
 
     public boolean isImmuneToCurse() {
-        return isImmuneToCurse;
+        return IsImmuneToCurse;
     }
     public void setImmuneToCurse(boolean immuneToCurse) {
-        isImmuneToCurse = immuneToCurse;
+        IsImmuneToCurse = immuneToCurse;
     }
 
     public boolean isImmuneToDisarm() {
-        return isImmuneToDisarm;
+        return IsImmuneToDisarm;
     }
     public void setImmuneToDisarm(boolean immuneToDisarm) {
-        isImmuneToDisarm = immuneToDisarm;
+        IsImmuneToDisarm = immuneToDisarm;
     }
 
     public boolean isImmuneToImmobilize() {
-        return isImmuneToImmobilize;
+        return IsImmuneToImmobilize;
     }
     public void setImmuneToImmobilize(boolean immuneToImmobilize) {
-        isImmuneToImmobilize = immuneToImmobilize;
+        IsImmuneToImmobilize = immuneToImmobilize;
     }
 
     public boolean isImmuneToStun() {
-        return isImmuneToStun;
+        return IsImmuneToStun;
     }
     public void setImmuneToStun(boolean immuneToStun) {
-        isImmuneToStun = immuneToStun;
+        IsImmuneToStun = immuneToStun;
     }
 
     public boolean isImmuneToMuddle() {
-        return isImmuneToMuddle;
+        return IsImmuneToMuddle;
     }
     public void setImmuneToMuddle(boolean immuneToMuddle) {
-        isImmuneToMuddle = immuneToMuddle;
+        IsImmuneToMuddle = immuneToMuddle;
     }
 
     public boolean isImmuneToPoison() {
-        return isImmuneToPoison;
+        return IsImmuneToPoison;
     }
     public void setImmuneToPoison(boolean immuneToPoison) {
-        isImmuneToPoison = immuneToPoison;
+        IsImmuneToPoison = immuneToPoison;
     }
 
     public boolean isImmuneToWound() {
-        return isImmuneToWound;
+        return IsImmuneToWound;
     }
     public void setImmuneToWound(boolean immuneToWound) {
-        isImmuneToWound = immuneToWound;
+        IsImmuneToWound = immuneToWound;
     }
 
     public List<String> getAttributesList() {
-        return attributesList;
+        return AttributesList;
     }
     public void setAttributesList(List<String> attributesList) {
-        this.attributesList = attributesList;
+        this.AttributesList = attributesList;
     }
 }
