@@ -38,4 +38,9 @@ public class ScenarioFragment extends Fragment implements ScenarioContract.View 
     public void setPresenter(ScenarioContract.Presenter presenter) {
         this.presenter = presenter;
     }
+
+    @Override
+    public void notifyScenariosLoaded() {
+
+    }
 }
