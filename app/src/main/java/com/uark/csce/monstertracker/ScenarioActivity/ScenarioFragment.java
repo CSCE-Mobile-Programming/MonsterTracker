@@ -1,5 +1,6 @@
 package com.uark.csce.monstertracker.ScenarioActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ScenarioFragment extends Fragment implements ScenarioContract.View {
     ScenarioContract.Presenter presenter;
     private RecyclerView rvScenarioList;
+    private ScenarioAdapter adapter;
 
     public ScenarioFragment() {
         // Required empty public constructor
@@ -39,8 +41,10 @@ public class ScenarioFragment extends Fragment implements ScenarioContract.View 
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_scenario, container, false);
 
+        adapter = new ScenarioAdapter();
+
         rvScenarioList = root.findViewById(R.id.rvScenarioList);
-        rvScenarioList.setAdapter(new ScenarioAdapter());
+        rvScenarioList.setAdapter(adapter);
         rvScenarioList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return root;
@@ -54,6 +58,7 @@ public class ScenarioFragment extends Fragment implements ScenarioContract.View 
     @Override
     public void setPresenter(ScenarioContract.Presenter presenter) {
         this.presenter = presenter;
+        adapter.setPresenter(presenter);
     }
 
     @Override
@@ -61,5 +66,19 @@ public class ScenarioFragment extends Fragment implements ScenarioContract.View 
         List<Scenario> scenarios = presenter.getScenarios();
         ((ScenarioAdapter)rvScenarioList.getAdapter()).setLocalDataSet(scenarios);
         rvScenarioList.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void setResultValue(String scenario) {
+
+        Intent intent = new Intent();
+        intent.putExtra("scenario", scenario);
+
+        getActivity().setResult(1, intent);
+    }
+
+    @Override
+    public void closeActivity() {
+        getActivity().finish();
     }
 }

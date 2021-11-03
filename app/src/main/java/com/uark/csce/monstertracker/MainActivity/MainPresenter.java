@@ -1,5 +1,7 @@
 package com.uark.csce.monstertracker.MainActivity;
 
+import android.util.Log;
+
 public class MainPresenter implements MainContract.Presenter {
     private MainContract.View view;
 
@@ -14,5 +16,10 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void detailsActivityButtonClicked() { view.startDetailsActivity(); }
+    public void scenarioActivityButtonClicked() { view.startScenarioActivity(); }
+
+    @Override
+    public void scenarioActivityResult(String scenario) {
+        Log.i("Scenario Chosen: ", scenario);
+    }
 }

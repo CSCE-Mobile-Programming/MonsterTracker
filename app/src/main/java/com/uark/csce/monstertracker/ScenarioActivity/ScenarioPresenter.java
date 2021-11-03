@@ -39,4 +39,10 @@ public class ScenarioPresenter implements ScenarioContract.Presenter {
         scenarioList = mRepository.getScenarios();
         view.notifyScenariosLoaded();
     }
+
+    @Override
+    public void scenarioClicked(String scenario) {
+        view.setResultValue(scenario);
+        view.closeActivity();
+    }
 }

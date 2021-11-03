@@ -18,6 +18,7 @@ import java.util.List;
 public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ViewHolder>{
 
     private List<Scenario> localDataSet;
+    private ScenarioContract.Presenter presenter;
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
@@ -41,6 +42,11 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ViewHo
         localDataSet = new ArrayList<>();
     }
 
+    public void setPresenter(ScenarioContract.Presenter presenter)
+    {
+        this.presenter = presenter;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,6 +62,16 @@ public class ScenarioAdapter extends RecyclerView.Adapter<ScenarioAdapter.ViewHo
         Scenario scenario = localDataSet.get(position);
 
         holder.getTvScenarioName().setText(scenario.getName());
+        holder.itemView.setTag(scenario.getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String scenario = (String)view.getTag();
+                presenter.scenarioClicked(scenario);
+            }
+        });
+
     }
 
     @Override

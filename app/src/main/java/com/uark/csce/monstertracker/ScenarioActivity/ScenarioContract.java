@@ -9,6 +9,8 @@ public interface ScenarioContract {
     interface View {
         public void setPresenter(Presenter presenter);
         public void notifyScenariosLoaded();
+        public void setResultValue(String scenario);
+        public void closeActivity();
     }
 
     interface Presenter {
@@ -18,5 +20,7 @@ public interface ScenarioContract {
         public void setRepository(MonsterRepository repository);
         public List<Scenario> getScenarios();
         public void getScenariosFromRepository();
+
+        public void scenarioClicked(String scenario);
     }
 }
