@@ -3,12 +3,13 @@ package com.uark.csce.monstertracker.MainActivity;
 public interface MainContract {
     interface View {
         public void setPresenter(Presenter presenter);
-        public void startDetailsActivity();
+        public void startScenarioActivity();
     }
 
     interface Presenter {
         public void setView(View view);
         public void start();
-        public void detailsActivityButtonClicked();
+        public void scenarioActivityButtonClicked();
+        public void scenarioActivityResult(String scenario);
     }
 }

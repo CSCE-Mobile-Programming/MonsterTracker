@@ -3,6 +3,11 @@ package com.uark.csce.monstertracker.MainActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,6 +21,8 @@ import com.uark.csce.monstertracker.ScenarioActivity.ScenarioActivity;
 
 public class MainFragment extends Fragment implements MainContract.View {
     MainContract.Presenter presenter;
+
+    private ActivityResultLauncher<Intent> scenarioResultLauncher;
 
     public MainFragment() {
         // Required empty public constructor
@@ -34,14 +41,25 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         Button button = root.findViewById(R.id.detailsActivityButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.detailsActivityButtonClicked();
+                presenter.scenarioActivityButtonClicked();
             }
         });
+
+        scenarioResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Intent data = result.getData();
+                    String scenario = data.getStringExtra("scenario");
+
+                    presenter.scenarioActivityResult(scenario);
+                });
+
         return root;
     }
 
@@ -51,9 +69,11 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public void startDetailsActivity() {
-        Intent detailsIntent = new Intent();
-        detailsIntent.setClass(getActivity(), ScenarioActivity.class);
-        startActivity(detailsIntent);
+    public void startScenarioActivity() {
+        Intent scenarioIntent = new Intent();
+        scenarioIntent.setClass(getActivity(), ScenarioActivity.class);
+
+        scenarioResultLauncher.launch(scenarioIntent);
+
     }
 }
