@@ -9,6 +9,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +20,14 @@ import android.widget.Button;
 import com.uark.csce.monstertracker.MonsterDetailsActivity.MonsterDetailsActivity;
 import com.uark.csce.monstertracker.R;
 import com.uark.csce.monstertracker.ScenarioActivity.ScenarioActivity;
+import com.uark.csce.monstertracker.models.info.MonsterInfo;
+
+import java.util.List;
 
 public class MainFragment extends Fragment implements MainContract.View {
     MainContract.Presenter presenter;
-
+    private RecyclerView rvMainList;
+    private MainAdapter adapter;
     private ActivityResultLauncher<Intent> scenarioResultLauncher;
 
     public MainFragment() {
@@ -43,6 +49,13 @@ public class MainFragment extends Fragment implements MainContract.View {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_main, container, false);
+        Button button = root.findViewById(R.id.buttonScenario);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.scenarioActivityButtonClicked();
+            }
+        });
 
         scenarioResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -53,12 +66,18 @@ public class MainFragment extends Fragment implements MainContract.View {
                     presenter.scenarioActivityResult(scenario);
                 });
 
+        adapter = new MainAdapter();
+        rvMainList = root.findViewById(R.id.rvMainList);
+        rvMainList.setAdapter(adapter);
+        rvMainList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         return root;
     }
 
     @Override
     public void setPresenter(MainContract.Presenter presenter) {
         this.presenter = presenter;
+        adapter.setPresenter(presenter);
     }
 
     @Override
@@ -68,5 +87,11 @@ public class MainFragment extends Fragment implements MainContract.View {
 
         scenarioResultLauncher.launch(scenarioIntent);
 
+    }
+
+    @Override
+    public void setupMonsterInfos(List<MonsterInfo> infos) {
+        ((MainAdapter)rvMainList.getAdapter()).setLocalDataSet(infos);
+        rvMainList.getAdapter().notifyDataSetChanged();
     }
 }

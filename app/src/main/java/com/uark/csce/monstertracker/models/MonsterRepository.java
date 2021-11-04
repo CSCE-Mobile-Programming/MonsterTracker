@@ -37,9 +37,7 @@ public class MonsterRepository {
     }
 
     private MonsterRepository(@NonNull Context context) {
-
         gson = new GsonBuilder().create();
-
         AssetManager assetManager = context.getAssets();
 
         loadScenarios(assetManager);
@@ -50,8 +48,28 @@ public class MonsterRepository {
         return scenarios;
     }
 
+    public Scenario getScenario(String scenarioName) {
+        // I miss Linq .Select()...
+        for (int i = 0; i < scenarios.size(); i++) {
+            if (scenarios.get(i).getName().equals(scenarioName)) {
+                return scenarios.get(i);
+            }
+        }
+        throw new IllegalArgumentException("Cannot find a scenario with name: " + scenarioName);
+    }
+
     public List<MonsterInfo> getMonsterInfos() {
         return monsterInfos;
+    }
+
+    public MonsterInfo getMonsterInfo(String monsterName) {
+        // ... still miss Linq .Select()...
+        for (int i = 0; i < monsterInfos.size(); i++) {
+            if (monsterInfos.get(i).getName().equals(monsterName)) {
+                return monsterInfos.get(i);
+            }
+        }
+        throw new IllegalArgumentException("Cannot find a scenario with name: " + monsterName);
     }
 
     private void loadScenarios(AssetManager assetManager) {

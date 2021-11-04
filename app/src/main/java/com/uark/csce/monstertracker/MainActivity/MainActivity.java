@@ -16,10 +16,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        repository = MonsterRepository.getInstance(getApplicationContext());
+
         presenter = new MainPresenter();
         view = (MainContract.View) getSupportFragmentManager().findFragmentById(R.id.mainFragmentContainerView);
         presenter.setView(view);
-        repository = MonsterRepository.getInstance(getApplicationContext());
+        presenter.setRepository(repository);
     }
 
     @Override
