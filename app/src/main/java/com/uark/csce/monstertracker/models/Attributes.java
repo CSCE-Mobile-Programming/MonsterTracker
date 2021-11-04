@@ -9,11 +9,11 @@ public class Attributes {
     private boolean isFlying;
     private boolean attackersGainDisadvantage;
 
-    private boolean isImmuneToCurse;
-    private boolean isImmuneToDisarm;
-    private boolean isImmuneToImmobilize;
-    private boolean isImmuneToStun;
-    private boolean isImmuneToMuddle;
-    private boolean isImmuneToPoison;
-    private boolean isImmuneToWound;
+    private boolean isCursed;
+    private boolean isDisarmed;
+    private boolean isImmobilized;
+    private boolean isStunned;
+    private boolean isMuddled;
+    private boolean isPoisoned;
+    private boolean isWounded;
 }
