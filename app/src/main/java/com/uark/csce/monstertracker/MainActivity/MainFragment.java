@@ -43,13 +43,6 @@ public class MainFragment extends Fragment implements MainContract.View {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-        Button button = root.findViewById(R.id.detailsActivityButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.scenarioActivityButtonClicked();
-            }
-        });
 
         scenarioResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
