@@ -7,6 +7,12 @@ public class MonsterInfo {
     private DeckInfo Deck;
     private List<MonsterStatsInfo> Stats;
 
+    public void setup() {
+        for(MonsterStatsInfo info : Stats) {
+            info.setup();
+        }
+    }
+
     public String getName() {
         return Name;
     }

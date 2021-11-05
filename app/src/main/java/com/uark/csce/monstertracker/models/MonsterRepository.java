@@ -42,6 +42,10 @@ public class MonsterRepository {
 
         loadScenarios(assetManager);
         loadMonsterInfo(assetManager);
+
+        for(MonsterInfo info : monsterInfos) {
+            info.setup();
+        }
     }
 
     public List<Scenario> getScenarios() {

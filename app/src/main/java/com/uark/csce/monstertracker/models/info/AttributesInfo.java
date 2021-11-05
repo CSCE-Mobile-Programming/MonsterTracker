@@ -1,5 +1,7 @@
 package com.uark.csce.monstertracker.models.info;
 
+import android.util.Log;
+
 import java.util.List;
 
 public class AttributesInfo {
@@ -7,11 +9,13 @@ public class AttributesInfo {
     private int Shield;
     private int Target;
     private int Retaliate;
+    private int RetaliateRange;
     private int Pierce;
 
     // Other flags
     private boolean IsFlying;
     private boolean AttackersGainDisadvantage;
+    private boolean HasAdvantage;
 
     // Immunities
     private boolean IsImmuneToCurse;
@@ -44,6 +48,14 @@ public class AttributesInfo {
     }
     public void setRetaliate(int retaliate) {
         this.Retaliate = retaliate;
+    }
+
+    public int getRetaliateRange() {
+        return RetaliateRange;
+    }
+
+    public void setRetaliateRange(int retaliateRange) {
+        RetaliateRange = retaliateRange;
     }
 
     public int getPierce() {
@@ -120,6 +132,81 @@ public class AttributesInfo {
         return AttributesList;
     }
     public void setAttributesList(List<String> attributesList) {
-        this.AttributesList = attributesList;
+        for (String attribute: attributesList) {
+            Log.i("AttributesInfo", attribute);
+            // Special case: "Attackers gain disadvantage isn't a %-enclosed string.
+            if (attribute.equals("Attackers gain Disadvantage")) {
+                AttackersGainDisadvantage = true;
+                continue;
+            }
+            // Special case: "Advantage" isn't a %-enclosed string.
+            if (attribute.equals("Advantage")) {
+                HasAdvantage = true;
+                continue;
+            }
+
+            // shamelessly stolen from https://stackoverflow.com/questions/12595019/how-to-get-a-string-between-two-characters/12595052
+            // This builds the "identifier" used in the switch statement. For 99% this is enough
+            String identifier = attribute.substring(attribute.indexOf('%') + 1);
+            identifier = identifier.substring(0, identifier.indexOf('%'));
+
+            // For the other 1% (retaliate @ range) we have to do some more special handling
+            if (attribute.contains("retaliate") && attribute.contains("range")) {
+                // parse retaliate: Find the first thing after "% " and set it
+                String retaliateVal = attribute.substring(attribute.indexOf("% ")+2, attribute.indexOf(":"));
+                String rangeVal = attribute.substring(attribute.indexOf("%range% ") + 8);
+                Retaliate = Integer.parseInt(retaliateVal);
+                RetaliateRange = Integer.parseInt(rangeVal);
+                continue;
+            }
+
+
+            String argumentStr = "";
+            if (identifier.length() < attribute.length() - 2) {
+                // There's something else in this string besides an identifier. Must be an argument.
+                argumentStr = attribute.substring(attribute.indexOf("% ") + 2);
+            }
+            switch(identifier) {
+                case "target":
+                    Target = Integer.parseInt(argumentStr);
+                    break;
+                case "shield":
+                    Shield = Integer.parseInt(argumentStr);
+                    break;
+                case "retaliate":
+                    Retaliate = Integer.parseInt(argumentStr);
+                    break;
+                case "pierce":
+                    Pierce = Integer.parseInt(argumentStr);
+                    break;
+                case "flying":
+                    IsFlying = true;
+                    break;
+                case "curse":
+                    IsImmuneToCurse = true;
+                    break;
+                case "immobilize":
+                    IsImmuneToImmobilize = true;
+                    break;
+                case "disarm":
+                    IsImmuneToDisarm = true;
+                    break;
+                case "poison":
+                    IsImmuneToPoison = true;
+                    break;
+                case "stun":
+                    IsImmuneToStun = true;
+                    break;
+                case "muddle":
+                    IsImmuneToMuddle = true;
+                    break;
+                case "wound":
+                    IsImmuneToWound = true;
+                    break;
+                default:
+                    throw new IllegalArgumentException(attribute);
+            }
+
+        }
     }
 }
