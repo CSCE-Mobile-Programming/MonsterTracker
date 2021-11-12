@@ -67,8 +67,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         MonsterInfo info = localDataSet.get(position);
 
         holder.getTvMonsterName().setText(info.getName());
-        holder.getTvCount().setText("0 / 6"); // dummy string. The RV will need some way to get this data
-        holder.getTvInitiative().setText("Init. 98"); // dummy string. The RV will need some way to get this data
+        holder.getTvCount().setText("0 / " + info.getMaxCount()); // dummy string. The RV will need some way to get this data
+        holder.getTvInitiative().setText("Init. -"); // dummy string. The RV will need some way to get this data
 
         holder.getButtonDetails().setOnClickListener(new View.OnClickListener() {
             @Override
