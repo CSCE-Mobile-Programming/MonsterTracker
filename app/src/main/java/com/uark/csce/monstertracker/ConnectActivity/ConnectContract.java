@@ -8,5 +8,7 @@ public interface ConnectContract {
     interface Presenter {
         public void setView(View view);
         public void start();
+        public void connectButtonClicked();
+        public void joinButtonClicked();
     }
 }

@@ -1,10 +1,22 @@
 package com.uark.csce.monstertracker.models.info;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class StatsInfo {
     private int Health;
     private int Move;
     private int Attack;
     private int Range;
+    private String[] Attributes;
+    private AttributesInfo AttributesInfo;
+
+    public void setup() {
+        // Load attributes into attributes info
+        AttributesInfo = new AttributesInfo();
+        AttributesInfo.setAttributesList(new ArrayList<>(Arrays.asList(Attributes)));
+    }
 
     public int getHealth() {
         return Health;
@@ -32,5 +44,9 @@ public class StatsInfo {
     }
     public void setRange(int range) {
         Range = range;
+    }
+
+    public AttributesInfo getAttributesInfo() {
+        return AttributesInfo;
     }
 }

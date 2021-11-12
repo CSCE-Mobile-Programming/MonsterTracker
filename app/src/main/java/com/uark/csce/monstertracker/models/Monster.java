@@ -7,7 +7,7 @@ import com.uark.csce.monstertracker.models.info.StatsInfo;
 // A monster is a single instance of a Class of Monsters ("Class" in the game sense and not in the
 // OOP sense). I.e. one monster object maps to one monster on the board in GH
 public class Monster {
-    private String name; // Name acts as our unique identifier for a monster type
+    private MonsterInfo info; // references the monsterInfo used to generate this instance
     private int level;
     private MonsterType type;
 
@@ -26,7 +26,7 @@ public class Monster {
     private Attributes attributes;
 
     public Monster(MonsterInfo info, int level, MonsterType type) {
-        name = info.getName();
+        this.info = info;
         this.level = level;
         this.type = type;
 
@@ -53,6 +53,20 @@ public class Monster {
     }
 
     // Getters and setters
+    public MonsterInfo getInfo() {
+        return info;
+    }
+    public void setInfo(MonsterInfo info) {
+        this.info = info;
+    }
+
+    public Attributes getAttributes() {
+        return attributes;
+    }
+    public void setAttributes(Attributes attributes) {
+        this.attributes = attributes;
+    }
+
     public int getLevel() {
         return level;
     }

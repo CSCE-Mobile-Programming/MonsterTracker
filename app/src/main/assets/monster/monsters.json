@@ -1,6 +1,7 @@
 [
   {
     "Name": "Ancient Artillery",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Ancient Artillery",
       "Cards": [
@@ -300,6 +301,7 @@
   },
   {
     "Name": "Bandit Archer",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Archer",
       "Cards": [
@@ -610,6 +612,7 @@
   },
   {
     "Name": "Bandit Guard",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Guard",
       "Cards": [
@@ -930,6 +933,7 @@
   },
   {
     "Name": "Black Imp",
+    "MaxCount": 10,
     "Deck": {
       "Name": "Imp",
       "Cards": [
@@ -1273,6 +1277,7 @@
   },
   {
     "Name": "Cave Bear",
+    "MaxCount": 4,
     "Deck": {
       "Name": "Cave Bear",
       "Cards": [
@@ -1593,6 +1598,7 @@
   },
   {
     "Name": "City Archer",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Archer",
       "Cards": [
@@ -1926,6 +1932,7 @@
   },
   {
     "Name": "City Guard",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Guard",
       "Cards": [
@@ -2263,6 +2270,7 @@
   },
   {
     "Name": "Cultist",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Cultist",
       "Cards": [
@@ -2595,6 +2603,7 @@
   },
   {
     "Name": "Deep Terror",
+    "MaxCount": 10,
     "Deck": {
       "Name": "Deep Terror",
       "Cards": [
@@ -2920,6 +2929,7 @@
   },
   {
     "Name": "Earth Demon",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Earth Demon",
       "Cards": [
@@ -3253,6 +3263,7 @@
   },
   {
     "Name": "Flame Demon",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Flame Demon",
       "Cards": [
@@ -3633,6 +3644,7 @@
   },
   {
     "Name": "Frost Demon",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Frost Demon",
       "Cards": [
@@ -3982,6 +3994,7 @@
   },
   {
     "Name": "Forest Imp",
+    "MaxCount": 10,
     "Deck": {
       "Name": "Imp",
       "Cards": [
@@ -4347,6 +4360,7 @@
   },
   {
     "Name": "Giant Viper",
+    "MaxCount": 10,
     "Deck": {
       "Name": "Giant Viper",
       "Cards": [
@@ -4693,6 +4707,7 @@
   },
   {
     "Name": "Harrower Infester",
+    "MaxCount": 10,
     "Deck": {
       "Name": "Harrower Infester",
       "Cards": [
@@ -5043,6 +5058,7 @@
   },
   {
     "Name": "Hound",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Hound",
       "Cards": [
@@ -5379,6 +5395,7 @@
   },
   {
     "Name": "Inox Archer",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Archer",
       "Cards": [
@@ -5693,6 +5710,7 @@
   },
   {
     "Name": "Inox Guard",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Guard",
       "Cards": [
@@ -6019,6 +6037,7 @@
   },
   {
     "Name": "Inox Shaman",
+    "MaxCount": 4,
     "Deck": {
       "Name": "Shaman",
       "Cards": [
@@ -6335,6 +6354,7 @@
   },
   {
     "Name": "Living Bones",
+    "MaxCount": 10,
     "Deck": {
       "Name": "Living Bones",
       "Cards": [
@@ -6677,6 +6697,7 @@
   },
   {
     "Name": "Living Corpse",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Living Corpse",
       "Cards": [
@@ -6991,6 +7012,7 @@
   },
   {
     "Name": "Living Spirit",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Living Spirit",
       "Cards": [
@@ -7358,6 +7380,7 @@
   },
   {
     "Name": "Lurker",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Lurker",
       "Cards": [
@@ -7730,6 +7753,7 @@
   },
   {
     "Name": "Ooze",
+    "MaxCount": 10,
     "Deck": {
       "Name": "Ooze",
       "Cards": [
@@ -8070,6 +8094,7 @@
   },
   {
     "Name": "Night Demon",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Night Demon",
       "Cards": [
@@ -8440,6 +8465,7 @@
   },
   {
     "Name": "Rending Drake",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Rending Drake",
       "Cards": [
@@ -8786,6 +8812,7 @@
   },
   {
     "Name": "Savvas Icestorm",
+    "MaxCount": 4,
     "Deck": {
       "Name": "Savvas Icestorm",
       "Cards": [
@@ -9181,6 +9208,7 @@
   },
   {
     "Name": "Savvas Lavaflow",
+    "MaxCount": 4,
     "Deck": {
       "Name": "Savvas Lavaflow",
       "Cards": [
@@ -9539,6 +9567,7 @@
   },
   {
     "Name": "Spitting Drake",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Spitting Drake",
       "Cards": [
@@ -9888,6 +9917,7 @@
   },
   {
     "Name": "Stone Golem",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Stone Golem",
       "Cards": [
@@ -10218,6 +10248,7 @@
   },
   {
     "Name": "Sun Demon",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Sun Demon",
       "Cards": [
@@ -10620,6 +10651,7 @@
   },
   {
     "Name": "Vermling Scout",
+    "MaxCount": 10,
     "Deck": {
       "Name": "Scout",
       "Cards": [
@@ -10910,6 +10942,7 @@
   },
   {
     "Name": "Vermling Shaman",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Shaman",
       "Cards": [
@@ -11266,6 +11299,7 @@
   },
   {
     "Name": "Wind Demon",
+    "MaxCount": 6,
     "Deck": {
       "Name": "Wind Demon",
       "Cards": [

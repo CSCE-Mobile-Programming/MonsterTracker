@@ -5,6 +5,11 @@ public class MonsterStatsInfo {
     private StatsInfo Normal;
     private StatsInfo Elite;
 
+    public void setup() {
+        Normal.setup();
+        Elite.setup();
+    }
+
     public int getLevel() {
         return Level;
     }
