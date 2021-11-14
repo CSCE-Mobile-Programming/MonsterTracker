@@ -8,6 +8,7 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     MonsterRepository repository;
 
     MonsterInfo info;
+    int currentLevel = 0;
 
     @Override
     public void setView(MonsterDetailsContract.View view) {
@@ -32,5 +33,22 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     @Override
     public MonsterInfo getMonsterInfo() {
         return this.info;
+    }
+
+    @Override
+    public void addLevel() {
+        if (currentLevel < 7)
+            currentLevel += 1;
+    }
+
+    @Override
+    public void subtractLevel() {
+        if (currentLevel > 0)
+            currentLevel -= 1;
+    }
+
+    @Override
+    public int getLevel() {
+        return this.currentLevel;
     }
 }

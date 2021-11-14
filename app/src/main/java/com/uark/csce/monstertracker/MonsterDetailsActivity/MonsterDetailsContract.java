@@ -14,5 +14,8 @@ public interface MonsterDetailsContract {
         public void start();
         public void setMonsterInfo(String monsterInfoName);
         public MonsterInfo getMonsterInfo();
+        public void addLevel();
+        public void subtractLevel();
+        public int getLevel();
     }
 }

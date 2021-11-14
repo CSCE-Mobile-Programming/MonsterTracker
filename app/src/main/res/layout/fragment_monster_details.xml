@@ -11,13 +11,12 @@
         android:id="@+id/tvEliteRange"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivIconMove3"
-        app:layout_constraintTop_toBottomOf="@+id/tvEliteAttack" />
+        app:layout_constraintTop_toTopOf="@+id/ivIconMove3" />
 
     <ImageView
         android:id="@+id/ivMonsterPortrait"
@@ -33,15 +32,14 @@
         android:id="@+id/tvLevel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Lv. 4"
         android:textAlignment="center"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivMonsterPortrait" />
+        app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toBottomOf="@+id/btnLevelAdd" />
 
     <TextView
         android:id="@+id/tvNormalHealth"
@@ -60,7 +58,7 @@
         android:id="@+id/tvNormalMove"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -72,7 +70,7 @@
         android:id="@+id/tvNormalAttack"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -84,7 +82,7 @@
         android:id="@+id/tvNormalRange"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -144,25 +142,23 @@
         android:id="@+id/tvEliteMove"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivIconMove"
-        app:layout_constraintTop_toBottomOf="@+id/tvEliteHealth" />
+        app:layout_constraintTop_toTopOf="@+id/ivIconMove" />
 
     <TextView
         android:id="@+id/tvEliteAttack"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivIconMove2"
-        app:layout_constraintTop_toBottomOf="@+id/tvEliteMove" />
+        app:layout_constraintTop_toTopOf="@+id/ivIconMove2" />
 
     <TextView
         android:id="@+id/tvEliteAttributesList"
@@ -224,4 +220,36 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="@+id/tvCardText"
         app:layout_constraintTop_toTopOf="@+id/tvCardText" />
+
+    <Button
+        android:id="@+id/btnLevelAdd"
+        android:layout_width="64dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minHeight="32dp"
+        android:text="+"
+        android:textSize="16sp"
+        app:iconPadding="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
+        app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toBottomOf="@+id/ivMonsterPortrait" />
+
+    <Button
+        android:id="@+id/btnLevelSubtract"
+        android:layout_width="64dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minHeight="32dp"
+        android:text="-"
+        android:textSize="16sp"
+        app:iconPadding="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
+        app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toBottomOf="@+id/tvLevel" />
 </androidx.constraintlayout.widget.ConstraintLayout>
