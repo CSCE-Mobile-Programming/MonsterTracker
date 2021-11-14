@@ -12,16 +12,17 @@
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="6"
+        android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivIconMove3"
         app:layout_constraintTop_toBottomOf="@+id/tvEliteAttack" />
 
     <ImageView
         android:id="@+id/ivMonsterPortrait"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_launcher_background"
@@ -46,11 +47,12 @@
         android:id="@+id/tvNormalHealth"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="112dp"
         android:layout_marginTop="8dp"
-        android:text="8"
+        android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivMonsterPortrait"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +64,7 @@
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvNormalHealth"
         app:layout_constraintTop_toBottomOf="@+id/tvNormalHealth" />
 
@@ -70,9 +73,10 @@
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="3"
+        android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvNormalHealth"
         app:layout_constraintTop_toBottomOf="@+id/tvNormalMove" />
 
@@ -81,9 +85,10 @@
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="4"
+        android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvNormalHealth"
         app:layout_constraintTop_toBottomOf="@+id/tvNormalAttack" />
 
@@ -128,9 +133,10 @@
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="10"
+        android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivIconHealth"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,9 +145,10 @@
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="3"
+        android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivIconMove"
         app:layout_constraintTop_toBottomOf="@+id/tvEliteHealth" />
 
@@ -150,14 +157,15 @@
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="4"
+        android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivIconMove2"
         app:layout_constraintTop_toBottomOf="@+id/tvEliteMove" />
 
     <TextView
-        android:id="@+id/tvAttributesList"
+        android:id="@+id/tvEliteAttributesList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -170,6 +178,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvNormalAttributesList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Attributes..."
+        app:layout_constraintBottom_toBottomOf="@+id/ivIconMove3"
+        app:layout_constraintEnd_toStartOf="@+id/tvNormalAttack"
+        app:layout_constraintStart_toEndOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tvCardText"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -179,7 +200,7 @@
         android:text="TextView"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/rvMonsterList"
-        app:layout_constraintEnd_toEndOf="@+id/tvAttributesList"
+        app:layout_constraintEnd_toEndOf="@+id/tvEliteAttributesList"
         app:layout_constraintStart_toStartOf="@+id/tvLevel"
         app:layout_constraintTop_toBottomOf="@+id/ivIconMove3" />
 
