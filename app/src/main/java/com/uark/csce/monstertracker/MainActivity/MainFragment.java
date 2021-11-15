@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.uark.csce.monstertracker.ConnectActivity.ConnectActivity;
 import com.uark.csce.monstertracker.MonsterDetailsActivity.MonsterDetailsActivity;
 import com.uark.csce.monstertracker.R;
 import com.uark.csce.monstertracker.ScenarioActivity.ScenarioActivity;
@@ -49,11 +50,20 @@ public class MainFragment extends Fragment implements MainContract.View {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-        Button button = root.findViewById(R.id.buttonScenario);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        Button buttonScenario = root.findViewById(R.id.buttonScenario);
+        buttonScenario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.scenarioActivityButtonClicked();
+            }
+        });
+
+        Button buttonConnect = root.findViewById(R.id.buttonConnect);
+        buttonConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.connectActivityButtonClicked();
             }
         });
 
@@ -65,8 +75,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
                     presenter.scenarioActivityResult(scenario);
                 });
-
-        adapter = new MainAdapter();
+        adapter = new MainAdapter(getActivity().getAssets());
         rvMainList = root.findViewById(R.id.rvMainList);
         rvMainList.setAdapter(adapter);
         rvMainList.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -86,6 +95,15 @@ public class MainFragment extends Fragment implements MainContract.View {
         scenarioIntent.setClass(getActivity(), ScenarioActivity.class);
 
         scenarioResultLauncher.launch(scenarioIntent);
+
+    }
+
+    @Override
+    public void startConnectActivity() {
+        Intent connectIntent = new Intent();
+        connectIntent.setClass(getActivity(), ConnectActivity.class);
+
+        startActivity(connectIntent);
 
     }
 
