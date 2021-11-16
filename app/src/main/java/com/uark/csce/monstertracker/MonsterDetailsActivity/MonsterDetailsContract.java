@@ -1,5 +1,6 @@
 package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
+import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.MonsterRepository;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
@@ -17,5 +18,7 @@ public interface MonsterDetailsContract {
         public void addLevel();
         public void subtractLevel();
         public int getLevel();
+        public Monster getMonster(int position);
+        public int getMonsterCount();
     }
 }

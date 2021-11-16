@@ -1,7 +1,10 @@
 package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
+import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.MonsterRepository;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
+
+import java.util.List;
 
 public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter {
     MonsterDetailsContract.View view;
@@ -50,5 +53,16 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     @Override
     public int getLevel() {
         return this.currentLevel;
+    }
+
+    @Override
+    public Monster getMonster(int position) {
+        List<Monster> monsters = repository.getMonsters(info.getName());
+        return monsters.get(position);
+    }
+
+    @Override
+    public int getMonsterCount() {
+        return repository.getMonsters(info.getName()).size();
     }
 }
