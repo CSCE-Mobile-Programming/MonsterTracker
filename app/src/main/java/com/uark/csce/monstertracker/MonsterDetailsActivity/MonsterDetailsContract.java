@@ -20,5 +20,6 @@ public interface MonsterDetailsContract {
         public int getLevel();
         public Monster getMonster(int position);
         public int getMonsterCount();
+        public void addMonster();
     }
 }

@@ -65,4 +65,9 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     public int getMonsterCount() {
         return repository.getMonsters(info.getName()).size();
     }
+
+    @Override
+    public void addMonster() {
+        repository.addMonster(info.getName());
+    }
 }

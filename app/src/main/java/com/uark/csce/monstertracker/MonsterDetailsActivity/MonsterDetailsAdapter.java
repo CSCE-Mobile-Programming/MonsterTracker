@@ -66,24 +66,27 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Monster monster = presenter.getMonster(position);
 
-        holder.getTvMonsterHealth().setText(monster.getHealth());
-        holder.getTvMonsterNumber().setText(position);
+        holder.getTvMonsterHealth().setText(Integer.toString(monster.getHealth()));
+        holder.getTvMonsterNumber().setText(Integer.toString(position + 1));
         holder.getBtnHealthAdd().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Add to health
+                //presenter.addHealth(position);
             }
         });
         holder.getBtnHealthSubtract().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Subtract from health
+                //presenter.subtractHealth(position);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return presenter.getMonsterCount();
+        if (presenter != null) {
+            return presenter.getMonsterCount();
+        }
+        return 0;
     }
 }

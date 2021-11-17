@@ -3,6 +3,8 @@ package com.uark.csce.monstertracker.MonsterDetailsActivity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,8 @@ import org.w3c.dom.Text;
 
 public class MonsterDetailsFragment extends Fragment implements MonsterDetailsContract.View {
     MonsterDetailsContract.Presenter presenter;
+    private MonsterDetailsAdapter adapter;
+    private RecyclerView rvMonsterList;
 
     public MonsterDetailsFragment() {
         // Required empty public constructor
@@ -43,22 +47,15 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
 
         Button btnLevelAdd = (Button)root.findViewById(R.id.btnLevelAdd);
         Button btnLevelSubtract = (Button)root.findViewById(R.id.btnLevelSubtract);
-        btnLevelAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.addLevel();
-                populateInfo(root, presenter.getMonsterInfo());
-                populateAttributes(root, presenter.getMonsterInfo());
-            }
-        });
-        btnLevelSubtract.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.subtractLevel();
-                populateInfo(root, presenter.getMonsterInfo());
-                populateAttributes(root, presenter.getMonsterInfo());
-            }
-        });
+        Button btnMonsterAdd = (Button)root.findViewById(R.id.btnMonsterAdd);
+        btnLevelAdd.setOnClickListener(levelAddAction);
+        btnLevelSubtract.setOnClickListener(levelSubtractAction);
+        btnMonsterAdd.setOnClickListener(monsterAddAction);
+
+        adapter = new MonsterDetailsAdapter();
+        rvMonsterList = root.findViewById(R.id.rvMonsterList);
+        rvMonsterList.setAdapter(adapter);
+        rvMonsterList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return root;
     }
@@ -74,6 +71,7 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
     @Override
     public void setPresenter(MonsterDetailsContract.Presenter presenter) {
         this.presenter = presenter;
+        adapter.setPresenter(presenter);
     }
 
     private void populateInfo(View view, MonsterInfo info) {
@@ -149,4 +147,37 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         ((TextView)view.findViewById(R.id.tvNormalAttributesList)).setText(attributeTexts[0].toString());
         ((TextView)view.findViewById(R.id.tvEliteAttributesList)).setText(attributeTexts[1].toString());
     }
+
+    private View.OnClickListener levelAddAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            presenter.addLevel();
+            populateInfo(view, presenter.getMonsterInfo());
+            populateAttributes(view, presenter.getMonsterInfo());
+        }
+    };
+
+    private View.OnClickListener levelSubtractAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            presenter.subtractLevel();
+            populateInfo(view, presenter.getMonsterInfo());
+            populateAttributes(view, presenter.getMonsterInfo());
+        }
+    };
+
+    private View.OnClickListener monsterAddAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            presenter.addMonster();
+            rvMonsterList.getAdapter().notifyItemInserted(presenter.getMonsterCount());
+        }
+    };
+
+    private View.OnClickListener drawCardAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            // TODO
+        }
+    };
 }
