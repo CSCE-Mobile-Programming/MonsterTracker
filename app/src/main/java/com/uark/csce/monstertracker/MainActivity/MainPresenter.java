@@ -44,6 +44,7 @@ public class MainPresenter implements MainContract.Presenter {
 
         for (int i = 0; i < chosen.getMonsters().size(); i++) {
             infos.add(repository.getMonsterInfo(chosen.getMonsters().get(i)));
+            repository.addMonsterInfo(chosen.getMonsters().get(i));
         }
 
         view.setupMonsterInfos(infos);

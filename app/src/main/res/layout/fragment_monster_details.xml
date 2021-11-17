@@ -1,14 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MonsterDetailsActivity.MonsterDetailsFragment">
+    tools:context=".MonsterDetailsActivity.MonsterDetailsFragment" >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tvEliteRange"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivIconMove3"
+        app:layout_constraintTop_toTopOf="@+id/ivIconMove3" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/ivMonsterPortrait"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLevel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Lv. 4"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
+        app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toBottomOf="@+id/btnLevelAdd" />
+
+    <TextView
+        android:id="@+id/tvNormalHealth"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="8dp"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNormalMove"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvNormalHealth"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormalHealth" />
+
+    <TextView
+        android:id="@+id/tvNormalAttack"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvNormalHealth"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormalMove" />
+
+    <TextView
+        android:id="@+id/tvNormalRange"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tvNormalHealth"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormalAttack" />
+
+    <ImageView
+        android:id="@+id/ivIconHealth"
+        android:layout_width="32dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormalHealth"
+        app:layout_constraintStart_toEndOf="@+id/tvNormalHealth"
+        app:layout_constraintTop_toTopOf="@+id/tvNormalHealth" />
+
+    <ImageView
+        android:id="@+id/ivIconMove"
+        android:layout_width="32dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormalMove"
+        app:layout_constraintStart_toEndOf="@+id/tvNormalMove"
+        app:layout_constraintTop_toTopOf="@+id/tvNormalMove" />
+
+    <ImageView
+        android:id="@+id/ivIconMove2"
+        android:layout_width="32dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormalAttack"
+        app:layout_constraintStart_toEndOf="@+id/tvNormalAttack"
+        app:layout_constraintTop_toTopOf="@+id/tvNormalAttack" />
+
+    <ImageView
+        android:id="@+id/ivIconMove3"
+        android:layout_width="32dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNormalRange"
+        app:layout_constraintStart_toEndOf="@+id/tvNormalRange"
+        app:layout_constraintTop_toTopOf="@+id/tvNormalRange" />
+
+    <TextView
+        android:id="@+id/tvEliteHealth"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivIconHealth"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEliteMove"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivIconMove"
+        app:layout_constraintTop_toTopOf="@+id/ivIconMove" />
+
+    <TextView
+        android:id="@+id/tvEliteAttack"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivIconMove2"
+        app:layout_constraintTop_toTopOf="@+id/ivIconMove2" />
+
+    <TextView
+        android:id="@+id/tvEliteAttributesList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Attributes..."
+        app:layout_constraintBottom_toBottomOf="@+id/ivIconMove3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvEliteHealth"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNormalAttributesList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Attributes..."
+        app:layout_constraintBottom_toBottomOf="@+id/ivIconMove3"
+        app:layout_constraintEnd_toStartOf="@+id/tvNormalAttack"
+        app:layout_constraintStart_toEndOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCardText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_background"
+        android:minHeight="96dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/tvEliteAttributesList"
+        app:layout_constraintStart_toStartOf="@+id/tvLevel"
+        app:layout_constraintTop_toBottomOf="@+id/ivIconMove3" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMonsterList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnMonsterAdd"
+        app:layout_constraintEnd_toEndOf="@+id/tvCardText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvCardText"
+        app:layout_constraintTop_toBottomOf="@+id/tvCardText" />
+
+    <TextView
+        android:id="@+id/tvCardInitiative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_background"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/tvCardText"
+        app:layout_constraintTop_toTopOf="@+id/tvCardText" />
+
+    <Button
+        android:id="@+id/btnLevelAdd"
+        android:layout_width="64dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minHeight="32dp"
+        android:text="+"
+        android:textSize="16sp"
+        app:iconPadding="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
+        app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toBottomOf="@+id/ivMonsterPortrait" />
+
+    <Button
+        android:id="@+id/btnLevelSubtract"
+        android:layout_width="64dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:minHeight="32dp"
+        android:text="—"
+        android:textSize="16sp"
+        app:iconPadding="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
+        app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
+        app:layout_constraintTop_toBottomOf="@+id/tvLevel" />
+
+    <Button
+        android:id="@+id/btnMonsterAdd"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="+"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDrawCard"
+        app:layout_constraintStart_toStartOf="@+id/rvMonsterList"
+        app:layout_constraintTop_toTopOf="@+id/btnDrawCard" />
+
+    <Button
+        android:id="@+id/btnDrawCard"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Draw"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rvMonsterList"
+        app:layout_constraintStart_toEndOf="@+id/btnMonsterAdd" />
+</androidx.constraintlayout.widget.ConstraintLayout>

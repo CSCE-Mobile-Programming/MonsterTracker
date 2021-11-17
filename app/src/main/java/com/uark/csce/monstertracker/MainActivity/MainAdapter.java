@@ -1,5 +1,6 @@
 package com.uark.csce.monstertracker.MainActivity;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.uark.csce.monstertracker.MonsterDetailsActivity.MonsterDetailsActivity;
 import com.uark.csce.monstertracker.R;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
@@ -87,6 +89,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 // start the associated monster details activity.
+                Intent detailsIntent = new Intent(view.getContext(), MonsterDetailsActivity.class);
+                detailsIntent.putExtra("monsterName", holder.getTvMonsterName().getText());
+                view.getContext().startActivity(detailsIntent);
             }
         });
     }
