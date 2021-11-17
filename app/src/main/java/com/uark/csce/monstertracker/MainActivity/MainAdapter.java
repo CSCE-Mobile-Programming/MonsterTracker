@@ -1,6 +1,9 @@
 package com.uark.csce.monstertracker.MainActivity;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +18,15 @@ import com.uark.csce.monstertracker.MonsterDetailsActivity.MonsterDetailsActivit
 import com.uark.csce.monstertracker.R;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private List<MonsterInfo> localDataSet;
     private MainContract.Presenter presenter;
+    AssetManager assetManager;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvMonsterName;
@@ -47,8 +53,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         public Button getButtonDetails() { return buttonDetails; }
     }
 
-    public MainAdapter() {
+    public MainAdapter(AssetManager manager) {
         localDataSet = new ArrayList<>();
+        assetManager = manager;
     }
 
     public void setPresenter(MainContract.Presenter presenter) {
@@ -72,6 +79,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         holder.getTvCount().setText("0 / " + info.getMaxCount()); // dummy string. The RV will need some way to get this data
         holder.getTvInitiative().setText("Init. -"); // dummy string. The RV will need some way to get this data
 
+        try {
+            holder.getIvPortrait().setImageBitmap(getBitmapFromAssets("portraits/" + info.getName() + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         holder.getButtonDetails().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,5 +103,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public void setLocalDataSet(List<MonsterInfo> localDataSet) {
         this.localDataSet = localDataSet;
+    }
+
+    public Bitmap getBitmapFromAssets(String fileName) throws IOException {
+        InputStream istr = assetManager.open(fileName);
+        Bitmap bitmap = BitmapFactory.decodeStream(istr);
+        istr.close();
+
+        return bitmap;
     }
 }

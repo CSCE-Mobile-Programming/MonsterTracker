@@ -8,6 +8,7 @@ public interface MainContract {
     interface View {
         public void setPresenter(Presenter presenter);
         public void startScenarioActivity();
+        public void startConnectActivity();
         public void setupMonsterInfos(List<MonsterInfo> infos);
     }
 
@@ -17,5 +18,6 @@ public interface MainContract {
         public void start();
         public void scenarioActivityButtonClicked();
         public void scenarioActivityResult(String scenarioName);
+        public void connectActivityButtonClicked();
     }
 }

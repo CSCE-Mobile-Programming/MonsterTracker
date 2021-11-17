@@ -32,6 +32,11 @@ public class MainPresenter implements MainContract.Presenter {
     public void scenarioActivityButtonClicked() { view.startScenarioActivity(); }
 
     @Override
+    public void connectActivityButtonClicked() {
+        view.startConnectActivity();
+    }
+
+    @Override
     public void scenarioActivityResult(String scenarioName) {
         Log.i("Scenario Chosen: ", scenarioName);
         Scenario chosen = repository.getScenario(scenarioName);
