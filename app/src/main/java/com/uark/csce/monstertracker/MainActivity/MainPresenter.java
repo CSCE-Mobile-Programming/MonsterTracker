@@ -37,6 +37,17 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public void addMonsterButtonClicked() {
+        view.showMonsterPicker(repository.getMonsterInfos());
+    }
+
+    @Override
+    public void monsterPickerReturned(String monsterName) {
+        repository.addMonsterInfo(monsterName);
+        view.addMonsterInfoToList(repository.getMonsterInfo(monsterName));
+    }
+
+    @Override
     public void scenarioActivityResult(String scenarioName) {
         Log.i("Scenario Chosen: ", scenarioName);
         Scenario chosen = repository.getScenario(scenarioName);

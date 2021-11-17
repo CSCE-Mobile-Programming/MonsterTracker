@@ -10,6 +10,8 @@ public interface MainContract {
         public void startScenarioActivity();
         public void startConnectActivity();
         public void setupMonsterInfos(List<MonsterInfo> infos);
+        public void showMonsterPicker(List<MonsterInfo> monsters);
+        public void addMonsterInfoToList(MonsterInfo monster);
     }
 
     interface Presenter {
@@ -19,5 +21,8 @@ public interface MainContract {
         public void scenarioActivityButtonClicked();
         public void scenarioActivityResult(String scenarioName);
         public void connectActivityButtonClicked();
+        public void addMonsterButtonClicked();
+        public void monsterPickerReturned(String monsterName);
     }
+
 }
