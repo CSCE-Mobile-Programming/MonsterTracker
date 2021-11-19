@@ -35,7 +35,7 @@
             android:name=".MainActivity.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.MonsterTracker.NoActionBar">
+            android:theme="@style/Theme.MonsterTracker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
