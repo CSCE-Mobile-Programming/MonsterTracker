@@ -67,8 +67,8 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     }
 
     @Override
-    public void addMonster() {
-        repository.addMonster(info.getName(), currentLevel);
+    public void addMonster(boolean isElite) {
+        repository.addMonster(info.getName(), currentLevel, isElite);
     }
 
     @Override

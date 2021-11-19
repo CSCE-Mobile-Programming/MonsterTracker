@@ -20,7 +20,7 @@ public interface MonsterDetailsContract {
         public int getLevel();
         public Monster getMonster(int position);
         public int getMonsterCount();
-        public void addMonster();
+        public void addMonster(boolean isElite);
         public void addHealth(int position);
         public void subtractHealth(int position);
     }

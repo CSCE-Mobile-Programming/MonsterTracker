@@ -13,12 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.uark.csce.monstertracker.R;
-import com.uark.csce.monstertracker.models.Attributes;
 import com.uark.csce.monstertracker.models.info.AttributesInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 import com.uark.csce.monstertracker.models.info.MonsterStatsInfo;
-
-import org.w3c.dom.Text;
 
 public class MonsterDetailsFragment extends Fragment implements MonsterDetailsContract.View {
     MonsterDetailsContract.Presenter presenter;
@@ -48,10 +45,12 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
 
         Button btnLevelAdd = (Button)root.findViewById(R.id.btnLevelAdd);
         Button btnLevelSubtract = (Button)root.findViewById(R.id.btnLevelSubtract);
-        Button btnMonsterAdd = (Button)root.findViewById(R.id.btnMonsterAdd);
+        Button btnMonsterAddNormal = (Button)root.findViewById(R.id.btnMonsterAddNormal);
+        Button btnMonsterAddElite = (Button)root.findViewById(R.id.btnMonsterAddElite);
         btnLevelAdd.setOnClickListener(levelAddAction);
         btnLevelSubtract.setOnClickListener(levelSubtractAction);
-        btnMonsterAdd.setOnClickListener(monsterAddAction);
+        btnMonsterAddNormal.setOnClickListener(monsterAddNormalAction);
+        btnMonsterAddElite.setOnClickListener(monsterAddEliteAction);
 
         adapter = new MonsterDetailsAdapter();
         rvMonsterList = root.findViewById(R.id.rvMonsterList);
@@ -167,10 +166,18 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         }
     };
 
-    private View.OnClickListener monsterAddAction = new View.OnClickListener() {
+    private View.OnClickListener monsterAddNormalAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            presenter.addMonster();
+            presenter.addMonster(false);
+            rvMonsterList.getAdapter().notifyDataSetChanged();
+        }
+    };
+
+    private View.OnClickListener monsterAddEliteAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            presenter.addMonster(true);
             rvMonsterList.getAdapter().notifyDataSetChanged();
         }
     };
