@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/scenario_list"
+        android:icon="@drawable/ic_scenario_list"
+        android:title="@string/scenario_list"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/wifi_sync"
+        android:icon="@drawable/ic_wifi_sync"
+        android:title="@string/wifi_sync"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/draw_all"
+        android:icon="@drawable/ic_draw_all"
+        android:title="@string/draw_all"
+        app:showAsAction="ifRoom" />
+
+</menu>

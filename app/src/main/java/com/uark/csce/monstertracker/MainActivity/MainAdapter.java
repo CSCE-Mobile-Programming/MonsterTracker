@@ -105,6 +105,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         this.localDataSet = localDataSet;
     }
 
+    public List<MonsterInfo> getLocalDataSet()
+    {
+        return localDataSet;
+    }
+
     public Bitmap getBitmapFromAssets(String fileName) throws IOException {
         InputStream istr = assetManager.open(fileName);
         Bitmap bitmap = BitmapFactory.decodeStream(istr);
