@@ -1,5 +1,8 @@
 package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uark.csce.monstertracker.R;
@@ -17,11 +21,16 @@ import com.uark.csce.monstertracker.models.info.AttributesInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 import com.uark.csce.monstertracker.models.info.MonsterStatsInfo;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public class MonsterDetailsFragment extends Fragment implements MonsterDetailsContract.View {
     MonsterDetailsContract.Presenter presenter;
     private MonsterDetailsAdapter adapter;
     private RecyclerView rvMonsterList;
     private View root;
+
+    private AssetManager assetManager;
 
     public MonsterDetailsFragment() {
         // Required empty public constructor
@@ -35,6 +44,7 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        assetManager = getContext().getAssets();
     }
 
     @Override
@@ -51,6 +61,20 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         btnLevelSubtract.setOnClickListener(levelSubtractAction);
         btnMonsterAddNormal.setOnClickListener(monsterAddNormalAction);
         btnMonsterAddElite.setOnClickListener(monsterAddEliteAction);
+
+        ImageView ivHealth = (ImageView)root.findViewById(R.id.ivIconHealth);
+        ImageView ivMove = (ImageView)root.findViewById(R.id.ivIconMove);
+        ImageView ivAttack = (ImageView)root.findViewById(R.id.ivIconAttack);
+        ImageView ivRange = (ImageView)root.findViewById(R.id.ivIconRange);
+
+        try {
+            ivHealth.setImageBitmap(getBitmapFromAssets("icons/health.PNG"));
+            ivMove.setImageBitmap(getBitmapFromAssets("icons/move.PNG"));
+            ivAttack.setImageBitmap(getBitmapFromAssets("icons/attack.PNG"));
+            ivRange.setImageBitmap(getBitmapFromAssets("icons/range.PNG"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         adapter = new MonsterDetailsAdapter();
         rvMonsterList = root.findViewById(R.id.rvMonsterList);
@@ -87,6 +111,13 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         ((TextView)root.findViewById(R.id.tvEliteRange)).setText(Integer.toString(stats.getElite().getRange()));
 
         ((TextView)root.findViewById(R.id.tvLevel)).setText("Lvl. " + Integer.toString(presenter.getLevel()));
+
+        ImageView ivPortrait = (ImageView)root.findViewById(R.id.ivMonsterPortrait);
+        try {
+            ivPortrait.setImageBitmap(getBitmapFromAssets("portraits/" + info.getName() + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void populateAttributes(MonsterInfo info) {
@@ -188,4 +219,12 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
             // TODO
         }
     };
+
+    public Bitmap getBitmapFromAssets(String fileName) throws IOException {
+        InputStream istr = assetManager.open(fileName);
+        Bitmap bitmap = BitmapFactory.decodeStream(istr);
+        istr.close();
+
+        return bitmap;
+    }
 }

@@ -15,8 +15,8 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ivIconMove3"
-        app:layout_constraintTop_toTopOf="@+id/ivIconMove3" />
+        app:layout_constraintStart_toEndOf="@+id/ivIconRange"
+        app:layout_constraintTop_toTopOf="@+id/ivIconRange" />
 
     <ImageView
         android:id="@+id/ivMonsterPortrait"
@@ -109,7 +109,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvNormalMove" />
 
     <ImageView
-        android:id="@+id/ivIconMove2"
+        android:id="@+id/ivIconAttack"
         android:layout_width="32dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_launcher_background"
@@ -118,7 +118,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvNormalAttack" />
 
     <ImageView
-        android:id="@+id/ivIconMove3"
+        android:id="@+id/ivIconRange"
         android:layout_width="32dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_launcher_background"
@@ -157,8 +157,8 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ivIconMove2"
-        app:layout_constraintTop_toTopOf="@+id/ivIconMove2" />
+        app:layout_constraintStart_toEndOf="@+id/ivIconAttack"
+        app:layout_constraintTop_toTopOf="@+id/ivIconAttack" />
 
     <TextView
         android:id="@+id/tvEliteAttributesList"
@@ -168,7 +168,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Attributes..."
-        app:layout_constraintBottom_toBottomOf="@+id/ivIconMove3"
+        app:layout_constraintBottom_toBottomOf="@+id/ivIconRange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvEliteHealth"
         app:layout_constraintTop_toTopOf="parent" />
@@ -181,7 +181,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Attributes..."
-        app:layout_constraintBottom_toBottomOf="@+id/ivIconMove3"
+        app:layout_constraintBottom_toBottomOf="@+id/ivIconRange"
         app:layout_constraintEnd_toStartOf="@+id/tvNormalAttack"
         app:layout_constraintStart_toEndOf="@+id/ivMonsterPortrait"
         app:layout_constraintTop_toTopOf="parent" />
@@ -197,7 +197,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/tvEliteAttributesList"
         app:layout_constraintStart_toStartOf="@+id/tvLevel"
-        app:layout_constraintTop_toBottomOf="@+id/ivIconMove3" />
+        app:layout_constraintTop_toBottomOf="@+id/ivIconRange" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMonsterList"
