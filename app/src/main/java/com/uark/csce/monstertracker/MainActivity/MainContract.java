@@ -19,5 +19,6 @@ public interface MainContract {
         public void scenarioActivityButtonClicked();
         public void scenarioActivityResult(String scenarioName);
         public void connectActivityButtonClicked();
+        public int getMonsterCount(String monsterInfoName);
     }
 }

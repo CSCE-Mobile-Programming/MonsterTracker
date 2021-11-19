@@ -205,7 +205,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnMonsterAdd"
+        app:layout_constraintBottom_toTopOf="@+id/btnMonsterAddNormal"
         app:layout_constraintEnd_toEndOf="@+id/tvCardText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvCardText"
@@ -253,27 +253,43 @@
         app:layout_constraintTop_toBottomOf="@+id/tvLevel" />
 
     <Button
-        android:id="@+id/btnMonsterAdd"
+        android:id="@+id/btnMonsterAddNormal"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
         android:text="+"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDrawCard"
+        app:layout_constraintEnd_toStartOf="@+id/btnMonsterAddElite"
         app:layout_constraintStart_toStartOf="@+id/rvMonsterList"
         app:layout_constraintTop_toTopOf="@+id/btnDrawCard" />
+
+    <Button
+        android:id="@+id/btnMonsterAddElite"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:text="+"
+        android:textColor="@color/elite_gold"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDrawCard"
+        app:layout_constraintStart_toEndOf="@+id/btnMonsterAddNormal"
+        app:layout_constraintTop_toTopOf="@+id/btnDrawCard"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnDrawCard"
         android:layout_width="0dp"
         android:layout_height="64dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
         android:text="Draw"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rvMonsterList"
-        app:layout_constraintStart_toEndOf="@+id/btnMonsterAdd" />
+        app:layout_constraintStart_toEndOf="@+id/btnMonsterAddElite" />
 </androidx.constraintlayout.widget.ConstraintLayout>

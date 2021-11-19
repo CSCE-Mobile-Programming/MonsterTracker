@@ -50,4 +50,9 @@ public class MainPresenter implements MainContract.Presenter {
 
         view.setupMonsterInfos(infos);
     }
+
+    @Override
+    public int getMonsterCount(String monsterInfoName) {
+        return repository.getMonsterCount(monsterInfoName);
+    }
 }

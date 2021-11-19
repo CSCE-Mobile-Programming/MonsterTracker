@@ -84,7 +84,7 @@ public class MonsterRepository {
         monsterInstanceData.put(monsterInfoName, list);
     }
 
-    public void addMonster(String monsterInfoName, int level) {
+    public void addMonster(String monsterInfoName, int level, boolean isElite) {
         MonsterInfo info = getMonsterInfo(monsterInfoName);
         List<Monster> monsters = monsterInstanceData.get(monsterInfoName);
 
@@ -92,7 +92,7 @@ public class MonsterRepository {
         // fill it. Otherwise, do nothing.
         for(int i = 0; i < monsters.size(); i++) {
             if (monsters.get(i) == null) {
-                Monster m = new Monster(info, level, MonsterType.Normal);
+                Monster m = new Monster(info, level, isElite ? MonsterType.Elite : MonsterType.Normal);
                 monsters.set(i, m);
                 break;
             }
