@@ -8,7 +8,6 @@ import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 
 import com.uark.csce.monstertracker.R;
-import com.uark.csce.monstertracker.WifiSync.SyncBroadcastReceiver;
 import com.uark.csce.monstertracker.models.MonsterRepository;
 
 public class MainActivity extends AppCompatActivity {

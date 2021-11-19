@@ -60,7 +60,6 @@ public class MonsterRepository {
         currentCardData = new HashMap<String, CardInfo>();
     }
 
-    // Instance data access and manipulation. This will throw exceptions if the key isn't found
     public void clearInstanceData() {
         monsterInstanceData = new HashMap<String, List<Monster>>();
     }
@@ -74,16 +73,64 @@ public class MonsterRepository {
     }
 
     public void addMonsterInfo(String monsterInfoName) {
-        monsterInstanceData.put(monsterInfoName, new ArrayList<Monster>());
-    }
-
-    public void addMonster(String monsterInfoName) {
         MonsterInfo info = getMonsterInfo(monsterInfoName);
-        Monster m = new Monster(info, 0, MonsterType.Normal);
-        monsterInstanceData.get(monsterInfoName).add(m);
+
+        // Preinitialize the list with null monsters
+        ArrayList<Monster> list = new ArrayList<>(info.getMaxCount());
+        for (int i = 0; i < info.getMaxCount(); i++) {
+            list.add(null);
+        }
+
+        monsterInstanceData.put(monsterInfoName, list);
     }
 
-    // Informational data access access
+    public void addMonster(String monsterInfoName, int level) {
+        MonsterInfo info = getMonsterInfo(monsterInfoName);
+        List<Monster> monsters = monsterInstanceData.get(monsterInfoName);
+
+        // When adding a monster we traverse the list and look for null entries. If one is found we
+        // fill it. Otherwise, do nothing.
+        for(int i = 0; i < monsters.size(); i++) {
+            if (monsters.get(i) == null) {
+                Monster m = new Monster(info, level, MonsterType.Normal);
+                monsters.set(i, m);
+                break;
+            }
+        }
+    }
+
+    public void removeMonster(String monsterInfoName, int position) {
+        MonsterInfo info = getMonsterInfo(monsterInfoName);
+        List<Monster> monsters = monsterInstanceData.get(monsterInfoName);
+        if (position < 0 || position >= monsters.size()) {
+            throw new IllegalArgumentException("Position out of range for monsterInfo: " + monsterInfoName);
+        }
+
+        // When removing a monster we go to that index and set the data to null. However, the entry
+        // in the list is kept so that the indexes of other monsters are not changed. This is a
+        // quality of life feature for GH players so they don't have to renumber their monsters
+        // every time one of them dies.
+        monsters.set(position, null);
+    }
+
+    public void addHealth(String monsterInfoName, int position) {
+        Monster m = monsterInstanceData.get(monsterInfoName).get(position);
+        if (m != null && m.getHealth() < m.getBaseHealth()) {
+            m.setHealth(m.getHealth() + 1);
+        }
+    }
+
+    public void subtractHealth(String monsterInfoName, int position) {
+        Monster m = monsterInstanceData.get(monsterInfoName).get(position);
+        if (m != null) {
+            m.setHealth(m.getHealth() - 1);
+            if (m.getHealth() <= 0) {
+                removeMonster(monsterInfoName, position);
+            }
+        }
+    }
+
+    // Informational data access
     public List<Scenario> getScenarios() {
         return scenarios;
     }
@@ -112,7 +159,21 @@ public class MonsterRepository {
         throw new IllegalArgumentException("Cannot find a monster with name: " + monsterName);
     }
 
-    private void loadScenarios(AssetManager assetManager) {
+    public int getMonsterCount(String monsterInfoName) {
+        MonsterInfo info = getMonsterInfo(monsterInfoName);
+        List<Monster> monsters = monsterInstanceData.get(monsterInfoName);
+
+        int counter = 0;
+        for (int i = 0; i < info.getMaxCount(); i++) {
+            if (monsters.get(i) != null) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    // Initialization
+    private void loadScenarios(@NonNull AssetManager assetManager) {
         try {
             InputStream in = assetManager.open("monster/scenarios.json");
             Reader reader = new InputStreamReader(in);
@@ -127,7 +188,7 @@ public class MonsterRepository {
         }
     }
 
-    private void loadMonsterInfo(AssetManager assetManager) {
+    private void loadMonsterInfo(@NonNull AssetManager assetManager) {
         try {
             InputStream in = assetManager.open("monster/monsters.json");
             Reader reader = new InputStreamReader(in);

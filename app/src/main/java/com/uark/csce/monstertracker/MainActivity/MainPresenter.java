@@ -38,6 +38,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void scenarioActivityResult(String scenarioName) {
+        repository.clearInstanceData();
         Log.i("Scenario Chosen: ", scenarioName);
         Scenario chosen = repository.getScenario(scenarioName);
         List<MonsterInfo> infos = new ArrayList<MonsterInfo>();
