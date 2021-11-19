@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -52,22 +54,6 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-
-        Button buttonScenario = root.findViewById(R.id.buttonScenario);
-        buttonScenario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.scenarioActivityButtonClicked();
-            }
-        });
-
-        Button buttonConnect = root.findViewById(R.id.buttonConnect);
-        buttonConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.connectActivityButtonClicked();
-            }
-        });
 
         FloatingActionButton buttonAddMonster = root.findViewById(R.id.buttonAddMonster);
         buttonAddMonster.setOnClickListener(new View.OnClickListener() {
