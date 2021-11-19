@@ -50,6 +50,14 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // When returning here from the details activity it's likely that the data set has changed.
+        // Tell the adapter to new info from the presenter.
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 

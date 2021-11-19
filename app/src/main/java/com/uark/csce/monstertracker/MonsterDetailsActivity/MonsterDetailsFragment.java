@@ -13,17 +13,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.uark.csce.monstertracker.R;
-import com.uark.csce.monstertracker.models.Attributes;
 import com.uark.csce.monstertracker.models.info.AttributesInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 import com.uark.csce.monstertracker.models.info.MonsterStatsInfo;
-
-import org.w3c.dom.Text;
 
 public class MonsterDetailsFragment extends Fragment implements MonsterDetailsContract.View {
     MonsterDetailsContract.Presenter presenter;
     private MonsterDetailsAdapter adapter;
     private RecyclerView rvMonsterList;
+    private View root;
 
     public MonsterDetailsFragment() {
         // Required empty public constructor
@@ -43,14 +41,16 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_monster_details, container, false);
+        root = inflater.inflate(R.layout.fragment_monster_details, container, false);
 
         Button btnLevelAdd = (Button)root.findViewById(R.id.btnLevelAdd);
         Button btnLevelSubtract = (Button)root.findViewById(R.id.btnLevelSubtract);
-        Button btnMonsterAdd = (Button)root.findViewById(R.id.btnMonsterAdd);
+        Button btnMonsterAddNormal = (Button)root.findViewById(R.id.btnMonsterAddNormal);
+        Button btnMonsterAddElite = (Button)root.findViewById(R.id.btnMonsterAddElite);
         btnLevelAdd.setOnClickListener(levelAddAction);
         btnLevelSubtract.setOnClickListener(levelSubtractAction);
-        btnMonsterAdd.setOnClickListener(monsterAddAction);
+        btnMonsterAddNormal.setOnClickListener(monsterAddNormalAction);
+        btnMonsterAddElite.setOnClickListener(monsterAddEliteAction);
 
         adapter = new MonsterDetailsAdapter();
         rvMonsterList = root.findViewById(R.id.rvMonsterList);
@@ -64,8 +64,8 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
     public void onResume() {
         super.onResume();
         MonsterInfo info = presenter.getMonsterInfo();
-        populateInfo(this.getView(), info);
-        populateAttributes(this.getView(), info);
+        populateInfo(info);
+        populateAttributes(info);
     }
 
     @Override
@@ -74,22 +74,22 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         adapter.setPresenter(presenter);
     }
 
-    private void populateInfo(View view, MonsterInfo info) {
+    private void populateInfo(MonsterInfo info) {
         // Set up normal and elite info
         MonsterStatsInfo stats = info.getStats().get(presenter.getLevel());
-        ((TextView)view.findViewById(R.id.tvNormalHealth)).setText(Integer.toString(stats.getNormal().getHealth()));
-        ((TextView)view.findViewById(R.id.tvNormalMove)).setText(Integer.toString(stats.getNormal().getMove()));
-        ((TextView)view.findViewById(R.id.tvNormalAttack)).setText(Integer.toString(stats.getNormal().getAttack()));
-        ((TextView)view.findViewById(R.id.tvNormalRange)).setText(Integer.toString(stats.getNormal().getRange()));
-        ((TextView)view.findViewById(R.id.tvEliteHealth)).setText(Integer.toString(stats.getElite().getHealth()));
-        ((TextView)view.findViewById(R.id.tvEliteMove)).setText(Integer.toString(stats.getElite().getMove()));
-        ((TextView)view.findViewById(R.id.tvEliteAttack)).setText(Integer.toString(stats.getElite().getAttack()));
-        ((TextView)view.findViewById(R.id.tvEliteRange)).setText(Integer.toString(stats.getElite().getRange()));
+        ((TextView)root.findViewById(R.id.tvNormalHealth)).setText(Integer.toString(stats.getNormal().getHealth()));
+        ((TextView)root.findViewById(R.id.tvNormalMove)).setText(Integer.toString(stats.getNormal().getMove()));
+        ((TextView)root.findViewById(R.id.tvNormalAttack)).setText(Integer.toString(stats.getNormal().getAttack()));
+        ((TextView)root.findViewById(R.id.tvNormalRange)).setText(Integer.toString(stats.getNormal().getRange()));
+        ((TextView)root.findViewById(R.id.tvEliteHealth)).setText(Integer.toString(stats.getElite().getHealth()));
+        ((TextView)root.findViewById(R.id.tvEliteMove)).setText(Integer.toString(stats.getElite().getMove()));
+        ((TextView)root.findViewById(R.id.tvEliteAttack)).setText(Integer.toString(stats.getElite().getAttack()));
+        ((TextView)root.findViewById(R.id.tvEliteRange)).setText(Integer.toString(stats.getElite().getRange()));
 
-        ((TextView)view.findViewById(R.id.tvLevel)).setText("Lvl. " + Integer.toString(presenter.getLevel()));
+        ((TextView)root.findViewById(R.id.tvLevel)).setText("Lvl. " + Integer.toString(presenter.getLevel()));
     }
 
-    private void populateAttributes(View view, MonsterInfo info) {
+    private void populateAttributes(MonsterInfo info) {
         // Reverse case! Time to parse all. of. the. attributes. :(
         AttributesInfo normalAttr = info.getStats().get(presenter.getLevel()).getNormal().getAttributesInfo();
         AttributesInfo eliteAttr = info.getStats().get(presenter.getLevel()).getElite().getAttributesInfo();
@@ -144,16 +144,16 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
             }
         }
 
-        ((TextView)view.findViewById(R.id.tvNormalAttributesList)).setText(attributeTexts[0].toString());
-        ((TextView)view.findViewById(R.id.tvEliteAttributesList)).setText(attributeTexts[1].toString());
+        ((TextView)root.findViewById(R.id.tvNormalAttributesList)).setText(attributeTexts[0].toString());
+        ((TextView)root.findViewById(R.id.tvEliteAttributesList)).setText(attributeTexts[1].toString());
     }
 
     private View.OnClickListener levelAddAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             presenter.addLevel();
-            populateInfo(view, presenter.getMonsterInfo());
-            populateAttributes(view, presenter.getMonsterInfo());
+            populateInfo(presenter.getMonsterInfo());
+            populateAttributes(presenter.getMonsterInfo());
         }
     };
 
@@ -161,16 +161,24 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         @Override
         public void onClick(View view) {
             presenter.subtractLevel();
-            populateInfo(view, presenter.getMonsterInfo());
-            populateAttributes(view, presenter.getMonsterInfo());
+            populateInfo(presenter.getMonsterInfo());
+            populateAttributes(presenter.getMonsterInfo());
         }
     };
 
-    private View.OnClickListener monsterAddAction = new View.OnClickListener() {
+    private View.OnClickListener monsterAddNormalAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            presenter.addMonster();
-            rvMonsterList.getAdapter().notifyItemInserted(presenter.getMonsterCount());
+            presenter.addMonster(false);
+            rvMonsterList.getAdapter().notifyDataSetChanged();
+        }
+    };
+
+    private View.OnClickListener monsterAddEliteAction = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            presenter.addMonster(true);
+            rvMonsterList.getAdapter().notifyDataSetChanged();
         }
     };
 

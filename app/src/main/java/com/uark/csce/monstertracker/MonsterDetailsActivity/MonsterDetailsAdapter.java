@@ -1,5 +1,6 @@
 package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,10 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uark.csce.monstertracker.R;
 import com.uark.csce.monstertracker.models.Monster;
+import com.uark.csce.monstertracker.models.MonsterType;
 
 import java.util.List;
 
@@ -65,21 +68,43 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Monster monster = presenter.getMonster(position);
+        if (monster != null) {
+            // Set the view to visible, since it might have previously been set invisible
+            holder.itemView.setVisibility(View.VISIBLE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        holder.getTvMonsterHealth().setText(Integer.toString(monster.getHealth()));
-        holder.getTvMonsterNumber().setText(Integer.toString(position + 1));
-        holder.getBtnHealthAdd().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //presenter.addHealth(position);
+            holder.getTvMonsterHealth().setText(Integer.toString(monster.getHealth()));
+            holder.getTvMonsterNumber().setText(Integer.toString(position + 1));
+
+            if (monster.getType() == MonsterType.Elite) {
+                holder.getTvMonsterNumber().setTextColor(ContextCompat.getColor(holder.getTvMonsterNumber().getContext(), R.color.elite_gold));
+                holder.getTvMonsterHealth().setTextColor(ContextCompat.getColor(holder.getTvMonsterHealth().getContext(), R.color.elite_gold));
             }
-        });
-        holder.getBtnHealthSubtract().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //presenter.subtractHealth(position);
+            else {
+                holder.getTvMonsterNumber().setTextColor(ContextCompat.getColor(holder.getTvMonsterNumber().getContext(), R.color.black));
+                holder.getTvMonsterHealth().setTextColor(ContextCompat.getColor(holder.getTvMonsterHealth().getContext(), R.color.black));
             }
-        });
+
+            holder.getBtnHealthAdd().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.addHealth(holder.getAdapterPosition());
+                    notifyDataSetChanged();
+                }
+            });
+            holder.getBtnHealthSubtract().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    presenter.subtractHealth(holder.getAdapterPosition());
+                    notifyDataSetChanged();
+                }
+            });
+        }
+        else {
+            // Set the view to invisible. We don't want table cells for monster data that's not initted
+            holder.itemView.setVisibility(View.GONE);
+            holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0, 0));
+        }
     }
 
     @Override
