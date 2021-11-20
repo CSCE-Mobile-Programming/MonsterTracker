@@ -76,8 +76,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         MonsterInfo info = localDataSet.get(position);
 
         holder.getTvMonsterName().setText(info.getName());
-        holder.getTvCount().setText(presenter.getMonsterCount(info.getName()) + " / " + info.getMaxCount()); // dummy string. The RV will need some way to get this data
-        holder.getTvInitiative().setText("Init. -"); // dummy string. The RV will need some way to get this data
+        holder.getTvCount().setText(presenter.getMonsterCount(info.getName()) + " / " + info.getMaxCount());
+        holder.getTvInitiative().setText("Init: " + presenter.getMonsterInitiative(info.getName()));
 
         try {
             holder.getIvPortrait().setImageBitmap(getBitmapFromAssets("portraits/" + info.getName() + ".png"));

@@ -67,6 +67,11 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
+    public int getMonsterInitiative(String monsterInfoName) {
+        return repository.getCurrentCard(monsterInfoName).getInitiative();
+    }
+
+    @Override
     public List<MonsterInfo> getSelectedMonsterInfos() {
         return repository.getSelectedMonsters();
     }
@@ -74,5 +79,15 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public List<MonsterInfo> getAllMonsterInfos() {
         return repository.getMonsterInfos();
+    }
+
+    @Override
+    public void drawAllButtonClicked() {
+        List<MonsterInfo> infos = repository.getSelectedMonsters();
+        for(int i = 0; i<infos.size(); i++)
+        {
+            repository.drawNextCard(infos.get(i).getName());
+        }
+        view.notifyLoadDataSet();
     }
 }

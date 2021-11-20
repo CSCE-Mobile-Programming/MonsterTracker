@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.wifi_sync:
                 presenter.connectActivityButtonClicked();
                 return true;
+            case R.id.draw_all:
+                presenter.drawAllButtonClicked();
             default:
                 return super.onOptionsItemSelected(item);
         }

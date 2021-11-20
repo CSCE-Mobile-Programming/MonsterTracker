@@ -24,12 +24,14 @@ public interface MainContract {
         public void scenarioActivityButtonClicked();
         public void connectActivityButtonClicked();
         public void addMonsterButtonClicked();
+        public void drawAllButtonClicked();
 
         public void scenarioActivityResult(String scenarioName);
 
         public void monsterPickerReturned(String monsterName);
 
         public int getMonsterCount(String monsterInfoName);
+        public int getMonsterInitiative(String monsterInfoName);
 
         public List<MonsterInfo> getSelectedMonsterInfos();
         public List<MonsterInfo> getAllMonsterInfos();
