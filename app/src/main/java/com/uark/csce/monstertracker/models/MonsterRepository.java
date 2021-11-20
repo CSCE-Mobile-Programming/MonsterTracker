@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import com.uark.csce.monstertracker.models.info.CardInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 import com.uark.csce.monstertracker.models.info.Scenario;
+import com.uark.csce.monstertracker.util.DeckUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +31,7 @@ public class MonsterRepository {
     // This is instance data. A dictionary of lists of monsters, keyed by monster info name.
     // This data changes frequently and is shared across multiple activities
     private Map<String, List<Monster>> monsterInstanceData;
-    private Map<String, CardInfo> currentCardData;
+    private Map<String, DeckUtil> currentCardData;
 
     private static volatile MonsterRepository INSTANCE;
     Gson gson;
@@ -58,19 +59,12 @@ public class MonsterRepository {
         }
 
         monsterInstanceData = new HashMap<String, List<Monster>>();
-        currentCardData = new HashMap<String, CardInfo>();
+        currentCardData = new HashMap<String, DeckUtil>();
     }
 
     public void clearInstanceData() {
         monsterInstanceData = new HashMap<String, List<Monster>>();
-    }
-
-    public List<Monster> getMonsters(String monsterInfoName) {
-        return monsterInstanceData.get(monsterInfoName);
-    }
-
-    public CardInfo getCurrentCard(String monsterInfoName) {
-        return currentCardData.get(monsterInfoName);
+        currentCardData = new HashMap<String, DeckUtil>();
     }
 
     public void addMonsterInfo(String monsterInfoName) {
@@ -83,6 +77,19 @@ public class MonsterRepository {
         }
 
         monsterInstanceData.put(monsterInfoName, list);
+        currentCardData.put(monsterInfoName, new DeckUtil(info.getDeck()));
+    }
+
+    public List<Monster> getMonsters(String monsterInfoName) {
+        return monsterInstanceData.get(monsterInfoName);
+    }
+
+    public CardInfo getCurrentCard(String monsterInfoName) {
+        return currentCardData.get(monsterInfoName).getCurrentCard();
+    }
+    public CardInfo drawNextCard(String monsterInfoName)
+    {
+        return currentCardData.get(monsterInfoName).drawNextCard();
     }
 
     public void addMonster(String monsterInfoName, int level, boolean isElite) {
