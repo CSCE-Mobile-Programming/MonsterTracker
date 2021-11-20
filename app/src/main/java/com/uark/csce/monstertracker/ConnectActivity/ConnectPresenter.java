@@ -16,12 +16,17 @@ public class ConnectPresenter implements ConnectContract.Presenter {
     }
 
     @Override
-    public void connectButtonClicked() {
-        Log.d("ConnectPresenter", "Connect button was clicked");
+    public void createButtonClicked() {
+        view.showRoomCodePickerDialog();
     }
 
     @Override
     public void joinButtonClicked() {
         Log.d("ConnectPresenter", "Join button was clicked");
+    }
+
+    @Override
+    public void roomCodeSelected(String roomCode) {
+
     }
 }

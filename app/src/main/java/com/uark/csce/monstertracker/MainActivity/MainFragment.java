@@ -50,14 +50,6 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        // When returning here from the details activity it's likely that the data set has changed.
-        // Tell the adapter to new info from the presenter.
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -88,6 +80,12 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.start();
+    }
+
+    @Override
     public void setPresenter(MainContract.Presenter presenter) {
         this.presenter = presenter;
         adapter.setPresenter(presenter);
@@ -112,28 +110,22 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
     }
 
     @Override
-    public void setupMonsterInfos(List<MonsterInfo> infos) {
-        ((MainAdapter)rvMainList.getAdapter()).setLocalDataSet(infos);
-        rvMainList.getAdapter().notifyDataSetChanged();
-    }
-
-    @Override
     public void onMonsterPicked(String monsterName) {
         presenter.monsterPickerReturned(monsterName);
     }
 
     @Override
-    public void showMonsterPicker(List<MonsterInfo> monsters) {
+    public void showMonsterPicker() {
+        List<MonsterInfo> monsters = presenter.getAllMonsterInfos();
+
         MonsterPickerDialog dialog = new MonsterPickerDialog(monsters, this);
         dialog.show(getParentFragmentManager(), "MonsterPickerDialog");
     }
 
     @Override
-    public void addMonsterInfoToList(MonsterInfo monster) {
-        List<MonsterInfo> monsterInfoList = ((MainAdapter)rvMainList.getAdapter()).getLocalDataSet();
-        monsterInfoList.add(monster);
-
-        ((MainAdapter)rvMainList.getAdapter()).setLocalDataSet(monsterInfoList);
+    public void notifyLoadDataSet() {
+        List<MonsterInfo> infos = presenter.getSelectedMonsterInfos();
+        ((MainAdapter)rvMainList.getAdapter()).setLocalDataSet(infos);
         rvMainList.getAdapter().notifyDataSetChanged();
     }
 }

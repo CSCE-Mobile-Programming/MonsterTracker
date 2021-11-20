@@ -26,6 +26,7 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void start() {
         view.setPresenter(this);
+        view.notifyLoadDataSet();
     }
 
     @Override
@@ -38,13 +39,13 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void addMonsterButtonClicked() {
-        view.showMonsterPicker(repository.getMonsterInfos());
+        view.showMonsterPicker();
     }
 
     @Override
     public void monsterPickerReturned(String monsterName) {
         repository.addMonsterInfo(monsterName);
-        view.addMonsterInfoToList(repository.getMonsterInfo(monsterName));
+        view.notifyLoadDataSet();
     }
 
     @Override
@@ -52,18 +53,26 @@ public class MainPresenter implements MainContract.Presenter {
         repository.clearInstanceData();
         Log.i("Scenario Chosen: ", scenarioName);
         Scenario chosen = repository.getScenario(scenarioName);
-        List<MonsterInfo> infos = new ArrayList<MonsterInfo>();
 
         for (int i = 0; i < chosen.getMonsters().size(); i++) {
-            infos.add(repository.getMonsterInfo(chosen.getMonsters().get(i)));
             repository.addMonsterInfo(chosen.getMonsters().get(i));
         }
 
-        view.setupMonsterInfos(infos);
+        view.notifyLoadDataSet();
     }
 
     @Override
     public int getMonsterCount(String monsterInfoName) {
         return repository.getMonsterCount(monsterInfoName);
+    }
+
+    @Override
+    public List<MonsterInfo> getSelectedMonsterInfos() {
+        return repository.getSelectedMonsters();
+    }
+
+    @Override
+    public List<MonsterInfo> getAllMonsterInfos() {
+        return repository.getMonsterInfos();
     }
 }

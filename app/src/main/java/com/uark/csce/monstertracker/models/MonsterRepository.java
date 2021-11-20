@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MonsterRepository {
     // Load-once informational data
@@ -170,6 +171,16 @@ public class MonsterRepository {
             }
         }
         return counter;
+    }
+    public List<MonsterInfo> getSelectedMonsters()
+    {
+        List<MonsterInfo> infos = new ArrayList<>();
+        for(String key : monsterInstanceData.keySet())
+        {
+            infos.add(getMonsterInfo(key));
+        }
+
+        return infos;
     }
 
     // Initialization
