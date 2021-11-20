@@ -7,23 +7,34 @@ import java.util.List;
 public interface MainContract {
     interface View {
         public void setPresenter(Presenter presenter);
+
         public void startScenarioActivity();
         public void startConnectActivity();
-        public void setupMonsterInfos(List<MonsterInfo> infos);
-        public void showMonsterPicker(List<MonsterInfo> monsters);
-        public void addMonsterInfoToList(MonsterInfo monster);
+
+        public void showMonsterPicker();
+
+        public void notifyLoadDataSet();
     }
 
     interface Presenter {
         public void setView(View view);
         public void setRepository(MonsterRepository repository);
         public void start();
+
         public void scenarioActivityButtonClicked();
-        public void scenarioActivityResult(String scenarioName);
         public void connectActivityButtonClicked();
-        public int getMonsterCount(String monsterInfoName);
         public void addMonsterButtonClicked();
+        public void drawAllButtonClicked();
+
+        public void scenarioActivityResult(String scenarioName);
+
         public void monsterPickerReturned(String monsterName);
+
+        public int getMonsterCount(String monsterInfoName);
+        public int getMonsterInitiative(String monsterInfoName);
+
+        public List<MonsterInfo> getSelectedMonsterInfos();
+        public List<MonsterInfo> getAllMonsterInfos();
     }
 
 }

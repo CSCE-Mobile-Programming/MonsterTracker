@@ -10,7 +10,7 @@ import java.util.Random;
 public class DeckUtil {
 
     private boolean shuffle;
-    private int nextCard;
+    private int currentCard;
     Random rand;
     ArrayList<CardInfo> cards;
 
@@ -18,16 +18,17 @@ public class DeckUtil {
     public DeckUtil(DeckInfo deck)
     {
         cards = new ArrayList<>(deck.getCards());
-        shuffle = true;
-        nextCard = 0;
+        currentCard = 0;
 
         Date now = new Date();
         rand = new Random(now.getTime());
+
+        shuffleDeck();
     }
 
     public void shuffleDeck()
     {
-        nextCard = 0;
+        currentCard = 0;
         for(int i = cards.size()-1; i>0; i--)
         {
             int index = rand.nextInt(i+1);
@@ -40,18 +41,19 @@ public class DeckUtil {
         }
     }
 
-    public CardInfo getCard()
+    public CardInfo drawNextCard()
     {
-        if(shuffle)
+        currentCard++;
+        if(currentCard >= cards.size() || cards.get(currentCard-1).isShuffle())
+        {
             shuffleDeck();
+        }
+        return cards.get(currentCard);
+    }
 
-        CardInfo c = cards.get(nextCard);
-
-        nextCard++;
-        if(nextCard >= cards.size() || c.isShuffle())
-            shuffle = true;
-
-        return c;
+    public CardInfo getCurrentCard()
+    {
+        return cards.get(currentCard);
     }
 
 }

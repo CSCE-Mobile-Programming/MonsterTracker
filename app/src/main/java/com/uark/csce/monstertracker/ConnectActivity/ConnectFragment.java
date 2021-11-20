@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import com.uark.csce.monstertracker.R;
 
-public class ConnectFragment extends Fragment implements ConnectContract.View {
+public class ConnectFragment extends Fragment implements ConnectContract.View, RoomCodePickerDialog.RoomCodePickerListener {
     ConnectContract.Presenter presenter;
 
     public ConnectFragment() {
@@ -35,11 +35,11 @@ public class ConnectFragment extends Fragment implements ConnectContract.View {
         View root = inflater.inflate(R.layout.fragment_connect, container, false);
 
         // Set up the actions for the buttons
-        Button connectButton = (Button)root.findViewById(R.id.createRoomButton);
-        connectButton.setOnClickListener(new View.OnClickListener() {
+        Button createButton = (Button)root.findViewById(R.id.createRoomButton);
+        createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.connectButtonClicked();
+                presenter.createButtonClicked();;
             }
         });
 
@@ -57,5 +57,16 @@ public class ConnectFragment extends Fragment implements ConnectContract.View {
     @Override
     public void setPresenter(ConnectContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void showRoomCodePickerDialog() {
+        RoomCodePickerDialog dialog = new RoomCodePickerDialog(this);
+        dialog.show(getParentFragmentManager(), "roomCode");
+    }
+
+    @Override
+    public void onRoomCodePicked(String roomCode) {
+        presenter.roomCodeSelected(roomCode);
     }
 }
