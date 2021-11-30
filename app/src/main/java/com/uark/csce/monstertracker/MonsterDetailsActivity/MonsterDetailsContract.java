@@ -2,6 +2,7 @@ package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
 import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.MonsterRepository;
+import com.uark.csce.monstertracker.models.info.CardInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
 public interface MonsterDetailsContract {
@@ -24,9 +25,15 @@ public interface MonsterDetailsContract {
         public void addHealth(int position);
         public void subtractHealth(int position);
         public void toggleStatus(String statusName, int position, ToggleStatusCallback callback);
+        public void drawCard(GetCardCallback callback);
+        public void getCurrentCardInfo(GetCardCallback callback);
     }
 
     interface ToggleStatusCallback {
         public void onToggleStatus(boolean currentState);
+    }
+
+    interface GetCardCallback {
+        public void onCardReceived(CardInfo cardInfo);
     }
 }

@@ -94,7 +94,7 @@
         android:id="@+id/ivIconHealth"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/health"
         app:layout_constraintBottom_toBottomOf="@+id/tvNormalHealth"
         app:layout_constraintStart_toEndOf="@+id/tvNormalHealth"
         app:layout_constraintTop_toTopOf="@+id/tvNormalHealth" />
@@ -103,16 +103,16 @@
         android:id="@+id/ivIconMove"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/move"
         app:layout_constraintBottom_toBottomOf="@+id/tvNormalMove"
         app:layout_constraintStart_toEndOf="@+id/tvNormalMove"
-        app:layout_constraintTop_toTopOf="@+id/tvNormalMove" />
+        app:layout_constraintTop_toTopOf="@+id/tvNormalMove"/>
 
     <ImageView
         android:id="@+id/ivIconAttack"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/attack"
         app:layout_constraintBottom_toBottomOf="@+id/tvNormalAttack"
         app:layout_constraintStart_toEndOf="@+id/tvNormalAttack"
         app:layout_constraintTop_toTopOf="@+id/tvNormalAttack" />
@@ -121,7 +121,7 @@
         android:id="@+id/ivIconRange"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/range"
         app:layout_constraintBottom_toBottomOf="@+id/tvNormalRange"
         app:layout_constraintStart_toEndOf="@+id/tvNormalRange"
         app:layout_constraintTop_toTopOf="@+id/tvNormalRange" />
@@ -193,8 +193,8 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_background"
         android:minHeight="96dp"
-        android:text="TextView"
         android:textAlignment="center"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="@+id/tvEliteAttributesList"
         app:layout_constraintStart_toStartOf="@+id/tvLevel"
         app:layout_constraintTop_toBottomOf="@+id/ivIconRange" />
@@ -216,7 +216,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_background"
-        android:text="TextView"
+        android:gravity="center"
+        android:minWidth="40dp"
+        android:minHeight="24dp"
+        android:text="99"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvCardText"
         app:layout_constraintTop_toTopOf="@+id/tvCardText" />
 

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.uark.csce.monstertracker.R;
 import com.uark.csce.monstertracker.models.info.AttributesInfo;
+import com.uark.csce.monstertracker.models.info.CardInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 import com.uark.csce.monstertracker.models.info.MonsterStatsInfo;
 
@@ -57,24 +58,12 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         Button btnLevelSubtract = (Button)root.findViewById(R.id.btnLevelSubtract);
         Button btnMonsterAddNormal = (Button)root.findViewById(R.id.btnMonsterAddNormal);
         Button btnMonsterAddElite = (Button)root.findViewById(R.id.btnMonsterAddElite);
+        Button btnDrawCard = root.findViewById(R.id.btnDrawCard);
         btnLevelAdd.setOnClickListener(levelAddAction);
         btnLevelSubtract.setOnClickListener(levelSubtractAction);
         btnMonsterAddNormal.setOnClickListener(monsterAddNormalAction);
         btnMonsterAddElite.setOnClickListener(monsterAddEliteAction);
-
-        ImageView ivHealth = (ImageView)root.findViewById(R.id.ivIconHealth);
-        ImageView ivMove = (ImageView)root.findViewById(R.id.ivIconMove);
-        ImageView ivAttack = (ImageView)root.findViewById(R.id.ivIconAttack);
-        ImageView ivRange = (ImageView)root.findViewById(R.id.ivIconRange);
-
-        try {
-            ivHealth.setImageBitmap(getBitmapFromAssets("icons/health.PNG"));
-            ivMove.setImageBitmap(getBitmapFromAssets("icons/move.PNG"));
-            ivAttack.setImageBitmap(getBitmapFromAssets("icons/attack.PNG"));
-            ivRange.setImageBitmap(getBitmapFromAssets("icons/range.PNG"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        btnDrawCard.setOnClickListener(drawCardAction);
 
         adapter = new MonsterDetailsAdapter();
         rvMonsterList = root.findViewById(R.id.rvMonsterList);
@@ -90,6 +79,7 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         MonsterInfo info = presenter.getMonsterInfo();
         populateInfo(info);
         populateAttributes(info);
+        populateCardInfo();
     }
 
     @Override
@@ -179,6 +169,10 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         ((TextView)root.findViewById(R.id.tvEliteAttributesList)).setText(attributeTexts[1].toString());
     }
 
+    private void populateCardInfo() {
+        presenter.getCurrentCardInfo(cardReceivedCallback);
+    }
+
     private View.OnClickListener levelAddAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -216,7 +210,22 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
     private View.OnClickListener drawCardAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            // TODO
+            presenter.drawCard(cardReceivedCallback);
+        }
+    };
+
+    private MonsterDetailsContract.GetCardCallback cardReceivedCallback = new MonsterDetailsContract.GetCardCallback() {
+        @Override
+        public void onCardReceived(CardInfo cardInfo) {
+            TextView tvCardInitiative = root.findViewById(R.id.tvCardInitiative);
+            TextView tvCardText = root.findViewById(R.id.tvCardText);
+            tvCardInitiative.setText(Integer.toString(cardInfo.getInitiative()));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < cardInfo.getAction().size(); i++) {
+                sb.append(cardInfo.getAction().get(i).getActionText());
+                sb.append(i == cardInfo.getAction().size() - 1 ? "" : "\n");
+            }
+            tvCardText.setText(sb.toString());
         }
     };
 

@@ -4707,7 +4707,7 @@
   },
   {
     "Name": "Harrower Infester",
-    "MaxCount": 10,
+    "MaxCount": 4,
     "Deck": {
       "Name": "Harrower Infester",
       "Cards": [

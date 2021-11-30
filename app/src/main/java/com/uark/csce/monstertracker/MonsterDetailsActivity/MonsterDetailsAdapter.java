@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uark.csce.monstertracker.R;
@@ -182,88 +181,76 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
 
         // For each of the status effects we're going to set, we need to check for immunities. If
         // immune, don't show the associated icon.
-        try {
-            // Disarm
-            holder.getIconDisarm().setTag("disarm");
-            if (attributesInfo.isImmuneToDisarm()) {
-                holder.getIconDisarm().setVisibility(View.INVISIBLE);
-            }
-            else {
-                holder.getIconDisarm().setImageBitmap(getBitmapFromAssets("icons/disarm.PNG"));
-                holder.getIconDisarm().setAlpha(monster.getAttributes().isDisarmed() ? 1.0f : disabledAlpha);
-                holder.getIconDisarm().setOnClickListener(buildIconClickListener(position));
-            }
-
-            // Immobilize
-            holder.getIconImmobilize().setTag("immobilize");
-            if (attributesInfo.isImmuneToImmobilize()) {
-                holder.getIconImmobilize().setVisibility(View.INVISIBLE);
-            }
-            else {
-                holder.getIconImmobilize().setImageBitmap(getBitmapFromAssets("icons/immobilize.PNG"));
-                holder.getIconImmobilize().setAlpha(monster.getAttributes().isImmobilized() ? 1.0f : disabledAlpha);
-                holder.getIconImmobilize().setOnClickListener(buildIconClickListener(position));
-            }
-
-            // Invisible. Nothing has immunity to invisible since it's a positive effect.
-            holder.getIconInvisible().setTag("invisible");
-            holder.getIconInvisible().setImageBitmap(getBitmapFromAssets("icons/invisible.PNG"));
-            holder.getIconInvisible().setAlpha(monster.getAttributes().isInvisible() ? 1.0f : disabledAlpha);
-            holder.getIconInvisible().setOnClickListener(buildIconClickListener(position));
-
-            // Muddle
-            holder.getIconMuddle().setTag("muddle");
-            if (attributesInfo.isImmuneToMuddle()) {
-                holder.getIconMuddle().setVisibility(View.INVISIBLE);
-            }
-            else {
-                holder.getIconMuddle().setImageBitmap(getBitmapFromAssets("icons/muddle.PNG"));
-                holder.getIconMuddle().setAlpha(monster.getAttributes().isMuddled() ? 1.0f : disabledAlpha);
-                holder.getIconMuddle().setOnClickListener(buildIconClickListener(position));
-            }
-
-            // Poison
-            holder.getIconPoison().setTag("poison");
-            if (attributesInfo.isImmuneToPoison()) {
-                holder.getIconPoison().setVisibility(View.INVISIBLE);
-            }
-            else {
-                holder.getIconPoison().setImageBitmap(getBitmapFromAssets("icons/poison.PNG"));
-                holder.getIconPoison().setAlpha(monster.getAttributes().isPoisoned() ? 1.0f : disabledAlpha);
-                holder.getIconPoison().setOnClickListener(buildIconClickListener(position));
-            }
-
-            // Strengthen. Nothing has immunity to Strengthen since it's a positive effect.
-            holder.getIconStrengthen().setTag("strengthen");
-            holder.getIconStrengthen().setImageBitmap(getBitmapFromAssets("icons/strengthen.PNG"));
-            holder.getIconStrengthen().setAlpha(monster.getAttributes().isStrengthened() ? 1.0f : disabledAlpha);
-            holder.getIconStrengthen().setOnClickListener(buildIconClickListener(position));
-
-            // Stun.
-            holder.getIconStun().setTag("stun");
-            if (attributesInfo.isImmuneToStun()) {
-                holder.getIconStun().setVisibility(View.INVISIBLE);
-            }
-            else {
-                holder.getIconStun().setImageBitmap(getBitmapFromAssets("icons/stun.PNG"));
-                holder.getIconStun().setAlpha(monster.getAttributes().isStunned() ? 1.0f : disabledAlpha);
-                holder.getIconStun().setOnClickListener(buildIconClickListener(position));
-            }
-
-            // Wound
-            holder.getIconWound().setTag("wound");
-            if (attributesInfo.isImmuneToWound()) {
-                holder.getIconWound().setVisibility(View.INVISIBLE);
-            }
-            else {
-                holder.getIconWound().setImageBitmap(getBitmapFromAssets("icons/wound.PNG"));
-                holder.getIconWound().setAlpha(monster.getAttributes().isWounded() ? 1.0f : disabledAlpha);
-                holder.getIconWound().setOnClickListener(buildIconClickListener(position));
-            }
+        // Disarm
+        holder.getIconDisarm().setTag("disarm");
+        if (attributesInfo.isImmuneToDisarm()) {
+            holder.getIconDisarm().setVisibility(View.INVISIBLE);
         }
-        catch (IOException e) {
-            Log.e("MonsterDetailsAdapter", "Failed to load asset");
+        else {
+            holder.getIconDisarm().setAlpha(monster.getAttributes().isDisarmed() ? 1.0f : disabledAlpha);
+            holder.getIconDisarm().setOnClickListener(buildIconClickListener(position));
         }
+
+        // Immobilize
+        holder.getIconImmobilize().setTag("immobilize");
+        if (attributesInfo.isImmuneToImmobilize()) {
+            holder.getIconImmobilize().setVisibility(View.INVISIBLE);
+        }
+        else {
+            holder.getIconImmobilize().setAlpha(monster.getAttributes().isImmobilized() ? 1.0f : disabledAlpha);
+            holder.getIconImmobilize().setOnClickListener(buildIconClickListener(position));
+        }
+
+        // Invisible. Nothing has immunity to invisible since it's a positive effect.
+        holder.getIconInvisible().setTag("invisible");
+        holder.getIconInvisible().setAlpha(monster.getAttributes().isInvisible() ? 1.0f : disabledAlpha);
+        holder.getIconInvisible().setOnClickListener(buildIconClickListener(position));
+
+        // Muddle
+        holder.getIconMuddle().setTag("muddle");
+        if (attributesInfo.isImmuneToMuddle()) {
+            holder.getIconMuddle().setVisibility(View.INVISIBLE);
+        }
+        else {
+            holder.getIconMuddle().setAlpha(monster.getAttributes().isMuddled() ? 1.0f : disabledAlpha);
+            holder.getIconMuddle().setOnClickListener(buildIconClickListener(position));
+        }
+
+        // Poison
+        holder.getIconPoison().setTag("poison");
+        if (attributesInfo.isImmuneToPoison()) {
+            holder.getIconPoison().setVisibility(View.INVISIBLE);
+        }
+        else {
+            holder.getIconPoison().setAlpha(monster.getAttributes().isPoisoned() ? 1.0f : disabledAlpha);
+            holder.getIconPoison().setOnClickListener(buildIconClickListener(position));
+        }
+
+        // Strengthen. Nothing has immunity to Strengthen since it's a positive effect.
+        holder.getIconStrengthen().setTag("strengthen");
+        holder.getIconStrengthen().setAlpha(monster.getAttributes().isStrengthened() ? 1.0f : disabledAlpha);
+        holder.getIconStrengthen().setOnClickListener(buildIconClickListener(position));
+
+        // Stun.
+        holder.getIconStun().setTag("stun");
+        if (attributesInfo.isImmuneToStun()) {
+            holder.getIconStun().setVisibility(View.INVISIBLE);
+        }
+        else {
+            holder.getIconStun().setAlpha(monster.getAttributes().isStunned() ? 1.0f : disabledAlpha);
+            holder.getIconStun().setOnClickListener(buildIconClickListener(position));
+        }
+
+        // Wound
+        holder.getIconWound().setTag("wound");
+        if (attributesInfo.isImmuneToWound()) {
+            holder.getIconWound().setVisibility(View.INVISIBLE);
+        }
+        else {
+            holder.getIconWound().setAlpha(monster.getAttributes().isWounded() ? 1.0f : disabledAlpha);
+            holder.getIconWound().setOnClickListener(buildIconClickListener(position));
+        }
+        Log.e("MonsterDetailsAdapter", "Failed to load asset");
     }
 
     private View.OnClickListener buildIconClickListener(int position) {
@@ -279,13 +266,5 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
                 });
             }
         };
-    }
-
-    public Bitmap getBitmapFromAssets(String fileName) throws IOException {
-        InputStream istr = assetManager.open(fileName);
-        Bitmap bitmap = BitmapFactory.decodeStream(istr);
-        istr.close();
-
-        return bitmap;
     }
 }
