@@ -24,17 +24,19 @@ import java.util.Map;
 import java.util.Set;
 
 public class MonsterRepository {
+
+    final String MONSTER_REFERENCE = "monsters";
+    final String CARD_REFERENCE = "cards"
+
     // Load-once informational data
     private List<Scenario> scenarios;
     private List<MonsterInfo> monsterInfos;
 
-    // This is instance data. A dictionary of lists of monsters, keyed by monster info name.
-    // This data changes frequently and is shared across multiple activities
-    private Map<String, List<Monster>> monsterInstanceData;
-    private Map<String, DeckUtil> currentCardData;
-
     private static volatile MonsterRepository INSTANCE;
-    Gson gson;
+    private Gson gson;
+    private String roomCode;
+
+    //*************** Monster Repository Constructor ***************
 
     public static MonsterRepository getInstance(@NonNull Context context){
         if(INSTANCE == null){
@@ -62,6 +64,65 @@ public class MonsterRepository {
         currentCardData = new HashMap<String, DeckUtil>();
     }
 
+    public void setRoomCode(String code){
+        this.roomCode = code;
+    }
+
+    private void loadScenarios(@NonNull AssetManager assetManager) {
+        try {
+            InputStream in = assetManager.open("monster/scenarios.json");
+            Reader reader = new InputStreamReader(in);
+
+            scenarios = gson.fromJson(reader, new TypeToken<List<Scenario>>() {
+            }.getType());
+
+            reader.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadMonsterInfo(@NonNull AssetManager assetManager) {
+        try {
+            InputStream in = assetManager.open("monster/monsters.json");
+            Reader reader = new InputStreamReader(in);
+
+            monsterInfos = gson.fromJson(reader, new TypeToken<List<MonsterInfo>>() { }.getType());
+            reader.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //*************** Monster Info Data ***************
+    public List<Scenario> getScenarios() {
+        return scenarios;
+    }
+    public Scenario getScenario(String scenarioName) {
+        // I miss Linq .Select()...
+        for (int i = 0; i < scenarios.size(); i++) {
+            if (scenarios.get(i).getName().equals(scenarioName)) {
+                return scenarios.get(i);
+            }
+        }
+        throw new IllegalArgumentException("Cannot find a scenario with name: " + scenarioName);
+    }
+
+    public List<MonsterInfo> getMonsterInfos() {
+        return monsterInfos;
+    }
+    public MonsterInfo getMonsterInfo(String monsterName) {
+        // ... still miss Linq .Select()...
+        for (int i = 0; i < monsterInfos.size(); i++) {
+            if (monsterInfos.get(i).getName().equals(monsterName)) {
+                return monsterInfos.get(i);
+            }
+        }
+        throw new IllegalArgumentException("Cannot find a monster with name: " + monsterName);
+    }
+
+    //*************** Monster Instance Data ***************
     public void clearInstanceData() {
         monsterInstanceData = new HashMap<String, List<Monster>>();
         currentCardData = new HashMap<String, DeckUtil>();
@@ -80,16 +141,30 @@ public class MonsterRepository {
         currentCardData.put(monsterInfoName, new DeckUtil(info.getDeck()));
     }
 
+    public List<MonsterInfo> getSelectedMonsters() {
+        List<MonsterInfo> infos = new ArrayList<>();
+        for(String key : monsterInstanceData.keySet())
+        {
+            infos.add(getMonsterInfo(key));
+        }
+
+        return infos;
+    }
     public List<Monster> getMonsters(String monsterInfoName) {
         return monsterInstanceData.get(monsterInfoName);
     }
 
-    public CardInfo getCurrentCard(String monsterInfoName) {
-        return currentCardData.get(monsterInfoName).getCurrentCard();
-    }
-    public CardInfo drawNextCard(String monsterInfoName)
-    {
-        return currentCardData.get(monsterInfoName).drawNextCard();
+    public int getMonsterCount(String monsterInfoName) {
+        MonsterInfo info = getMonsterInfo(monsterInfoName);
+        List<Monster> monsters = monsterInstanceData.get(monsterInfoName);
+
+        int counter = 0;
+        for (int i = 0; i < info.getMaxCount(); i++) {
+            if (monsters.get(i) != null) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     public void addMonster(String monsterInfoName, int level, boolean isElite) {
@@ -106,7 +181,6 @@ public class MonsterRepository {
             }
         }
     }
-
     public void removeMonster(String monsterInfoName, int position) {
         MonsterInfo info = getMonsterInfo(monsterInfoName);
         List<Monster> monsters = monsterInstanceData.get(monsterInfoName);
@@ -127,7 +201,6 @@ public class MonsterRepository {
             m.setHealth(m.getHealth() + 1);
         }
     }
-
     public void subtractHealth(String monsterInfoName, int position) {
         Monster m = monsterInstanceData.get(monsterInfoName).get(position);
         if (m != null) {
@@ -138,84 +211,10 @@ public class MonsterRepository {
         }
     }
 
-    // Informational data access
-    public List<Scenario> getScenarios() {
-        return scenarios;
+    public CardInfo getCurrentCard(String monsterInfoName) {
+        return currentCardData.get(monsterInfoName).getCurrentCard();
     }
-
-    public Scenario getScenario(String scenarioName) {
-        // I miss Linq .Select()...
-        for (int i = 0; i < scenarios.size(); i++) {
-            if (scenarios.get(i).getName().equals(scenarioName)) {
-                return scenarios.get(i);
-            }
-        }
-        throw new IllegalArgumentException("Cannot find a scenario with name: " + scenarioName);
-    }
-
-    public List<MonsterInfo> getMonsterInfos() {
-        return monsterInfos;
-    }
-
-    public MonsterInfo getMonsterInfo(String monsterName) {
-        // ... still miss Linq .Select()...
-        for (int i = 0; i < monsterInfos.size(); i++) {
-            if (monsterInfos.get(i).getName().equals(monsterName)) {
-                return monsterInfos.get(i);
-            }
-        }
-        throw new IllegalArgumentException("Cannot find a monster with name: " + monsterName);
-    }
-
-    public int getMonsterCount(String monsterInfoName) {
-        MonsterInfo info = getMonsterInfo(monsterInfoName);
-        List<Monster> monsters = monsterInstanceData.get(monsterInfoName);
-
-        int counter = 0;
-        for (int i = 0; i < info.getMaxCount(); i++) {
-            if (monsters.get(i) != null) {
-                counter++;
-            }
-        }
-        return counter;
-    }
-    public List<MonsterInfo> getSelectedMonsters()
-    {
-        List<MonsterInfo> infos = new ArrayList<>();
-        for(String key : monsterInstanceData.keySet())
-        {
-            infos.add(getMonsterInfo(key));
-        }
-
-        return infos;
-    }
-
-    // Initialization
-    private void loadScenarios(@NonNull AssetManager assetManager) {
-        try {
-            InputStream in = assetManager.open("monster/scenarios.json");
-            Reader reader = new InputStreamReader(in);
-
-            scenarios = gson.fromJson(reader, new TypeToken<List<Scenario>>() {
-            }.getType());
-
-            reader.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadMonsterInfo(@NonNull AssetManager assetManager) {
-        try {
-            InputStream in = assetManager.open("monster/monsters.json");
-            Reader reader = new InputStreamReader(in);
-
-            monsterInfos = gson.fromJson(reader, new TypeToken<List<MonsterInfo>>() { }.getType());
-            reader.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+    public CardInfo drawNextCard(String monsterInfoName) {
+        return currentCardData.get(monsterInfoName).drawNextCard();
     }
 }

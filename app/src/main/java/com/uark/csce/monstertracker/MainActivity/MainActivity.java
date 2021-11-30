@@ -2,13 +2,17 @@ package com.uark.csce.monstertracker.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.uark.csce.monstertracker.BuildConfig;
 import com.uark.csce.monstertracker.R;
 import com.uark.csce.monstertracker.models.MonsterRepository;
+
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     MainContract.View view;
@@ -25,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         view = (MainContract.View) getSupportFragmentManager().findFragmentById(R.id.mainFragmentContainerView);
         presenter.setView(view);
         presenter.setRepository(repository);
+
+        getUserRoomCode();
+
     }
 
     @Override
@@ -56,4 +63,25 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         presenter.start();
     }
+
+    private void getUserRoomCode() {
+
+        final String PREFS_NAME = "MyPrefsFile";
+        final String PREF_ROOM_CODE_KEY = "room";
+        final String DOESNT_EXIST = "";
+
+        // Get saved version code
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String savedRoomCode = prefs.getString(PREF_ROOM_CODE_KEY, DOESNT_EXIST);
+        if(savedRoomCode.equals("")) {
+            UUID uuid = UUID.randomUUID();
+            prefs.edit().putString(PREF_ROOM_CODE_KEY, uuid.toString()).apply();
+            repository.setRoomCode(uuid.toString());
+        }
+        else {
+            repository.setRoomCode(savedRoomCode);
+        }
+
+    }
+
 }
