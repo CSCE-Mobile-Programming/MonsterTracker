@@ -80,4 +80,10 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     public void subtractHealth(int position) {
         repository.subtractHealth(info.getName(), position);
     }
+
+    @Override
+    public void toggleStatus(String statusName, int position, MonsterDetailsContract.ToggleStatusCallback callback) {
+        boolean status = repository.toggleMonsterStatus(info.getName(), statusName, position);
+        callback.onToggleStatus(status);
+    }
 }

@@ -28,6 +28,7 @@ import java.io.InputStream;
 public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAdapter.ViewHolder> {
     private MonsterDetailsContract.Presenter presenter;
     private AssetManager assetManager;
+    private static final float disabledAlpha = 0.25f;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvMonsterNumber;
@@ -130,12 +131,12 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             if (monster.getType() == MonsterType.Elite) {
                 holder.getTvMonsterNumber().setTextColor(ContextCompat.getColor(holder.getTvMonsterNumber().getContext(), R.color.elite_gold));
                 holder.getTvMonsterHealth().setTextColor(ContextCompat.getColor(holder.getTvMonsterHealth().getContext(), R.color.elite_gold));
-                setStatusEffects(holder, MonsterType.Normal);
+                setStatusEffects(holder, MonsterType.Normal, monster, position);
             }
             else {
                 holder.getTvMonsterNumber().setTextColor(ContextCompat.getColor(holder.getTvMonsterNumber().getContext(), R.color.black));
                 holder.getTvMonsterHealth().setTextColor(ContextCompat.getColor(holder.getTvMonsterHealth().getContext(), R.color.black));
-                setStatusEffects(holder, MonsterType.Elite);
+                setStatusEffects(holder, MonsterType.Elite, monster, position);
             }
 
             holder.getBtnHealthAdd().setOnClickListener(new View.OnClickListener() {
@@ -168,7 +169,7 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
         return 0;
     }
 
-    public void setStatusEffects(ViewHolder holder, MonsterType type) {
+    public void setStatusEffects(ViewHolder holder, MonsterType type, Monster monster, int position) {
         // First, fetch the stats for this level of monster and then get attributes based on type
         MonsterStatsInfo monsterStatsInfo = presenter.getMonsterInfo().getStats().get(presenter.getLevel());
         AttributesInfo attributesInfo = null;
@@ -189,8 +190,8 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             }
             else {
                 holder.getIconDisarm().setImageBitmap(getBitmapFromAssets("icons/disarm.PNG"));
-                holder.getIconDisarm().setAlpha(0.4f);
-                holder.getIconDisarm().setOnClickListener(iconOnClickListener);
+                holder.getIconDisarm().setAlpha(monster.getAttributes().isDisarmed() ? 1.0f : disabledAlpha);
+                holder.getIconDisarm().setOnClickListener(buildIconClickListener(position));
             }
 
             // Immobilize
@@ -200,15 +201,15 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             }
             else {
                 holder.getIconImmobilize().setImageBitmap(getBitmapFromAssets("icons/immobilize.PNG"));
-                holder.getIconImmobilize().setAlpha(0.4f);
-                holder.getIconImmobilize().setOnClickListener(iconOnClickListener);
+                holder.getIconImmobilize().setAlpha(monster.getAttributes().isImmobilized() ? 1.0f : disabledAlpha);
+                holder.getIconImmobilize().setOnClickListener(buildIconClickListener(position));
             }
 
             // Invisible. Nothing has immunity to invisible since it's a positive effect.
             holder.getIconInvisible().setTag("invisible");
             holder.getIconInvisible().setImageBitmap(getBitmapFromAssets("icons/invisible.PNG"));
-            holder.getIconInvisible().setAlpha(0.4f);
-            holder.getIconInvisible().setOnClickListener(iconOnClickListener);
+            holder.getIconInvisible().setAlpha(monster.getAttributes().isInvisible() ? 1.0f : disabledAlpha);
+            holder.getIconInvisible().setOnClickListener(buildIconClickListener(position));
 
             // Muddle
             holder.getIconMuddle().setTag("muddle");
@@ -217,8 +218,8 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             }
             else {
                 holder.getIconMuddle().setImageBitmap(getBitmapFromAssets("icons/muddle.PNG"));
-                holder.getIconMuddle().setAlpha(0.4f);
-                holder.getIconMuddle().setOnClickListener(iconOnClickListener);
+                holder.getIconMuddle().setAlpha(monster.getAttributes().isMuddled() ? 1.0f : disabledAlpha);
+                holder.getIconMuddle().setOnClickListener(buildIconClickListener(position));
             }
 
             // Poison
@@ -228,15 +229,15 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             }
             else {
                 holder.getIconPoison().setImageBitmap(getBitmapFromAssets("icons/poison.PNG"));
-                holder.getIconPoison().setAlpha(0.4f);
-                holder.getIconPoison().setOnClickListener(iconOnClickListener);
+                holder.getIconPoison().setAlpha(monster.getAttributes().isPoisoned() ? 1.0f : disabledAlpha);
+                holder.getIconPoison().setOnClickListener(buildIconClickListener(position));
             }
 
             // Strengthen. Nothing has immunity to Strengthen since it's a positive effect.
             holder.getIconStrengthen().setTag("strengthen");
             holder.getIconStrengthen().setImageBitmap(getBitmapFromAssets("icons/strengthen.PNG"));
-            holder.getIconStrengthen().setAlpha(0.4f);
-            holder.getIconStrengthen().setOnClickListener(iconOnClickListener);
+            holder.getIconStrengthen().setAlpha(monster.getAttributes().isStrengthened() ? 1.0f : disabledAlpha);
+            holder.getIconStrengthen().setOnClickListener(buildIconClickListener(position));
 
             // Stun.
             holder.getIconStun().setTag("stun");
@@ -245,8 +246,8 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             }
             else {
                 holder.getIconStun().setImageBitmap(getBitmapFromAssets("icons/stun.PNG"));
-                holder.getIconStun().setAlpha(0.4f);
-                holder.getIconStun().setOnClickListener(iconOnClickListener);
+                holder.getIconStun().setAlpha(monster.getAttributes().isStunned() ? 1.0f : disabledAlpha);
+                holder.getIconStun().setOnClickListener(buildIconClickListener(position));
             }
 
             // Wound
@@ -256,8 +257,8 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             }
             else {
                 holder.getIconWound().setImageBitmap(getBitmapFromAssets("icons/wound.PNG"));
-                holder.getIconWound().setAlpha(0.4f);
-                holder.getIconWound().setOnClickListener(iconOnClickListener);
+                holder.getIconWound().setAlpha(monster.getAttributes().isWounded() ? 1.0f : disabledAlpha);
+                holder.getIconWound().setOnClickListener(buildIconClickListener(position));
             }
         }
         catch (IOException e) {
@@ -265,13 +266,20 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
         }
     }
 
-    private View.OnClickListener iconOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            String statusName = view.getTag().toString();
-            Log.d("MonsterDetailsAdapter", statusName);
-        }
-    };
+    private View.OnClickListener buildIconClickListener(int position) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String statusName = view.getTag().toString();
+                presenter.toggleStatus(statusName, position, new MonsterDetailsContract.ToggleStatusCallback() {
+                    @Override
+                    public void onToggleStatus(boolean currentState) {
+                        view.setAlpha(currentState ? 1.0f : disabledAlpha);
+                    }
+                });
+            }
+        };
+    }
 
     public Bitmap getBitmapFromAssets(String fileName) throws IOException {
         InputStream istr = assetManager.open(fileName);

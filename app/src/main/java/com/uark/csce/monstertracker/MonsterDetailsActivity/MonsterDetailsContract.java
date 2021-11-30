@@ -23,5 +23,10 @@ public interface MonsterDetailsContract {
         public void addMonster(boolean isElite);
         public void addHealth(int position);
         public void subtractHealth(int position);
+        public void toggleStatus(String statusName, int position, ToggleStatusCallback callback);
+    }
+
+    interface ToggleStatusCallback {
+        public void onToggleStatus(boolean currentState);
     }
 }
