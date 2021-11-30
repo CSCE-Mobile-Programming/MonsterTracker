@@ -138,6 +138,46 @@ public class MonsterRepository {
         }
     }
 
+    public boolean toggleMonsterStatus(String monsterInfoName, String statusName, int position) {
+        Monster m = monsterInstanceData.get(monsterInfoName).get(position);
+        // Toggle the relevant status
+        if (statusName.equals("disarm")) {
+            m.getAttributes().setDisarmed(!m.getAttributes().isDisarmed());
+            return m.getAttributes().isDisarmed();
+        }
+        else if (statusName.equals("immobilize")) {
+            m.getAttributes().setImmobilized(!m.getAttributes().isImmobilized());
+            return m.getAttributes().isImmobilized();
+        }
+        else if (statusName.equals("invisible")) {
+            m.getAttributes().setInvisible(!m.getAttributes().isInvisible());
+            return m.getAttributes().isInvisible();
+        }
+        else if (statusName.equals("poison")) {
+            m.getAttributes().setPoisoned(!m.getAttributes().isPoisoned());
+            return m.getAttributes().isPoisoned();
+        }
+        else if (statusName.equals("muddle")) {
+            m.getAttributes().setMuddled(!m.getAttributes().isMuddled());
+            return m.getAttributes().isMuddled();
+        }
+        else if (statusName.equals("strengthen")) {
+            m.getAttributes().setStrengthened(!m.getAttributes().isStrengthened());
+            return m.getAttributes().isStrengthened();
+        }
+        else if (statusName.equals("stun")) {
+            m.getAttributes().setStunned(!m.getAttributes().isStunned());
+            return m.getAttributes().isStunned();
+        }
+        else if (statusName.equals("wound")) {
+            m.getAttributes().setWounded(!m.getAttributes().isWounded());
+            return m.getAttributes().isWounded();
+        }
+        else {
+            throw new IllegalArgumentException("Unknown status.");
+        }
+    }
+
     // Informational data access
     public List<Scenario> getScenarios() {
         return scenarios;

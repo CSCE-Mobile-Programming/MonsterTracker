@@ -49,7 +49,7 @@ public class Monster {
         attack = baseAttack;
         range = baseRange;
 
-        //attributes = info.getStats().getAttributes();
+        attributes = new Attributes();
     }
 
     // Getters and setters
