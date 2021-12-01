@@ -35,7 +35,7 @@
         android:layout_marginTop="8dp"
         android:text="Lv. 4"
         android:textAlignment="center"
-        android:textSize="14sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
         app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
@@ -58,7 +58,7 @@
         android:id="@+id/tvNormalMove"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -70,7 +70,7 @@
         android:id="@+id/tvNormalAttack"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -82,7 +82,7 @@
         android:id="@+id/tvNormalRange"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="99"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -94,7 +94,7 @@
         android:id="@+id/ivIconHealth"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/health"
         app:layout_constraintBottom_toBottomOf="@+id/tvNormalHealth"
         app:layout_constraintStart_toEndOf="@+id/tvNormalHealth"
         app:layout_constraintTop_toTopOf="@+id/tvNormalHealth" />
@@ -103,16 +103,16 @@
         android:id="@+id/ivIconMove"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/move"
         app:layout_constraintBottom_toBottomOf="@+id/tvNormalMove"
         app:layout_constraintStart_toEndOf="@+id/tvNormalMove"
-        app:layout_constraintTop_toTopOf="@+id/tvNormalMove" />
+        app:layout_constraintTop_toTopOf="@+id/tvNormalMove"/>
 
     <ImageView
         android:id="@+id/ivIconAttack"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/attack"
         app:layout_constraintBottom_toBottomOf="@+id/tvNormalAttack"
         app:layout_constraintStart_toEndOf="@+id/tvNormalAttack"
         app:layout_constraintTop_toTopOf="@+id/tvNormalAttack" />
@@ -121,7 +121,7 @@
         android:id="@+id/ivIconRange"
         android:layout_width="32dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/range"
         app:layout_constraintBottom_toBottomOf="@+id/tvNormalRange"
         app:layout_constraintStart_toEndOf="@+id/tvNormalRange"
         app:layout_constraintTop_toTopOf="@+id/tvNormalRange" />
@@ -186,51 +186,40 @@
         app:layout_constraintStart_toEndOf="@+id/ivMonsterPortrait"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvCardText"
+    <ImageView
+        android:id="@+id/ivCard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_background"
-        android:minHeight="96dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/tvEliteAttributesList"
-        app:layout_constraintStart_toStartOf="@+id/tvLevel"
-        app:layout_constraintTop_toBottomOf="@+id/ivIconRange" />
+        android:layout_height="192dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:maxHeight="192dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnLevelSubtract"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormalAttributesList"
+        tools:src="@tools:sample/avatars" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMonsterList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btnMonsterAddNormal"
-        app:layout_constraintEnd_toEndOf="@+id/tvCardText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvCardText"
-        app:layout_constraintTop_toBottomOf="@+id/tvCardText" />
-
-    <TextView
-        android:id="@+id/tvCardInitiative"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/tvCardText"
-        app:layout_constraintTop_toTopOf="@+id/tvCardText" />
+        app:layout_constraintEnd_toEndOf="@+id/ivCard"
+        app:layout_constraintStart_toStartOf="@+id/btnLevelSubtract"
+        app:layout_constraintTop_toBottomOf="@+id/ivCard" />
 
     <Button
         android:id="@+id/btnLevelAdd"
         android:layout_width="64dp"
-        android:layout_height="24dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:includeFontPadding="false"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:minHeight="32dp"
         android:text="+"
-        android:textSize="16sp"
+        android:textSize="34sp"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
         app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
@@ -239,14 +228,14 @@
     <Button
         android:id="@+id/btnLevelSubtract"
         android:layout_width="64dp"
-        android:layout_height="24dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:includeFontPadding="false"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:minHeight="32dp"
         android:text="—"
-        android:textSize="16sp"
+        android:textSize="34sp"
         app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="@+id/ivMonsterPortrait"
         app:layout_constraintStart_toStartOf="@+id/ivMonsterPortrait"
@@ -255,9 +244,11 @@
     <Button
         android:id="@+id/btnMonsterAddNormal"
         android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="+"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -268,10 +259,12 @@
     <Button
         android:id="@+id/btnMonsterAddElite"
         android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_height="48dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="+"
         android:textColor="@color/elite_gold"
         android:textSize="34sp"
@@ -284,12 +277,15 @@
     <Button
         android:id="@+id/btnDrawCard"
         android:layout_width="0dp"
-        android:layout_height="64dp"
+        android:layout_height="48dp"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="8dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="Draw"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rvMonsterList"
         app:layout_constraintStart_toEndOf="@+id/btnMonsterAddElite" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ public class MonsterInfo {
         for(MonsterStatsInfo info : Stats) {
             info.setup();
         }
+        Deck.setup();
     }
 
     public String getName() {

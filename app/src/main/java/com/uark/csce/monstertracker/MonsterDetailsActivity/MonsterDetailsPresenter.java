@@ -1,7 +1,10 @@
 package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
+import androidx.annotation.NonNull;
+
 import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.MonsterRepository;
+import com.uark.csce.monstertracker.models.info.CardInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
 import java.util.List;
@@ -82,8 +85,20 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     }
 
     @Override
-    public void toggleStatus(String statusName, int position, MonsterDetailsContract.ToggleStatusCallback callback) {
+    public void toggleStatus(String statusName, int position, @NonNull MonsterDetailsContract.ToggleStatusCallback callback) {
         boolean status = repository.toggleMonsterStatus(info.getName(), statusName, position);
         callback.onToggleStatus(status);
+    }
+
+    @Override
+    public void drawCard(@NonNull MonsterDetailsContract.GetCardCallback callback) {
+        CardInfo cardInfo = repository.drawNextCard(info.getName());
+        callback.onCardReceived(cardInfo);
+    }
+
+    @Override
+    public void getCurrentCardInfo(MonsterDetailsContract.GetCardCallback callback) {
+        CardInfo cardInfo = repository.getCurrentCard(info.getName());
+        callback.onCardReceived(cardInfo);
     }
 }
