@@ -67,6 +67,7 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
         public TextView getTvMonsterNumber() {
             return tvMonsterNumber;
         }
+
         public TextView getTvMonsterHealth() {
             return tvMonsterHealth;
         }
@@ -142,14 +143,12 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
                 @Override
                 public void onClick(View view) {
                     presenter.addHealth(holder.getAdapterPosition());
-                    notifyDataSetChanged();
                 }
             });
             holder.getBtnHealthSubtract().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     presenter.subtractHealth(holder.getAdapterPosition());
-                    notifyDataSetChanged();
                 }
             });
         }

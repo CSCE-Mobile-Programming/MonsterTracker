@@ -5,30 +5,21 @@ import com.uark.csce.monstertracker.models.info.DeckInfo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class DeckUtil {
 
-    private boolean shuffle;
-    private int currentCard;
-    Random rand;
-    ArrayList<CardInfo> cards;
+    static Random rand;
 
-
-    public DeckUtil(DeckInfo deck)
+    public DeckUtil()
     {
-        cards = new ArrayList<>(deck.getCards());
-        currentCard = 0;
-
         Date now = new Date();
         rand = new Random(now.getTime());
-
-        shuffleDeck();
     }
 
-    public void shuffleDeck()
+    public static List<CardInfo> shuffleDeck(List<CardInfo> cards)
     {
-        currentCard = 0;
         for(int i = cards.size()-1; i>0; i--)
         {
             int index = rand.nextInt(i+1);
@@ -39,21 +30,7 @@ public class DeckUtil {
             cards.set(index, c2);
             cards.set(i, c1);
         }
-    }
 
-    public CardInfo drawNextCard()
-    {
-        currentCard++;
-        if(currentCard >= cards.size() || cards.get(currentCard-1).isShuffle())
-        {
-            shuffleDeck();
-        }
-        return cards.get(currentCard);
+        return cards;
     }
-
-    public CardInfo getCurrentCard()
-    {
-        return cards.get(currentCard);
-    }
-
 }
