@@ -62,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         presenter.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.pause();
     }
 
     private void getUserRoomCode() {

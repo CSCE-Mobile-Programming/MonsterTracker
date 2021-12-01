@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.uark.csce.monstertracker.MonsterDetailsActivity.MonsterDetailsActivity;
 import com.uark.csce.monstertracker.R;
+import com.uark.csce.monstertracker.models.FirebaseModels.MainActivityInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
 import java.io.IOException;
@@ -24,8 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
-    private List<MonsterInfo> localDataSet;
-    private MainContract.Presenter presenter;
+    private List<MainAdapterModel> localDataSet;
     AssetManager assetManager;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -58,10 +58,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         assetManager = manager;
     }
 
-    public void setPresenter(MainContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -73,11 +69,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     @NonNull
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MonsterInfo info = localDataSet.get(position);
+        MainAdapterModel model = localDataSet.get(position);
+        MonsterInfo info = model.getInfo();
 
         holder.getTvMonsterName().setText(info.getName());
-        holder.getTvCount().setText(presenter.getMonsterCount(info.getName()) + " / " + info.getMaxCount());
-        holder.getTvInitiative().setText("Init: " + presenter.getMonsterInitiative(info.getName()));
+        holder.getTvCount().setText(model.getNumMonsters() + " / " + info.getMaxCount());
+        holder.getTvInitiative().setText("Init: " + model.getInitiative());
 
         try {
             holder.getIvPortrait().setImageBitmap(getBitmapFromAssets("portraits/" + info.getName() + ".png"));
@@ -101,14 +98,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         return localDataSet.size();
     }
 
-    public void setLocalDataSet(List<MonsterInfo> localDataSet) {
-        this.localDataSet = localDataSet;
+    public void setLocalDataSet(List<MainAdapterModel> models) {
+        this.localDataSet = models;
     }
 
-    public List<MonsterInfo> getLocalDataSet()
-    {
-        return localDataSet;
-    }
+
 
     public Bitmap getBitmapFromAssets(String fileName) throws IOException {
         InputStream istr = assetManager.open(fileName);

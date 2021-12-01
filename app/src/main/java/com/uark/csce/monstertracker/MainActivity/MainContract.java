@@ -13,13 +13,14 @@ public interface MainContract {
 
         public void showMonsterPicker();
 
-        public void notifyLoadDataSet();
+        public void monsterInfoChanged(List<MainAdapterModel> models);
     }
 
     interface Presenter {
         public void setView(View view);
         public void setRepository(MonsterRepository repository);
         public void start();
+        public void pause();
 
         public void scenarioActivityButtonClicked();
         public void connectActivityButtonClicked();
@@ -30,10 +31,6 @@ public interface MainContract {
 
         public void monsterPickerReturned(String monsterName);
 
-        public int getMonsterCount(String monsterInfoName);
-        public int getMonsterInitiative(String monsterInfoName);
-
-        public List<MonsterInfo> getSelectedMonsterInfos();
         public List<MonsterInfo> getAllMonsterInfos();
     }
 

@@ -2,8 +2,11 @@ package com.uark.csce.monstertracker.ConnectActivity;
 
 import android.util.Log;
 
+import com.uark.csce.monstertracker.models.MonsterRepository;
+
 public class ConnectPresenter implements ConnectContract.Presenter {
     ConnectContract.View view;
+    private MonsterRepository repository;
 
     @Override
     public void setView(ConnectContract.View view) {
@@ -16,17 +19,17 @@ public class ConnectPresenter implements ConnectContract.Presenter {
     }
 
     @Override
-    public void createButtonClicked() {
-        view.showRoomCodePickerDialog();
+    public void setRepository(MonsterRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public void joinButtonClicked() {
-        Log.d("ConnectPresenter", "Join button was clicked");
+        view.showRoomCodePickerDialog();
     }
 
     @Override
     public void roomCodeSelected(String roomCode) {
-
+        repository.setRoomCode(roomCode);
     }
 }

@@ -88,7 +88,6 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
     @Override
     public void setPresenter(MainContract.Presenter presenter) {
         this.presenter = presenter;
-        adapter.setPresenter(presenter);
     }
 
     @Override
@@ -123,9 +122,10 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
     }
 
     @Override
-    public void notifyLoadDataSet() {
-        List<MonsterInfo> infos = presenter.getSelectedMonsterInfos();
-        ((MainAdapter)rvMainList.getAdapter()).setLocalDataSet(infos);
+    public void monsterInfoChanged(List<MainAdapterModel> models) {
+        ((MainAdapter)rvMainList.getAdapter()).setLocalDataSet(models);
         rvMainList.getAdapter().notifyDataSetChanged();
     }
+
+
 }
