@@ -82,7 +82,6 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
     @Override
     public void onResume() {
         super.onResume();
-        presenter.start();
     }
 
     @Override

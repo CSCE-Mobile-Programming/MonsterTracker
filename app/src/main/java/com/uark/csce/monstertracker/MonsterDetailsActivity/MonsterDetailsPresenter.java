@@ -2,6 +2,8 @@ package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
 import androidx.annotation.NonNull;
 
+import com.uark.csce.monstertracker.models.FirebaseModels.FirebaseContract;
+import com.uark.csce.monstertracker.models.FirebaseModels.MainActivityInfo;
 import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.MonsterRepository;
 import com.uark.csce.monstertracker.models.info.CardInfo;
@@ -9,7 +11,7 @@ import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
 import java.util.List;
 
-public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter {
+public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter, FirebaseContract.FirebaseCallback {
     MonsterDetailsContract.View view;
     MonsterRepository repository;
 
@@ -28,7 +30,14 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
 
     @Override
     public void start() {
+
         view.setPresenter(this);
+        repository.registerCallback("monsterDetails", getMonsterInfo().getName(), this);
+    }
+
+    @Override
+    public void pause() {
+        repository.unregisterCallback("monsterDetails");
     }
 
     @Override
@@ -59,17 +68,6 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     }
 
     @Override
-    public Monster getMonster(int position) {
-        List<Monster> monsters = repository.getMonsters(info.getName());
-        return monsters.get(position);
-    }
-
-    @Override
-    public int getMonsterCount() {
-        return repository.getMonsters(info.getName()).size();
-    }
-
-    @Override
     public void addMonster(boolean isElite) {
         repository.addMonster(info.getName(), currentLevel, isElite);
     }
@@ -85,20 +83,27 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     }
 
     @Override
-    public void toggleStatus(String statusName, int position, @NonNull MonsterDetailsContract.ToggleStatusCallback callback) {
-        boolean status = repository.toggleMonsterStatus(info.getName(), statusName, position);
-        callback.onToggleStatus(status);
+    public void toggleStatus(String statusName, int position) {
+        repository.toggleMonsterStatus(info.getName(), statusName, position);
     }
 
     @Override
-    public void drawCard(@NonNull MonsterDetailsContract.GetCardCallback callback) {
-        CardInfo cardInfo = repository.drawNextCard(info.getName());
-        callback.onCardReceived(cardInfo);
+    public void drawCard() {
+        repository.drawNextCard(info.getName());
     }
 
     @Override
-    public void getCurrentCardInfo(MonsterDetailsContract.GetCardCallback callback) {
-        CardInfo cardInfo = repository.getCurrentCard(info.getName());
-        callback.onCardReceived(cardInfo);
+    public void notifyMonsterInfoChanged(List<MainActivityInfo> mainActivityInfos) {
+
+    }
+
+    @Override
+    public void notifyMonsterInstanceChanged(List<Monster> monsters) {
+        view.monsterListChanged(monsters);
+    }
+
+    @Override
+    public void notifyMonsterCardsChanged(CardInfo currentCard) {
+        view.monsterCardChanged(currentCard);
     }
 }

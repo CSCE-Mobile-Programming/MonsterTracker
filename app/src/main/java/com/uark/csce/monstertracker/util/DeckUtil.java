@@ -10,12 +10,12 @@ import java.util.Random;
 
 public class DeckUtil {
 
-    static Random rand;
+    static Date now = new Date();
+    static Random rand = new Random(now.getTime());
 
     public DeckUtil()
     {
-        Date now = new Date();
-        rand = new Random(now.getTime());
+
     }
 
     public static List<CardInfo> shuffleDeck(List<CardInfo> cards)

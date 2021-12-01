@@ -23,10 +23,14 @@ import com.uark.csce.monstertracker.models.info.MonsterStatsInfo;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAdapter.ViewHolder> {
+
     private MonsterDetailsContract.Presenter presenter;
     private AssetManager assetManager;
+    private List<Monster> localDataSet;
     private static final float disabledAlpha = 0.25f;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -103,8 +107,17 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
         }
     }
 
+    public MonsterDetailsAdapter(){
+        localDataSet = new ArrayList<>();
+    }
+
     public void setPresenter(MonsterDetailsContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    public void setLocalDataSet(List<Monster> dataSet)
+    {
+        localDataSet = dataSet;
     }
 
     @NonNull
@@ -119,7 +132,7 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
     @NonNull
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Monster monster = presenter.getMonster(position);
+        Monster monster = localDataSet.get(position);
         if (monster != null) {
             // Set the view to visible, since it might have previously been set invisible
             holder.itemView.setVisibility(View.VISIBLE);
@@ -161,10 +174,7 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
 
     @Override
     public int getItemCount() {
-        if (presenter != null) {
-            return presenter.getMonsterCount();
-        }
-        return 0;
+        return localDataSet.size();
     }
 
     public void setStatusEffects(ViewHolder holder, MonsterType type, Monster monster, int position) {
@@ -256,12 +266,7 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             @Override
             public void onClick(View view) {
                 String statusName = view.getTag().toString();
-                presenter.toggleStatus(statusName, position, new MonsterDetailsContract.ToggleStatusCallback() {
-                    @Override
-                    public void onToggleStatus(boolean currentState) {
-                        view.setAlpha(currentState ? 1.0f : disabledAlpha);
-                    }
-                });
+                presenter.toggleStatus(statusName, position);
             }
         };
     }

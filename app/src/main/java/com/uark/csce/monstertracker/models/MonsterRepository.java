@@ -2,6 +2,7 @@ package com.uark.csce.monstertracker.models;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -77,6 +78,7 @@ public class MonsterRepository {
             info.setup();
         }
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(false);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseCallbacks = new HashMap<>();
     }
@@ -127,7 +129,9 @@ public class MonsterRepository {
             container.setMonsterCardListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    callback.notifyMonsterCardsChanged(snapshot.getValue(CardInfo.class));
+                    CardInfo card = new CardInfo();
+                    card.setImagePath("");
+                    callback.notifyMonsterCardsChanged(card);
                 }
 
                 @Override
@@ -227,10 +231,6 @@ public class MonsterRepository {
         activityInfo.setInitiative(0);
         activityInfo.setNumMonsters(0);
 
-        CardDeckModel deckModel = new CardDeckModel();
-        deckModel.setNextCard(0);
-        deckModel.setCards(DeckUtil.shuffleDeck(info.getDeck().getCards()));
-
         mDatabase.child(roomCode).runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
@@ -239,7 +239,6 @@ public class MonsterRepository {
                 if(temp == null)
                 {
                     currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).setValue(activityInfo);
-                    currentData.child(CARD_REFERENCE).child(monsterInfoName).child(DECK_REFERENCE).setValue(deckModel);
                     return Transaction.success(currentData);
                 }
                 return Transaction.success(currentData);
@@ -247,11 +246,9 @@ public class MonsterRepository {
 
             @Override
             public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-
+                Log.d("Monster Repository", "addMonsterINfo:onComplete:" + error);
             }
         });
-
-        drawNextCard(monsterInfoName);
     }
 
     public void addMonster(String monsterInfoName, int level, boolean isElite) {
@@ -288,7 +285,7 @@ public class MonsterRepository {
 
             @Override
             public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-
+                Log.d("Monster Repository", "addMonster:onComplete:" + error);
             }
         });
 
@@ -312,7 +309,7 @@ public class MonsterRepository {
 
                     @Override
                     public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-
+                        Log.d("Monster Repository", "addHealth:onComplete:" + error);
                     }
                 });
 
@@ -326,7 +323,7 @@ public class MonsterRepository {
                 MainActivityInfo temp = currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).getValue(MainActivityInfo.class);
                 Monster monster = currentData.child(MONSTER_INSTANCE_REFERENCE).child(monsterInfoName).child(Integer.toString(position)).getValue(Monster.class);
 
-                if(monster == null)
+                if(monster == null || temp == null)
                 {
                     return Transaction.success(currentData);
                 }
@@ -346,7 +343,7 @@ public class MonsterRepository {
 
             @Override
             public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-
+                Log.d("Monster Repository", "subtractHealth:onComplete:" + error);
             }
         });
 
@@ -359,7 +356,7 @@ public class MonsterRepository {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-                Boolean status = currentData.getValue(Boolean.class);
+                Boolean status = true;
                 if(status == null)
                 {
                     return Transaction.success(currentData);
@@ -397,6 +394,7 @@ public class MonsterRepository {
                     }
 
                     temp.setInitiative(card.getInitiative());
+                    deck.setNextCard(deck.getNextCard() + 1);
 
                     currentData.child(CARD_REFERENCE).child(monsterInfoName).child("current_card").setValue(card);
                     currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).setValue(temp);
@@ -409,7 +407,7 @@ public class MonsterRepository {
 
             @Override
             public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-
+                Log.d("Monster Repository", "drawCard:onComplete:" + error);
             }
         });
     }
