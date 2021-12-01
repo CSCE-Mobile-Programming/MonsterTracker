@@ -11,7 +11,6 @@
     "Name": "#2 Barrow Lair",
     "Monsters": [
       "Bandit Archer",
-      "Bandit Commander",
       "Living Bones",
       "Living Corpse"
     ]
@@ -66,16 +65,14 @@
     "Name": "#8 Gloomhaven Warehouse",
     "Monsters": [
       "Living Bones",
-      "Living Corpse",
-      "Inox Bodyguard"
+      "Living Corpse"
     ]
   },
   {
     "Name": "#9 Diamond Mine",
     "Monsters": [
       "Hound",
-      "Vermling Scout",
-      "Merciless Overseer"
+      "Vermling Scout"
     ]
   },
   {
@@ -92,8 +89,7 @@
       "Living Bones",
       "Living Corpse",
       "City Guard",
-      "City Archer",
-      "Captain of the Guard"
+      "City Archer"
     ]
   },
   {
@@ -103,8 +99,7 @@
       "Living Corpse",
       "Cultist",
       "City Guard",
-      "City Archer",
-      "Jekserah"
+      "City Archer"
     ]
   },
   {
@@ -174,8 +169,7 @@
       "Living Bones",
       "Cultist",
       "Night Demon",
-      "Living Corpse",
-      "Jekserah"
+      "Living Corpse"
     ]
   },
   {
@@ -186,8 +180,7 @@
       "Night Demon",
       "Wind Demon",
       "Earth Demon",
-      "Flame Demon",
-      "Prime Demon"
+      "Flame Demon"
     ]
   },
   {
@@ -305,8 +298,7 @@
     "Name": "#34 Scorched Summit",
     "Monsters": [
       "Rending Drake",
-      "Spitting Drake",
-      "Elder Drake"
+      "Spitting Drake"
     ]
   },
   {
@@ -325,8 +317,7 @@
       "Frost Demon",
       "Earth Demon",
       "Wind Demon",
-      "City Archer",
-      "Prime Demon"
+      "City Archer"
     ]
   },
   {
@@ -414,8 +405,7 @@
       "Night Demon",
       "Frost Demon",
       "Wind Demon",
-      "Savvas Icestorm",
-      "Winged Horror"
+      "Savvas Icestorm"
     ]
   },
   {
@@ -423,8 +413,7 @@
     "Monsters": [
       "Lurker",
       "Deep Terror",
-      "Harrower Infester",
-      "The Sightless Eye"
+      "Harrower Infester"
     ]
   },
   {
@@ -432,8 +421,7 @@
     "Monsters": [
       "Forest Imp",
       "Earth Demon",
-      "Harrower Infester",
-      "Dark Rider"
+      "Harrower Infester"
     ]
   },
   {
@@ -456,7 +444,6 @@
   {
     "Name": "#51 The Void",
     "Monsters": [
-      "The Gloom"
     ]
   },
   {
@@ -696,8 +683,7 @@
     "Name": "#79 Lost Temple",
     "Monsters": [
       "Stone Golem",
-      "Giant Viper",
-      "The Betrayer"
+      "Giant Viper"
     ]
   },
   {
@@ -715,8 +701,7 @@
       "Night Demon",
       "Sun Demon",
       "Stone Golem",
-      "Ancient Artillery",
-      "The Colorless"
+      "Ancient Artillery"
     ]
   },
   {

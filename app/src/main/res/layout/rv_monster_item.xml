@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_background"
-    android:maxHeight="96dp">
+    android:maxHeight="132dp">
 
     <Button
         android:id="@+id/btnHealthAdd"
@@ -85,12 +85,92 @@
         app:layout_constraintStart_toEndOf="@+id/tvMonsterNumber"
         app:layout_constraintTop_toBottomOf="@+id/tvLabelHealth" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="48dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+    <ImageView
+        android:id="@+id/iconDisarm"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
         app:layout_constraintStart_toEndOf="@+id/btnHealthAdd"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iconPoison"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
+        app:layout_constraintStart_toStartOf="@+id/iconImmobilize"
+        app:layout_constraintTop_toTopOf="@+id/iconMuddle"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iconImmobilize"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
+        app:layout_constraintStart_toEndOf="@+id/iconDisarm"
+        app:layout_constraintTop_toTopOf="@+id/iconDisarm"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iconStrengthen"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
+        app:layout_constraintStart_toStartOf="@+id/iconInvisible"
+        app:layout_constraintTop_toTopOf="@+id/iconPoison"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iconInvisible"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
+        app:layout_constraintStart_toEndOf="@+id/iconImmobilize"
+        app:layout_constraintTop_toTopOf="@+id/iconImmobilize"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iconStun"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
+        app:layout_constraintStart_toStartOf="@+id/iconMuddle"
+        app:layout_constraintTop_toTopOf="@+id/iconWound"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iconMuddle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
+        app:layout_constraintStart_toStartOf="@+id/iconDisarm"
+        app:layout_constraintTop_toBottomOf="@+id/iconDisarm"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iconWound"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="4dp"
+        android:maxWidth="32dp"
+        android:maxHeight="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iconPoison"
+        app:layout_constraintTop_toBottomOf="@+id/iconMuddle"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
