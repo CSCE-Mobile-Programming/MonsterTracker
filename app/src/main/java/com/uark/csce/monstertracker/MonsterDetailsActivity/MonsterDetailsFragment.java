@@ -217,15 +217,7 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
     private MonsterDetailsContract.GetCardCallback cardReceivedCallback = new MonsterDetailsContract.GetCardCallback() {
         @Override
         public void onCardReceived(CardInfo cardInfo) {
-            TextView tvCardInitiative = root.findViewById(R.id.tvCardInitiative);
-            TextView tvCardText = root.findViewById(R.id.tvCardText);
-            tvCardInitiative.setText(Integer.toString(cardInfo.getInitiative()));
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < cardInfo.getAction().size(); i++) {
-                sb.append(cardInfo.getAction().get(i).getActionText());
-                sb.append(i == cardInfo.getAction().size() - 1 ? "" : "\n");
-            }
-            tvCardText.setText(sb.toString());
+
         }
     };
 

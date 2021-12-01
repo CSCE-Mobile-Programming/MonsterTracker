@@ -186,18 +186,18 @@
         app:layout_constraintStart_toEndOf="@+id/ivMonsterPortrait"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvCardText"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="96dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_background"
-        android:minHeight="96dp"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/tvEliteAttributesList"
-        app:layout_constraintStart_toStartOf="@+id/tvLevel"
-        app:layout_constraintTop_toBottomOf="@+id/ivIconRange" />
+        android:layout_marginEnd="8dp"
+        android:maxHeight="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNormalAttributesList"
+        tools:src="@tools:sample/avatars" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMonsterList"
@@ -206,25 +206,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btnMonsterAddNormal"
-        app:layout_constraintEnd_toEndOf="@+id/tvCardText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvCardText"
-        app:layout_constraintTop_toBottomOf="@+id/tvCardText" />
-
-    <TextView
-        android:id="@+id/tvCardInitiative"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        android:gravity="center"
-        android:minWidth="40dp"
-        android:minHeight="24dp"
-        android:text="99"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tvCardText"
-        app:layout_constraintTop_toTopOf="@+id/tvCardText" />
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <Button
         android:id="@+id/btnLevelAdd"
@@ -298,4 +282,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rvMonsterList"
         app:layout_constraintStart_toEndOf="@+id/btnMonsterAddElite" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
