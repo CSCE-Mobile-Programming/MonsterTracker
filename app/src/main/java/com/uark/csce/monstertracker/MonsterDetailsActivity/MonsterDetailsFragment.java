@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -173,7 +174,7 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         presenter.getCurrentCardInfo(cardReceivedCallback);
     }
 
-    private View.OnClickListener levelAddAction = new View.OnClickListener() {
+    private final View.OnClickListener levelAddAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             presenter.addLevel();
@@ -182,7 +183,7 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         }
     };
 
-    private View.OnClickListener levelSubtractAction = new View.OnClickListener() {
+    private final View.OnClickListener levelSubtractAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             presenter.subtractLevel();
@@ -191,7 +192,7 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         }
     };
 
-    private View.OnClickListener monsterAddNormalAction = new View.OnClickListener() {
+    private final View.OnClickListener monsterAddNormalAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             presenter.addMonster(false);
@@ -199,7 +200,7 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         }
     };
 
-    private View.OnClickListener monsterAddEliteAction = new View.OnClickListener() {
+    private final View.OnClickListener monsterAddEliteAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             presenter.addMonster(true);
@@ -214,10 +215,16 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         }
     };
 
-    private MonsterDetailsContract.GetCardCallback cardReceivedCallback = new MonsterDetailsContract.GetCardCallback() {
+    private final MonsterDetailsContract.GetCardCallback cardReceivedCallback = new MonsterDetailsContract.GetCardCallback() {
         @Override
         public void onCardReceived(CardInfo cardInfo) {
-
+            ImageView iv = root.findViewById(R.id.ivCard);
+            try {
+                iv.setImageBitmap(getBitmapFromAssets(cardInfo.getImagePath()));
+            }
+            catch (IOException e) {
+                Log.e("MonsterDetailsFragment", "Could not retrieve image " + cardInfo.getImagePath());
+            }
         }
     };
 

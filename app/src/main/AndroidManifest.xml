@@ -30,7 +30,8 @@
             android:exported="true" />
         <activity
             android:name=".MonsterDetailsActivity.MonsterDetailsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.MonsterTracker.NoActionBar"/>
         <activity
             android:name=".MainActivity.MainActivity"
             android:exported="true"

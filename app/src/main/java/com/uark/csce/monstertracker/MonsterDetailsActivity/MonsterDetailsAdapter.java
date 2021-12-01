@@ -250,7 +250,6 @@ public class MonsterDetailsAdapter extends RecyclerView.Adapter<MonsterDetailsAd
             holder.getIconWound().setAlpha(monster.getAttributes().isWounded() ? 1.0f : disabledAlpha);
             holder.getIconWound().setOnClickListener(buildIconClickListener(position));
         }
-        Log.e("MonsterDetailsAdapter", "Failed to load asset");
     }
 
     private View.OnClickListener buildIconClickListener(int position) {

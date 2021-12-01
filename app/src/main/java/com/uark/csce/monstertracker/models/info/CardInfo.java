@@ -5,6 +5,11 @@ import java.util.List;
 public class CardInfo {
     private int Initiative;
     private boolean Shuffle;
+    private String ImagePath;
+
+    public void setup(String imagePath) {
+        ImagePath = imagePath;
+    }
 
     public int getInitiative() {
         return Initiative;
@@ -19,4 +24,6 @@ public class CardInfo {
     public void setShuffle(boolean shuffle) {
         this.Shuffle = shuffle;
     }
+
+    public String getImagePath() { return ImagePath; }
 }

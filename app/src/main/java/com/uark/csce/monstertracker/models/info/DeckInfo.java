@@ -7,6 +7,12 @@ public class DeckInfo {
     private List<CardInfo> Cards;
     private String Path;
 
+    public void setup() {
+        for (int i = 0; i < Cards.size(); i++) {
+            Cards.get(i).setup(Path.replace("$", Integer.toString(i + 1)));
+        }
+    }
+
     public String getName() {
         return Name;
     }
