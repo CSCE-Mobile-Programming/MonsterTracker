@@ -11,8 +11,9 @@
         android:id="@+id/btnHealthAdd"
         android:layout_width="48dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
         android:includeFontPadding="false"
         android:insetTop="0dp"
         android:insetBottom="0dp"
@@ -20,8 +21,8 @@
         android:text="+"
         android:textSize="16sp"
         app:iconPadding="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvLabelHealth"
-        app:layout_constraintStart_toEndOf="@+id/tvLabelHealth"
+        app:layout_constraintBottom_toTopOf="@+id/btnHealthSubtract"
+        app:layout_constraintStart_toEndOf="@+id/tvMonsterNumber"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -29,7 +30,8 @@
         android:id="@+id/btnHealthSubtract"
         android:layout_width="48dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
         android:includeFontPadding="false"
         android:insetTop="0dp"
         android:insetBottom="0dp"
@@ -37,9 +39,10 @@
         android:text="—"
         android:textSize="16sp"
         app:iconPadding="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvMonsterHealth"
-        app:layout_constraintStart_toEndOf="@+id/tvLabelHealth"
-        app:layout_constraintTop_toTopOf="@+id/tvMonsterHealth"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnHealthAdd"
+        app:layout_constraintStart_toStartOf="@+id/btnHealthAdd"
+        app:layout_constraintTop_toBottomOf="@+id/btnHealthAdd"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
@@ -59,32 +62,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvLabelHealth"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Health"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/tvMonsterNumber"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvMonsterHealth"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="100"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvMonsterNumber"
-        app:layout_constraintEnd_toEndOf="@+id/tvLabelHealth"
-        app:layout_constraintStart_toEndOf="@+id/tvMonsterNumber"
-        app:layout_constraintTop_toBottomOf="@+id/tvLabelHealth" />
-
     <ImageView
         android:id="@+id/iconDisarm"
         android:layout_width="40dp"
@@ -95,7 +72,7 @@
         android:maxHeight="32dp"
         app:layout_constraintStart_toEndOf="@+id/btnHealthAdd"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/disarm" />
 
     <ImageView
         android:id="@+id/iconPoison"
@@ -105,7 +82,7 @@
         android:maxHeight="32dp"
         app:layout_constraintStart_toStartOf="@+id/iconImmobilize"
         app:layout_constraintTop_toTopOf="@+id/iconMuddle"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/poison" />
 
     <ImageView
         android:id="@+id/iconImmobilize"
@@ -116,7 +93,7 @@
         android:maxHeight="32dp"
         app:layout_constraintStart_toEndOf="@+id/iconDisarm"
         app:layout_constraintTop_toTopOf="@+id/iconDisarm"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/immobilize" />
 
     <ImageView
         android:id="@+id/iconStrengthen"
@@ -126,7 +103,7 @@
         android:maxHeight="32dp"
         app:layout_constraintStart_toStartOf="@+id/iconInvisible"
         app:layout_constraintTop_toTopOf="@+id/iconPoison"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/strengthen" />
 
     <ImageView
         android:id="@+id/iconInvisible"
@@ -137,7 +114,7 @@
         android:maxHeight="32dp"
         app:layout_constraintStart_toEndOf="@+id/iconImmobilize"
         app:layout_constraintTop_toTopOf="@+id/iconImmobilize"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/invisible" />
 
     <ImageView
         android:id="@+id/iconStun"
@@ -147,7 +124,7 @@
         android:maxHeight="32dp"
         app:layout_constraintStart_toStartOf="@+id/iconMuddle"
         app:layout_constraintTop_toTopOf="@+id/iconWound"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/stun" />
 
     <ImageView
         android:id="@+id/iconMuddle"
@@ -158,7 +135,7 @@
         android:maxHeight="32dp"
         app:layout_constraintStart_toStartOf="@+id/iconDisarm"
         app:layout_constraintTop_toBottomOf="@+id/iconDisarm"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/muddle" />
 
     <ImageView
         android:id="@+id/iconWound"
@@ -171,6 +148,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/iconPoison"
         app:layout_constraintTop_toBottomOf="@+id/iconMuddle"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/wound" />
+
+    <ImageView
+        android:id="@+id/ivMonsterHealthBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnHealthAdd"
+        app:layout_constraintStart_toEndOf="@+id/tvMonsterNumber"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/health_whitebg" />
+
+    <TextView
+        android:id="@+id/tvMonsterHealth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="100"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMonsterHealthBackground"
+        app:layout_constraintEnd_toEndOf="@+id/ivMonsterHealthBackground"
+        app:layout_constraintStart_toStartOf="@+id/ivMonsterHealthBackground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
