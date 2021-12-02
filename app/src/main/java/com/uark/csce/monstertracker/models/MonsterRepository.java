@@ -11,17 +11,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.uark.csce.monstertracker.models.FirebaseModels.CallbackContainer;
-import com.uark.csce.monstertracker.models.FirebaseModels.CardDeckModel;
+import com.uark.csce.monstertracker.models.FirebaseModels.CardState;
 import com.uark.csce.monstertracker.models.FirebaseModels.FirebaseContract;
-import com.uark.csce.monstertracker.models.FirebaseModels.MainActivityInfo;
+import com.uark.csce.monstertracker.models.FirebaseModels.MonsterState;
 import com.uark.csce.monstertracker.models.info.CardInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 import com.uark.csce.monstertracker.models.info.Scenario;
@@ -35,15 +35,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class MonsterRepository {
 
     private DatabaseReference mDatabase;
-    final String MONSTER_INSTANCE_REFERENCE = "monster_instance";
-    final String MONSTER_INFO_REFERENCE = "monster_info";
-    final String CARD_REFERENCE = "cards";
-    final String DECK_REFERENCE = "deck";
     Map<String, CallbackContainer> firebaseCallbacks;
     private String roomCode;
 
@@ -78,7 +73,6 @@ public class MonsterRepository {
             info.setup();
         }
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(false);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseCallbacks = new HashMap<>();
     }
@@ -87,36 +81,17 @@ public class MonsterRepository {
 
         CallbackContainer container = new CallbackContainer();
 
-         container.setMonsterInfoListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<MainActivityInfo> infos = new ArrayList<>();
-                for(DataSnapshot infoSnapshot : snapshot.getChildren() )
-                {
-                    infos.add(infoSnapshot.getValue(MainActivityInfo.class));
-                }
-                callback.notifyMonsterInfoChanged(infos);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        mDatabase.child(roomCode).child(MONSTER_INFO_REFERENCE).addValueEventListener(container.getMonsterInfoListener());
-
-        if(!monsterName.isEmpty()){
-            container.setMonsterInstanceListener(new ValueEventListener() {
+        if(monsterName.isEmpty())
+        {
+            container.setGameStateListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    List<Monster> monsters = new ArrayList<>();
-                    MonsterInfo info = getMonsterInfo(monsterName);
-                    for(int i = 0; i<info.getMaxCount(); i++)
+                    Map<String, MonsterState> gameState = snapshot.getValue(new GenericTypeIndicator<Map<String, MonsterState>>() {});
+                    if(gameState == null)
                     {
-                        Monster monster = snapshot.child(Integer.toString(i)).getValue(Monster.class);
-                        monsters.add(monster);
+                        gameState = new HashMap<>();
                     }
-                    callback.notifyMonsterInstanceChanged(monsters);
+                    callback.notifyGameStateChanged(gameState);
                 }
 
                 @Override
@@ -124,14 +99,15 @@ public class MonsterRepository {
 
                 }
             });
-            mDatabase.child(roomCode).child(MONSTER_INSTANCE_REFERENCE).child(monsterName).addValueEventListener(container.getMonsterInstanceListener());
-
-            container.setMonsterCardListener(new ValueEventListener() {
+            mDatabase.child(roomCode).addValueEventListener(container.getGameStateListener());
+        }
+        else
+        {
+            container.setMonsterStateListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    CardInfo card = new CardInfo();
-                    card.setImagePath("");
-                    callback.notifyMonsterCardsChanged(card);
+                    List<Monster> monsters = snapshot.getValue(new GenericTypeIndicator<List<Monster>>() {});
+                    callback.notifyMonsterStateChanged(monsters);
                 }
 
                 @Override
@@ -139,20 +115,27 @@ public class MonsterRepository {
 
                 }
             });
-            mDatabase.child(roomCode).child(CARD_REFERENCE).child(monsterName).child("current_card").addValueEventListener(container.getMonsterCardListener());
+            mDatabase.child(roomCode).child(monsterName).child("monsters").addValueEventListener(container.getMonsterStateListener());
         }
 
         firebaseCallbacks.put(id, container);
 
     }
-    public void unregisterCallback(String id){
-        CallbackContainer container = firebaseCallbacks.get(id);
-        mDatabase.removeEventListener(container.getMonsterInfoListener());
+    public void unregisterCallback(String id) {
 
-        if(container.getMonsterInstanceListener() != null && container.getMonsterCardListener() != null)
+        CallbackContainer container = firebaseCallbacks.get(id);
+
+        if(container.getGameStateListener() != null)
         {
-            mDatabase.removeEventListener(container.getMonsterInstanceListener());
-            mDatabase.removeEventListener(container.getMonsterCardListener());
+            mDatabase.removeEventListener(container.getGameStateListener());
+        }
+        if(container.getMonsterStateListener() != null)
+        {
+            mDatabase.removeEventListener(container.getMonsterStateListener());
+        }
+        if(container.getCardStateListener() != null)
+        {
+            mDatabase.removeEventListener(container.getCardStateListener());
         }
 
         firebaseCallbacks.remove(id);
@@ -218,196 +201,103 @@ public class MonsterRepository {
 
     //*************** Monster Instance Data ***************
     public void clearInstanceData() {
-        mDatabase.child(roomCode).child(MONSTER_INFO_REFERENCE).removeValue();
-        mDatabase.child(roomCode).child(MONSTER_INSTANCE_REFERENCE).removeValue();
-        mDatabase.child(roomCode).child(CARD_REFERENCE).removeValue();
+        mDatabase.child(roomCode).removeValue();
     }
 
     public void addMonsterInfo(String monsterInfoName) {
         MonsterInfo info = getMonsterInfo(monsterInfoName);
 
-        MainActivityInfo activityInfo = new MainActivityInfo();
-        activityInfo.setMonsterInfoName(monsterInfoName);
-        activityInfo.setInitiative(0);
-        activityInfo.setNumMonsters(0);
+        CardState cardState = new CardState();
+        cardState.setCards(info.getDeck().getCards());
+        cardState.setCurrentCard(new CardInfo());
+        cardState.setNextCard(0);
 
-        mDatabase.child(roomCode).runTransaction(new Transaction.Handler() {
-            @NonNull
-            @Override
-            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-                MainActivityInfo temp = currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).getValue(MainActivityInfo.class);
-                if(temp == null)
-                {
-                    currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).setValue(activityInfo);
-                    return Transaction.success(currentData);
-                }
-                return Transaction.success(currentData);
-            }
+        mDatabase.child(roomCode).child(monsterInfoName).child("cardState").setValue(cardState);
 
-            @Override
-            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-                Log.d("Monster Repository", "addMonsterINfo:onComplete:" + error);
-            }
-        });
+        drawNextCard(monsterInfoName);
+
     }
 
     public void addMonster(String monsterInfoName, int level, boolean isElite) {
-        MonsterInfo info = getMonsterInfo(monsterInfoName);
-
-        mDatabase.child(roomCode).runTransaction(new Transaction.Handler() {
+        mDatabase.child(roomCode).child(monsterInfoName).runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-                MainActivityInfo temp = currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).getValue(MainActivityInfo.class);
-
-                if(temp == null) {
+                MonsterState monsterState = currentData.getValue(MonsterState.class);
+                if(monsterState == null)
+                {
                     return Transaction.success(currentData);
                 }
 
-                for(int i = 0; i < info.getMaxCount(); i++) {
+                MonsterInfo info = getMonsterInfo(monsterInfoName);
 
-                    Monster monster = currentData.child(MONSTER_INSTANCE_REFERENCE).child(monsterInfoName).child(Integer.toString(i)).getValue(Monster.class);
+                Monster m = new Monster(info, level, isElite ? MonsterType.Elite : MonsterType.Normal);
 
-                    if (monster == null) {
-
-                        Monster m = new Monster(info, level, isElite ? MonsterType.Elite : MonsterType.Normal);
-                        temp.setNumMonsters(temp.getNumMonsters() + 1);
-
-                        currentData.child(MONSTER_INSTANCE_REFERENCE).child(monsterInfoName).child(Integer.toString(i)).setValue(m);
-                        currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).setValue(temp);
-
+                for(int i = 0; i<info.getMaxCount(); i++)
+                {
+                    if(i >= monsterState.getMonsters().size())
+                    {
+                        monsterState.getMonsters().add(m);
+                        break;
+                    }
+                    if(monsterState.getMonsters().get(i) == null)
+                    {
+                        monsterState.getMonsters().set(i, m);
                         break;
                     }
                 }
 
+                currentData.setValue(monsterState);
                 return Transaction.success(currentData);
+
             }
 
             @Override
             public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-                Log.d("Monster Repository", "addMonster:onComplete:" + error);
+
             }
         });
-
     }
 
     public void addHealth(String monsterInfoName, int position) {
-        mDatabase.child(roomCode).child(MONSTER_INSTANCE_REFERENCE).child(monsterInfoName).child(Integer.toString(position))
-                .runTransaction(new Transaction.Handler() {
-                    @NonNull
-                    @Override
-                    public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-                        Monster monster = currentData.getValue(Monster.class);
-                        if(monster == null && monster.getHealth() >= monster.getBaseHealth())
-                        {
-                            return Transaction.success(currentData);
-                        }
-                        monster.setHealth(monster.getHealth() + 1);
-                        currentData.setValue(monster);
-                        return Transaction.success(currentData);
-                    }
-
-                    @Override
-                    public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-                        Log.d("Monster Repository", "addHealth:onComplete:" + error);
-                    }
-                });
 
     }
     public void subtractHealth(String monsterInfoName, int position) {
-        mDatabase.child(roomCode).runTransaction(new Transaction.Handler() {
-            @NonNull
-            @Override
-            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-
-                MainActivityInfo temp = currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).getValue(MainActivityInfo.class);
-                Monster monster = currentData.child(MONSTER_INSTANCE_REFERENCE).child(monsterInfoName).child(Integer.toString(position)).getValue(Monster.class);
-
-                if(monster == null || temp == null)
-                {
-                    return Transaction.success(currentData);
-                }
-                else if(temp != null && monster.getHealth() == 1)
-                {
-                    temp.setNumMonsters(temp.getNumMonsters() - 1);
-                    currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).setValue(temp);
-                    currentData.child(MONSTER_INSTANCE_REFERENCE).child(monsterInfoName).child(Integer.toString(position)).setValue(null);
-
-                    return Transaction.success(currentData);
-                }
-
-                monster.setHealth(monster.getHealth() - 1);
-                currentData.child(MONSTER_INSTANCE_REFERENCE).child(monsterInfoName).child(Integer.toString(position)).setValue(monster);
-                return Transaction.success(currentData);
-            }
-
-            @Override
-            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-                Log.d("Monster Repository", "subtractHealth:onComplete:" + error);
-            }
-        });
 
     }
 
     public void toggleMonsterStatus(String monsterInfoName, String statusName, int position) {
 
-        mDatabase.child(roomCode).child(MONSTER_INSTANCE_REFERENCE).child(monsterInfoName).child(Integer.toString(position))
-                .child("attributes").child(statusName).runTransaction(new Transaction.Handler() {
-            @NonNull
-            @Override
-            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-                Boolean status = true;
-                if(status == null)
-                {
-                    return Transaction.success(currentData);
-                }
-                status = !status;
-                currentData.setValue(status);
-                return Transaction.success(currentData);
-            }
-
-            @Override
-            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-
-            }
-        });
     }
 
     public void drawNextCard(String monsterInfoName) {
-        mDatabase.child(roomCode).runTransaction(new Transaction.Handler() {
+        mDatabase.child(roomCode).child(monsterInfoName).child("cardState").runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData currentData) {
-
-                MainActivityInfo temp = currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).getValue(MainActivityInfo.class);
-                CardDeckModel deck = currentData.child(CARD_REFERENCE).child(monsterInfoName).child(DECK_REFERENCE).getValue(CardDeckModel.class);
-
-                if(temp != null &&  deck != null)
+                CardState cardState = currentData.getValue(CardState.class);
+                if(cardState == null)
                 {
-                    CardInfo card = deck.getCards().get(deck.getNextCard());
-
-                    if(card.isShuffle())
-                    {
-                        deck.setCards(DeckUtil.shuffleDeck(deck.getCards()));
-                        deck.setNextCard(0);
-                        currentData.child(CARD_REFERENCE).child(monsterInfoName).child(DECK_REFERENCE).setValue(deck);
-                    }
-
-                    temp.setInitiative(card.getInitiative());
-                    deck.setNextCard(deck.getNextCard() + 1);
-
-                    currentData.child(CARD_REFERENCE).child(monsterInfoName).child("current_card").setValue(card);
-                    currentData.child(MONSTER_INFO_REFERENCE).child(monsterInfoName).setValue(temp);
-
                     return Transaction.success(currentData);
                 }
 
+                CardInfo card = cardState.getCards().get(cardState.getNextCard());
+                cardState.setCurrentCard(card);
+                cardState.setNextCard(cardState.getNextCard() + 1);
+
+                if(cardState.getNextCard() >= cardState.getCards().size() || card.isShuffle())
+                {
+                    cardState.setNextCard(0);
+                    cardState.setCards(DeckUtil.shuffleDeck(cardState.getCards()));
+                }
+
+                currentData.setValue(cardState);
                 return Transaction.success(currentData);
             }
 
             @Override
             public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
-                Log.d("Monster Repository", "drawCard:onComplete:" + error);
+
             }
         });
     }

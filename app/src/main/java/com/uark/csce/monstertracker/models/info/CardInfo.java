@@ -30,4 +30,10 @@ public class CardInfo {
     public void setImagePath(String imagePath) {
         ImagePath = imagePath;
     }
+
+    public CardInfo()
+    {
+        ImagePath = "";
+    }
+
 }

@@ -3,31 +3,31 @@ package com.uark.csce.monstertracker.models.FirebaseModels;
 import com.google.firebase.database.ValueEventListener;
 
 public class CallbackContainer {
-    private ValueEventListener monsterInfoListener;
-    private ValueEventListener monsterInstanceListener;
-    private ValueEventListener monsterCardListener;
+    private ValueEventListener gameStateListener;
+    private ValueEventListener monsterStateListener;
+    private ValueEventListener cardStateListener;
 
-    public ValueEventListener getMonsterInfoListener() {
-        return monsterInfoListener;
+    public ValueEventListener getGameStateListener() {
+        return gameStateListener;
     }
 
-    public void setMonsterInfoListener(ValueEventListener monsterInfoListener) {
-        this.monsterInfoListener = monsterInfoListener;
+    public void setGameStateListener(ValueEventListener gameStateListener) {
+        this.gameStateListener = gameStateListener;
     }
 
-    public ValueEventListener getMonsterInstanceListener() {
-        return monsterInstanceListener;
+    public ValueEventListener getMonsterStateListener() {
+        return monsterStateListener;
     }
 
-    public void setMonsterInstanceListener(ValueEventListener monsterInstanceListener) {
-        this.monsterInstanceListener = monsterInstanceListener;
+    public void setMonsterStateListener(ValueEventListener monsterStateListener) {
+        this.monsterStateListener = monsterStateListener;
     }
 
-    public ValueEventListener getMonsterCardListener() {
-        return monsterCardListener;
+    public ValueEventListener getCardStateListener() {
+        return cardStateListener;
     }
 
-    public void setMonsterCardListener(ValueEventListener monsterCardListener) {
-        this.monsterCardListener = monsterCardListener;
+    public void setCardStateListener(ValueEventListener cardStateListener) {
+        this.cardStateListener = cardStateListener;
     }
 }

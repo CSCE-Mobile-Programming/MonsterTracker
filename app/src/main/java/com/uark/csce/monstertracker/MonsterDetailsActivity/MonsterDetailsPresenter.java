@@ -1,15 +1,15 @@
 package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
-import androidx.annotation.NonNull;
-
 import com.uark.csce.monstertracker.models.FirebaseModels.FirebaseContract;
 import com.uark.csce.monstertracker.models.FirebaseModels.MainActivityInfo;
+import com.uark.csce.monstertracker.models.FirebaseModels.MonsterState;
 import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.MonsterRepository;
 import com.uark.csce.monstertracker.models.info.CardInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter, FirebaseContract.FirebaseCallback {
     MonsterDetailsContract.View view;
@@ -93,17 +93,12 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     }
 
     @Override
-    public void notifyMonsterInfoChanged(List<MainActivityInfo> mainActivityInfos) {
+    public void notifyGameStateChanged(Map<String, MonsterState> gameState) {
 
     }
 
     @Override
-    public void notifyMonsterInstanceChanged(List<Monster> monsters) {
+    public void notifyMonsterStateChanged(List<Monster> monsters) {
         view.monsterListChanged(monsters);
-    }
-
-    @Override
-    public void notifyMonsterCardsChanged(CardInfo currentCard) {
-        view.monsterCardChanged(currentCard);
     }
 }

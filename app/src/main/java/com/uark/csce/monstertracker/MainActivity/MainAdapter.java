@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.uark.csce.monstertracker.MonsterDetailsActivity.MonsterDetailsActivity;
 import com.uark.csce.monstertracker.R;
-import com.uark.csce.monstertracker.models.FirebaseModels.MainActivityInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
 
 import java.io.IOException;
