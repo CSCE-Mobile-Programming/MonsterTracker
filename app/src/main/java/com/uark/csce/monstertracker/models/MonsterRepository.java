@@ -107,6 +107,10 @@ public class MonsterRepository {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     List<Monster> monsters = snapshot.getValue(new GenericTypeIndicator<List<Monster>>() {});
+                    if(monsters == null)
+                    {
+                        monsters = new ArrayList<>();
+                    }
                     callback.notifyMonsterStateChanged(monsters);
                 }
 
@@ -116,6 +120,25 @@ public class MonsterRepository {
                 }
             });
             mDatabase.child(roomCode).child(monsterName).child("monsters").addValueEventListener(container.getMonsterStateListener());
+
+            container.setCardStateListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    CardInfo card = snapshot.getValue(CardInfo.class);
+                    if(card == null)
+                    {
+                        card = new CardInfo();
+                    }
+                    callback.notifyCardStateChanged(card);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            mDatabase.child(roomCode).child(monsterName).child("cardState").child("currentCard").addValueEventListener(container.getCardStateListener());
+
         }
 
         firebaseCallbacks.put(id, container);
@@ -260,14 +283,113 @@ public class MonsterRepository {
     }
 
     public void addHealth(String monsterInfoName, int position) {
+        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(Integer.toString(position)).runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
 
+                Monster monster = currentData.getValue(Monster.class);
+                if(monster ==  null) {
+                    return Transaction.success(currentData);
+                }
+
+                if(monster.getHealth() < monster.getBaseHealth())
+                {
+                    monster.setHealth(monster.getHealth() + 1);
+                }
+
+                currentData.setValue(monster);
+
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+
+            }
+        });
     }
     public void subtractHealth(String monsterInfoName, int position) {
+        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(Integer.toString(position)).runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
 
+                Monster monster = currentData.getValue(Monster.class);
+                if(monster ==  null) {
+                    return Transaction.success(currentData);
+                }
+
+                monster.setHealth(monster.getHealth() - 1);
+
+                if(monster.getHealth() == 0)
+                {
+                    currentData.setValue(null);
+                }
+                else
+                {
+                    currentData.setValue(monster);
+                }
+
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+
+            }
+        });
     }
 
     public void toggleMonsterStatus(String monsterInfoName, String statusName, int position) {
+        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(Integer.toString(position)).child("attributes").runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
 
+                Attributes attribute = currentData.getValue(Attributes.class);
+                if(attribute ==  null) {
+                    return Transaction.success(currentData);
+                }
+
+                if (statusName.equals("disarm")) {
+                    attribute.setDisarmed(!attribute.isDisarmed());
+                }
+                else if (statusName.equals("immobilize")) {
+                    attribute.setImmobilized(!attribute.isImmobilized());
+                }
+                else if (statusName.equals("invisible")) {
+                    attribute.setInvisible(!attribute.isInvisible());
+                }
+                else if (statusName.equals("poison")) {
+                    attribute.setPoisoned(!attribute.isPoisoned());
+                }
+                else if (statusName.equals("muddle")) {
+                    attribute.setMuddled(!attribute.isMuddled());
+                }
+                else if (statusName.equals("strengthen")) {
+                    attribute.setStrengthened(!attribute.isStrengthened());
+                }
+                else if (statusName.equals("stun")) {
+                    attribute.setStunned(!attribute.isStunned());
+                }
+                else if (statusName.equals("wound")) {
+                    attribute.setWounded(!attribute.isWounded());
+                }
+                else {
+                    throw new IllegalArgumentException("Unknown status.");
+                }
+
+                currentData.setValue(attribute);
+
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+
+            }
+        });
     }
 
     public void drawNextCard(String monsterInfoName) {
@@ -292,6 +414,49 @@ public class MonsterRepository {
                 }
 
                 currentData.setValue(cardState);
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+
+            }
+        });
+    }
+    public void drawAll() {
+        mDatabase.child(roomCode).runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+
+                Map<String, MonsterState> gameState = currentData.getValue(new GenericTypeIndicator<Map<String, MonsterState>>() {});
+                if(gameState == null)
+                {
+                    return Transaction.success(currentData);
+                }
+
+                for(String key : gameState.keySet()) {
+                    CardState cardState = gameState.get(key).getCardState();
+
+                    if(cardState == null)
+                    {
+                        continue;
+                    }
+
+                    CardInfo card = cardState.getCards().get(cardState.getNextCard());
+                    cardState.setCurrentCard(card);
+                    cardState.setNextCard(cardState.getNextCard() + 1);
+
+                    if(cardState.getNextCard() >= cardState.getCards().size() || card.isShuffle())
+                    {
+                        cardState.setNextCard(0);
+                        cardState.setCards(DeckUtil.shuffleDeck(cardState.getCards()));
+                    }
+
+                    gameState.get(key).setCardState(cardState);
+                }
+
+                currentData.setValue(gameState);
                 return Transaction.success(currentData);
             }
 

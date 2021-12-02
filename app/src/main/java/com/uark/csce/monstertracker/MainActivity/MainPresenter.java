@@ -3,7 +3,6 @@ package com.uark.csce.monstertracker.MainActivity;
 import android.util.Log;
 
 import com.uark.csce.monstertracker.models.FirebaseModels.FirebaseContract;
-import com.uark.csce.monstertracker.models.FirebaseModels.MainActivityInfo;
 import com.uark.csce.monstertracker.models.FirebaseModels.MonsterState;
 import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.MonsterRepository;
@@ -76,12 +75,7 @@ public class MainPresenter implements MainContract.Presenter, FirebaseContract.F
 
     @Override
     public void drawAllButtonClicked() {
-        // List<MonsterInfo> infos = repository.getSelectedMonsters();
-        // for(int i = 0; i<infos.size(); i++)
-        // {
-        //     repository.drawNextCard(infos.get(i).getName());
-        // }
-        // view.notifyLoadDataSet();
+        repository.drawAll();
     }
 
     @Override
@@ -113,6 +107,11 @@ public class MainPresenter implements MainContract.Presenter, FirebaseContract.F
 
     @Override
     public void notifyMonsterStateChanged(List<Monster> monsters) {
+
+    }
+
+    @Override
+    public void notifyCardStateChanged(CardInfo card) {
 
     }
 

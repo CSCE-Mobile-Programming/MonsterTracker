@@ -6,6 +6,7 @@ public interface ConnectContract {
     interface View {
         public void setPresenter(Presenter presenter);
         public void showRoomCodePickerDialog();
+        public void closeActivity();
     }
 
     interface Presenter {

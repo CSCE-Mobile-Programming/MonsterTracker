@@ -58,6 +58,11 @@ public class ConnectFragment extends Fragment implements ConnectContract.View, R
     }
 
     @Override
+    public void closeActivity() {
+        getActivity().finish();
+    }
+
+    @Override
     public void onRoomCodePicked(String roomCode) {
         presenter.roomCodeSelected(roomCode);
     }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1059282307603",
+    "project_id": "monstertracker-e1c02",
+    "storage_bucket": "monstertracker-e1c02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059282307603:android:7a265ffe63f8ae91b88de6",
+        "android_client_info": {
+          "package_name": "com.uark.csce.monstertracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059282307603-q0otg7uq628ncdlge1gvkc30ic4erg0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApOTQLZQrrDWoGRdbN4_tf9xW7d0gtQrc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059282307603-q0otg7uq628ncdlge1gvkc30ic4erg0r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

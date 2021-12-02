@@ -11,5 +11,6 @@ public interface FirebaseContract {
     interface FirebaseCallback {
         void notifyGameStateChanged(Map<String, MonsterState> gameState);
         void notifyMonsterStateChanged(List<Monster> monsters);
+        void notifyCardStateChanged(CardInfo card);
     }
 }

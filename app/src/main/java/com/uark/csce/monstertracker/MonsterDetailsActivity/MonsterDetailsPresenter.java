@@ -1,7 +1,6 @@
 package com.uark.csce.monstertracker.MonsterDetailsActivity;
 
 import com.uark.csce.monstertracker.models.FirebaseModels.FirebaseContract;
-import com.uark.csce.monstertracker.models.FirebaseModels.MainActivityInfo;
 import com.uark.csce.monstertracker.models.FirebaseModels.MonsterState;
 import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.MonsterRepository;
@@ -100,5 +99,10 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     @Override
     public void notifyMonsterStateChanged(List<Monster> monsters) {
         view.monsterListChanged(monsters);
+    }
+
+    @Override
+    public void notifyCardStateChanged(CardInfo card) {
+        view.monsterCardChanged(card);
     }
 }

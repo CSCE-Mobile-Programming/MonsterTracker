@@ -31,5 +31,6 @@ public class ConnectPresenter implements ConnectContract.Presenter {
     @Override
     public void roomCodeSelected(String roomCode) {
         repository.setRoomCode(roomCode);
+        view.closeActivity();
     }
 }
