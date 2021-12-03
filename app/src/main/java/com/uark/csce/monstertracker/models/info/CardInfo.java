@@ -26,4 +26,14 @@ public class CardInfo {
     }
 
     public String getImagePath() { return ImagePath; }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
+    }
+
+    public CardInfo()
+    {
+        ImagePath = "";
+    }
+
 }

@@ -43,7 +43,7 @@ public class RoomCodePickerDialog extends DialogFragment {
             }
         });
 
-        builder.setPositiveButton("Create Room", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Join Room", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
                 String roomCode = ((TextView)getDialog().findViewById(R.id.editTextRoomCodeSelect)).getText().toString();

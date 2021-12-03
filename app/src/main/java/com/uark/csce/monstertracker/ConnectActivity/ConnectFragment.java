@@ -35,19 +35,11 @@ public class ConnectFragment extends Fragment implements ConnectContract.View, R
         View root = inflater.inflate(R.layout.fragment_connect, container, false);
 
         // Set up the actions for the buttons
-        Button createButton = (Button)root.findViewById(R.id.createRoomButton);
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.createButtonClicked();;
-            }
-        });
-
         Button joinButton = (Button)root.findViewById(R.id.joinRoomButton);
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.joinButtonClicked();
+                presenter.joinButtonClicked();;
             }
         });
 
@@ -63,6 +55,11 @@ public class ConnectFragment extends Fragment implements ConnectContract.View, R
     public void showRoomCodePickerDialog() {
         RoomCodePickerDialog dialog = new RoomCodePickerDialog(this);
         dialog.show(getParentFragmentManager(), "roomCode");
+    }
+
+    @Override
+    public void closeActivity() {
+        getActivity().finish();
     }
 
     @Override

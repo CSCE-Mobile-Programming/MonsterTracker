@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uark.csce.monstertracker.R;
+import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.info.AttributesInfo;
 import com.uark.csce.monstertracker.models.info.CardInfo;
 import com.uark.csce.monstertracker.models.info.MonsterInfo;
@@ -25,6 +26,7 @@ import com.uark.csce.monstertracker.models.info.MonsterStatsInfo;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class MonsterDetailsFragment extends Fragment implements MonsterDetailsContract.View {
     MonsterDetailsContract.Presenter presenter;
@@ -80,13 +82,29 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         MonsterInfo info = presenter.getMonsterInfo();
         populateInfo(info);
         populateAttributes(info);
-        populateCardInfo();
     }
 
     @Override
     public void setPresenter(MonsterDetailsContract.Presenter presenter) {
         this.presenter = presenter;
         adapter.setPresenter(presenter);
+    }
+
+    @Override
+    public void monsterListChanged(List<Monster> monsters) {
+        ((MonsterDetailsAdapter)rvMonsterList.getAdapter()).setLocalDataSet(monsters);
+        rvMonsterList.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void monsterCardChanged(CardInfo currentCard) {
+        ImageView iv = root.findViewById(R.id.ivCard);
+        try {
+            iv.setImageBitmap(getBitmapFromAssets(currentCard.getImagePath()));
+        }
+        catch (IOException e) {
+            Log.e("MonsterDetailsFragment", "Could not retrieve image " + currentCard.getImagePath());
+        }
     }
 
     private void populateInfo(MonsterInfo info) {
@@ -170,10 +188,6 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         ((TextView)root.findViewById(R.id.tvEliteAttributesList)).setText(attributeTexts[1].toString());
     }
 
-    private void populateCardInfo() {
-        presenter.getCurrentCardInfo(cardReceivedCallback);
-    }
-
     private final View.OnClickListener levelAddAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -196,7 +210,6 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         @Override
         public void onClick(View view) {
             presenter.addMonster(false);
-            rvMonsterList.getAdapter().notifyDataSetChanged();
         }
     };
 
@@ -204,27 +217,13 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         @Override
         public void onClick(View view) {
             presenter.addMonster(true);
-            rvMonsterList.getAdapter().notifyDataSetChanged();
         }
     };
 
     private View.OnClickListener drawCardAction = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            presenter.drawCard(cardReceivedCallback);
-        }
-    };
-
-    private final MonsterDetailsContract.GetCardCallback cardReceivedCallback = new MonsterDetailsContract.GetCardCallback() {
-        @Override
-        public void onCardReceived(CardInfo cardInfo) {
-            ImageView iv = root.findViewById(R.id.ivCard);
-            try {
-                iv.setImageBitmap(getBitmapFromAssets(cardInfo.getImagePath()));
-            }
-            catch (IOException e) {
-                Log.e("MonsterDetailsFragment", "Could not retrieve image " + cardInfo.getImagePath());
-            }
+            presenter.drawCard();
         }
     };
 
