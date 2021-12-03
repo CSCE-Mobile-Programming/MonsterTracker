@@ -32,6 +32,7 @@ public interface MainContract {
         public void monsterPickerReturned(String monsterName);
 
         public List<MonsterInfo> getAllMonsterInfos();
+        public void removeMonster(String monsterInfoName);
     }
 
 }

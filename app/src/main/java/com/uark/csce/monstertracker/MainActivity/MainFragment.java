@@ -8,8 +8,10 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,6 +78,10 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
         rvMainList.setAdapter(adapter);
         rvMainList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        // Attach the swipe callback to the RV
+        ItemTouchHelper helper = new ItemTouchHelper(swipeCallback);
+        helper.attachToRecyclerView(rvMainList);
+
         return root;
     }
 
@@ -126,5 +132,17 @@ public class MainFragment extends Fragment implements MainContract.View, Monster
         rvMainList.getAdapter().notifyDataSetChanged();
     }
 
+    private ItemTouchHelper.SimpleCallback swipeCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
 
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            MainAdapter.ViewHolder vh = (MainAdapter.ViewHolder)viewHolder;
+            String monsterInfoName = vh.getTvMonsterName().getText().toString();
+            presenter.removeMonster(monsterInfoName);
+        }
+    };
 }

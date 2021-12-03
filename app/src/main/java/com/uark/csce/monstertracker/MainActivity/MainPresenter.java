@@ -115,4 +115,8 @@ public class MainPresenter implements MainContract.Presenter, FirebaseContract.F
 
     }
 
+    @Override
+    public void removeMonster(String monsterInfoName) {
+        repository.deleteMonsterInfo(monsterInfoName);
+    }
 }

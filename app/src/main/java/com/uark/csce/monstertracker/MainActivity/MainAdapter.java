@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uark.csce.monstertracker.MonsterDetailsActivity.MonsterDetailsActivity;
@@ -100,8 +101,6 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void setLocalDataSet(List<MainAdapterModel> models) {
         this.localDataSet = models;
     }
-
-
 
     public Bitmap getBitmapFromAssets(String fileName) throws IOException {
         InputStream istr = assetManager.open(fileName);
