@@ -241,6 +241,11 @@ public class MonsterRepository {
 
     }
 
+    public void deleteMonsterInfo(String monsterInfoName)
+    {
+        mDatabase.child(roomCode).child(monsterInfoName).removeValue();
+    }
+
     public void addMonster(String monsterInfoName, int level, boolean isElite) {
         mDatabase.child(roomCode).child(monsterInfoName).runTransaction(new Transaction.Handler() {
             @NonNull
