@@ -11,6 +11,7 @@ import com.uark.csce.monstertracker.models.info.MonsterInfo;
 import com.uark.csce.monstertracker.models.info.Scenario;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -94,6 +95,14 @@ public class MainPresenter implements MainContract.Presenter, FirebaseContract.F
 
             models.add(model);
         }
+
+        models.sort(new Comparator<MainAdapterModel>() {
+            @Override
+            public int compare(MainAdapterModel a, MainAdapterModel b) {
+                return a.getInitiative() < b.getInitiative() ? -1 : (a.getInitiative() == b.getInitiative() ? 0 : 1);
+            }
+        });
+
         view.monsterInfoChanged(models);
     }
 
