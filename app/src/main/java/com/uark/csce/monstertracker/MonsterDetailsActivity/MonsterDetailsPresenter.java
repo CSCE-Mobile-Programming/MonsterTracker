@@ -72,6 +72,11 @@ public class MonsterDetailsPresenter implements MonsterDetailsContract.Presenter
     }
 
     @Override
+    public void removeMonster(int position) {
+        repository.removeMonster(info.getName(), position);
+    }
+
+    @Override
     public void addHealth(int position) {
         repository.addHealth(info.getName(), position);
     }

@@ -29,6 +29,7 @@ public interface MonsterDetailsContract {
         public int getLevel();
 
         public void addMonster(boolean isElite);
+        public void removeMonster(int position);
         public void addHealth(int position);
         public void subtractHealth(int position);
         public void toggleStatus(String statusName, int position);

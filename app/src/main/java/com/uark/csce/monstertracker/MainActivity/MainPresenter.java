@@ -88,15 +88,7 @@ public class MainPresenter implements MainContract.Presenter, FirebaseContract.F
             model.setInitiative(state.getCardState().getCurrentCard().getInitiative());
             model.setInfo(repository.getMonsterInfo(key));
 
-            int numMonsters = 0;
-            for(int i = 0; i< state.getMonsters().size(); i++)
-            {
-                Monster m = state.getMonsters().get(i);
-                if(m != null)
-                {
-                    numMonsters++;
-                }
-            }
+            int numMonsters = state.getMonsters().size();
 
             model.setNumMonsters(numMonsters);
 

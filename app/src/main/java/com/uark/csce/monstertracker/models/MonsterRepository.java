@@ -41,6 +41,7 @@ public class MonsterRepository {
     private DatabaseReference mDatabase;
     Map<String, CallbackContainer> firebaseCallbacks;
     private String roomCode;
+    private int partyLevel;
 
     // Load-once informational data
     private List<Scenario> scenarios;
@@ -72,6 +73,8 @@ public class MonsterRepository {
         for(MonsterInfo info : monsterInfos) {
             info.setup();
         }
+
+        partyLevel = 0;
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         firebaseCallbacks = new HashMap<>();
@@ -106,12 +109,28 @@ public class MonsterRepository {
             container.setMonsterStateListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    List<Monster> monsters = snapshot.getValue(new GenericTypeIndicator<List<Monster>>() {});
+                    Map<String, Monster> monsters = snapshot.getValue(new GenericTypeIndicator<Map<String, Monster>>() {});
                     if(monsters == null)
                     {
-                        monsters = new ArrayList<>();
+                        monsters = new HashMap<>();
                     }
-                    callback.notifyMonsterStateChanged(monsters);
+
+                    List<Monster> monsterList = new ArrayList<>();
+                    MonsterInfo info = getMonsterInfo(monsterName);
+
+                    for(int i = 0; i<info.getMaxCount(); i++)
+                    {
+                        if(monsters.containsKey(i + "_key"))
+                        {
+                            monsterList.add(i, monsters.get(i + "_key"));
+                        }
+                        else
+                        {
+                            monsterList.add(i, null);
+                        }
+                    }
+
+                    callback.notifyMonsterStateChanged(monsterList);
                 }
 
                 @Override
@@ -241,8 +260,7 @@ public class MonsterRepository {
 
     }
 
-    public void deleteMonsterInfo(String monsterInfoName)
-    {
+    public void deleteMonsterInfo(String monsterInfoName) {
         mDatabase.child(roomCode).child(monsterInfoName).removeValue();
     }
 
@@ -263,14 +281,10 @@ public class MonsterRepository {
 
                 for(int i = 0; i<info.getMaxCount(); i++)
                 {
-                    if(i >= monsterState.getMonsters().size())
+
+                    if(!monsterState.getMonsters().containsKey(i + "_key"))
                     {
-                        monsterState.getMonsters().add(m);
-                        break;
-                    }
-                    if(monsterState.getMonsters().get(i) == null)
-                    {
-                        monsterState.getMonsters().set(i, m);
+                        monsterState.getMonsters().put(i + "_key", m);
                         break;
                     }
                 }
@@ -286,9 +300,12 @@ public class MonsterRepository {
             }
         });
     }
+    public void removeMonster(String monsterInfoName, int position)  {
+        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(position + "_key").removeValue();
+    }
 
     public void addHealth(String monsterInfoName, int position) {
-        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(Integer.toString(position)).runTransaction(new Transaction.Handler() {
+        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(position + "_key").runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData currentData) {
@@ -315,7 +332,7 @@ public class MonsterRepository {
         });
     }
     public void subtractHealth(String monsterInfoName, int position) {
-        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(Integer.toString(position)).runTransaction(new Transaction.Handler() {
+        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(position + "_key").runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData currentData) {
@@ -347,7 +364,7 @@ public class MonsterRepository {
     }
 
     public void toggleMonsterStatus(String monsterInfoName, String statusName, int position) {
-        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(Integer.toString(position)).child("attributes").runTransaction(new Transaction.Handler() {
+        mDatabase.child(roomCode).child(monsterInfoName).child("monsters").child(position + "_key").child("attributes").runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
             public Transaction.Result doTransaction(@NonNull MutableData currentData) {
