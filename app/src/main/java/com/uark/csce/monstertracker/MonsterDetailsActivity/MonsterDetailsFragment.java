@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.uark.csce.monstertracker.MainActivity.MainAdapter;
 import com.uark.csce.monstertracker.R;
 import com.uark.csce.monstertracker.models.Monster;
 import com.uark.csce.monstertracker.models.info.AttributesInfo;
@@ -72,6 +75,10 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         rvMonsterList = root.findViewById(R.id.rvMonsterList);
         rvMonsterList.setAdapter(adapter);
         rvMonsterList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // Attach the swipe callback to the RV
+        ItemTouchHelper helper = new ItemTouchHelper(swipeCallback);
+        helper.attachToRecyclerView(rvMonsterList);
 
         return root;
     }
@@ -224,6 +231,20 @@ public class MonsterDetailsFragment extends Fragment implements MonsterDetailsCo
         @Override
         public void onClick(View view) {
             presenter.drawCard();
+        }
+    };
+
+    private ItemTouchHelper.SimpleCallback swipeCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            MonsterDetailsAdapter.ViewHolder vh = (MonsterDetailsAdapter.ViewHolder)viewHolder;
+            int monsterNumber = vh.getAdapterPosition();
+            presenter.removeMonster(monsterNumber);
         }
     };
 

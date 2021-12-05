@@ -3,15 +3,17 @@ package com.uark.csce.monstertracker.models.FirebaseModels;
 import com.uark.csce.monstertracker.models.Monster;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MonsterState {
 
     private CardState cardState;
-    private List<Monster> monsters;
+    private Map<String, Monster> monsters;
 
     public MonsterState() {
-        monsters = new ArrayList<>();
+        monsters = new HashMap<>();
         cardState = new CardState();
     }
 
@@ -23,11 +25,11 @@ public class MonsterState {
         this.cardState = cardState;
     }
 
-    public List<Monster> getMonsters() {
+    public Map<String, Monster> getMonsters() {
         return monsters;
     }
 
-    public void setMonsters(List<Monster> monsters) {
+    public void setMonsters(Map<String, Monster> monsters) {
         this.monsters = monsters;
     }
 }
